@@ -9,6 +9,10 @@ WorkingDirectory=/home/zcs/projects/isa
 ExecStart=/usr/bin/python3 /home/zcs/projects/isa/isa.py --id 军师 --channel main --agently-listen --gateway ws://localhost:8766
 Restart=always
 RestartSec=5
+# 赫淮斯托斯安全加固(user模式可用)
+PrivateTmp=yes
+NoNewPrivileges=yes
+MemoryMax=256M
 StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=isa-agent

@@ -763,6 +763,27 @@ class IsaAgent:
         thread.start()
         return thread
 
+    def _fingerprint_path(self) -> Path:
+        """语义指纹持久化文件路径。"""
+        fp_dir = ISA_HOME / "fingerprints"
+        fp_dir.mkdir(parents=True, exist_ok=True)
+        return fp_dir / f"{self.agent_id}.json"
+
+    def _load_fingerprint(self) -> dict:
+        """加载持久化语义指纹。"""
+        path = self._fingerprint_path()
+        if path.exists():
+            try:
+                return json.loads(path.read_text())
+            except Exception:
+                pass
+        return {}
+
+    def _save_fingerprint(self, keywords: dict):
+        """保存语义指纹到持久化文件。"""
+        path = self._fingerprint_path()
+        path.write_text(json.dumps(keywords, ensure_ascii=False, indent=2))
+
     def agently_listen(self, gateway_url: str = "ws://localhost:8766",
                        keywords: dict = None,
                        outbox_path: str = None):
@@ -779,7 +800,12 @@ class IsaAgent:
         import asyncio as _asyncio
 
         _channel = self.graph.channel
-        _keywords = keywords or {}
+        # 雅典娜赐福: 优先从持久化指纹文件加载，保证语义身份稳定
+        _keywords = keywords or self._load_fingerprint() or {}
+        if not _keywords:
+            # 兜底: 从Core profile提取
+            p = self.profile()
+            _keywords = p.keywords
         _outbox = Path(outbox_path) if outbox_path else None
 
         async def _run():
@@ -808,6 +834,10 @@ class IsaAgent:
                             await _asyncio.sleep(delay)
                             continue
                         print(f"[ISA] ✅ {self.agent_id} 已连接 · {reply.get('peer_count',0)} Agent在线")
+                        # 雅典娜: 持久化语义指纹
+                        if _keywords:
+                            self._save_fingerprint(_keywords)
+                            print(f"[ISA] 🏛️ 语义指纹已持久化: {len(_keywords)}个关键词")
 
                         async def _recv():
                             try:
