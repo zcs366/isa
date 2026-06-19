@@ -274,6 +274,29 @@ body {
   width: 60px;
   padding: 4px;
 }
+.input-area .img-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 1.2em;
+  padding: 10px 14px;
+}
+.input-area .img-btn:hover { background: var(--accent); border-color: var(--accent); }
+#imgFileInput { display: none; }
+
+/* 图片消息 */
+.msg-image {
+  max-width: 280px;
+  max-height: 280px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.msg-image:hover { transform: scale(1.02); }
+.msg-image.full { 
+  position: fixed; inset: 0; margin: auto;
+  max-width: 90vw; max-height: 90vh; z-index: 200;
+  border-radius: 16px;
+}
 
 /* ── 连接面板 ── */
 .connect-overlay {
@@ -393,6 +416,8 @@ body {
     <div class="msg system">消息按语义距离扩散——你会看到与你在意的事共振的消息。</div>
   </div>
   <div class="input-area">
+    <input type="file" id="imgFileInput" accept="image/*" onchange="onImageSelect(event)">
+    <button class="img-btn" onclick="document.getElementById('imgFileInput').click()" title="发送图片">📎</button>
     <input id="msgInput" placeholder="输入消息...（高重要性消息将触发波扩散）" onkeydown="if(event.key==='Enter')sendMessage()">
     <div class="importance-slider">
       <span>扩散</span>
@@ -515,6 +540,8 @@ function addMessage(msg) {
   const isMine = msg.source === myId;
   const isWave = msg.wave_propagated;
   const isWink = msg.type === 'wink';
+  const isImage = msg.body && msg.body.startsWith('data:image/');
+  const attachment = msg.meta && msg.meta.attachment;
 
   const div = document.createElement('div');
   div.className = 'msg ' + (isMine ? 'outgoing' : 'incoming')
@@ -522,8 +549,17 @@ function addMessage(msg) {
     + (isWink ? ' wink' : '');
 
   let html = '';
-  if (!isMine) html += `<div class="sender">${msg.source}</div>`;
-  html += `<div>${escapeHtml(msg.body)}</div>`;
+  if (!isMine) html += `<div class="sender">${escapeHtml(msg.source)}</div>`;
+  
+  if (isImage || (attachment && attachment.startsWith('image/'))) {
+    const imgSrc = isImage ? msg.body : msg.body;
+    const caption = msg.meta && msg.meta.caption;
+    html += `<img src="${imgSrc}" class="msg-image" onclick="this.classList.toggle('full')" title="点击放大">`;
+    if (caption) html += `<div style="margin-top:4px;font-size:0.85em">${escapeHtml(caption)}</div>`;
+  } else {
+    html += `<div>${escapeHtml(msg.body)}</div>`;
+  }
+  
   if (isWave) html += `<div class="time">🌊 波扩散</div>`;
   if (isWink) html += `<div class="time">⚡ 眨眼</div>`;
 
@@ -531,8 +567,8 @@ function addMessage(msg) {
   msgDiv.appendChild(div);
   msgDiv.scrollTop = msgDiv.scrollHeight;
 
-  // 更新话题云
-  updateTopicCloud(msg.body);
+  // 更新话题云（跳过图片base64数据）
+  if (!isImage) updateTopicCloud(msg.body);
 }
 
 function addSystemMsg(text) {
@@ -543,23 +579,60 @@ function addSystemMsg(text) {
   msgDiv.scrollTop = msgDiv.scrollHeight;
 }
 
-// 发送消息
+let pendingImage = null;  // 待发送的图片 {dataUrl, type}
+
+// 图片选择
+function onImageSelect(event) {
+  const file = event.target.files[0];
+  if (!file || !file.type.startsWith('image/')) return;
+  
+  const reader = new FileReader();
+  reader.onload = () => {
+    pendingImage = { dataUrl: reader.result, type: file.type };
+    msgInput.placeholder = `📷 ${file.name} (${(file.size/1024).toFixed(1)}KB) — 输入文字说明后发送`;
+    msgInput.focus();
+  };
+  reader.readAsDataURL(file);
+}
+
+// 发送消息（支持图片）
 function sendMessage() {
   const body = msgInput.value.trim();
-  if (!body || !ws || ws.readyState !== WebSocket.OPEN) return;
+  const hasImage = pendingImage !== null;
+  if ((!body && !hasImage) || !ws || ws.readyState !== WebSocket.OPEN) return;
 
   const importance = parseInt(document.getElementById('importanceSlider').value) / 10;
+  
+  const meta = {};
+  let sendBody = body;
+  
+  if (hasImage) {
+    meta.attachment = pendingImage.type;
+    // body = 图片的base64数据URL，文字说明放在meta里
+    sendBody = pendingImage.dataUrl;
+    meta.caption = body || '';
+  }
 
   ws.send(JSON.stringify({
     type: 'message',
     target: selectedPeer || '*',
-    body: body,
+    body: sendBody,
+    meta: meta,
     importance: importance,
   }));
 
   // 本地回显
-  addMessage({ source: myId, body, wave_propagated: importance >= 0.4 });
+  addMessage({ 
+    source: myId, 
+    body: sendBody, 
+    meta: meta,
+    wave_propagated: importance >= 0.4 
+  });
+  
   msgInput.value = '';
+  msgInput.placeholder = '输入消息...（高重要性消息将触发波扩散）';
+  pendingImage = null;
+  document.getElementById('imgFileInput').value = '';
 }
 
 // 话题云
