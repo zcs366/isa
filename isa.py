@@ -749,6 +749,7 @@ class IsaAgent:
         self._handlers.append(handler)
 
     def listen(self, interval: float = 0.5):
+        """本地监听——轮询Core JSONL中的消息（适合纯本地模式）。"""
         self._running = True
         def _loop():
             while self._running:
@@ -761,6 +762,107 @@ class IsaAgent:
         thread = threading.Thread(target=_loop, daemon=True)
         thread.start()
         return thread
+
+    def agently_listen(self, gateway_url: str = "ws://localhost:8766",
+                       keywords: dict = None,
+                       outbox_path: str = None):
+        """Gateway监听——WebSocket连接Gateway，实时收发，自动重连。
+
+        替代独立的hermes_adapter daemon进程。
+        IsaAgent现在是单进程三模式之一：agently_listen = daemon模式。
+
+        Args:
+            gateway_url: Gateway WebSocket地址
+            keywords: 语义指纹（默认从agent profile提取）
+            outbox_path: outbox文件路径（用于接收外部send命令写入的消息）
+        """
+        import asyncio as _asyncio
+
+        _channel = self.graph.channel
+        _keywords = keywords or {}
+        _outbox = Path(outbox_path) if outbox_path else None
+
+        async def _run():
+            try:
+                import websockets as _ws
+            except ImportError:
+                print("[ISA] ❌ agently_listen需要: pip install websockets")
+                return
+
+            url = f"{gateway_url}/isa/channel/{_channel}"
+            delay = 3
+
+            while True:
+                try:
+                    print(f"[ISA] 🔌 {self.agent_id} 连接Gateway: {url}")
+                    async with _ws.connect(url, ping_interval=20, ping_timeout=10, close_timeout=5) as ws:
+                        await ws.send(json.dumps({
+                            "type": "register",
+                            "agent_id": self.agent_id,
+                            "channel": _channel,
+                            "keywords": _keywords,
+                        }, ensure_ascii=False))
+                        reply = json.loads(await ws.recv())
+                        if reply.get("type") != "registered":
+                            print(f"[ISA] ❌ 注册失败: {reply}")
+                            await _asyncio.sleep(delay)
+                            continue
+                        print(f"[ISA] ✅ {self.agent_id} 已连接 · {reply.get('peer_count',0)} Agent在线")
+
+                        async def _recv():
+                            try:
+                                async for raw in ws:
+                                    msg = json.loads(raw)
+                                    sig = Signal(
+                                        type=msg.get("type","message"),
+                                        source=msg.get("source","?"),
+                                        target=msg.get("target","*"),
+                                        body=msg.get("body",""),
+                                        meta=msg.get("meta",{}),
+                                    )
+                                    self.graph.ingest(sig)  # 写入本地Core
+                                    for h in self._handlers:
+                                        try: h(sig)
+                                        except Exception: pass
+                            except Exception:
+                                pass
+
+                        async def _send_outbox():
+                            if not _outbox:
+                                while True:
+                                    await _asyncio.sleep(1)
+                            last_pos = 0
+                            try:
+                                while True:
+                                    await _asyncio.sleep(0.5)
+                                    if _outbox.exists():
+                                        with open(_outbox, "rb") as f:
+                                            f.seek(last_pos)
+                                            for line in f:
+                                                try:
+                                                    m = json.loads(line.decode().strip())
+                                                    await ws.send(json.dumps(m, ensure_ascii=False))
+                                                except Exception:
+                                                    pass
+                                            last_pos = f.tell()
+                            except Exception:
+                                pass
+
+                        await _asyncio.gather(_recv(), _send_outbox())
+                        delay = 3  # 成功连接后重置退避
+
+                except Exception as e:
+                    print(f"[ISA] ⚠ {self.agent_id} 断连: {type(e).__name__}")
+                print(f"[ISA] 🔄 {delay}秒后重连...")
+                await _asyncio.sleep(delay)
+                delay = min(delay * 1.5, 30)
+
+        # 在新线程中启动asyncio事件循环
+        def _thread_run():
+            _asyncio.run(_run())
+        t = threading.Thread(target=_thread_run, daemon=True)
+        t.start()
+        return t
 
     def stop(self):
         self._running = False
@@ -807,6 +909,10 @@ def main():
     parser.add_argument("--profile", action="store_true")
     parser.add_argument("--stats", action="store_true")
     parser.add_argument("--listen", action="store_true")
+    parser.add_argument("--agently-listen", action="store_true",
+                        help="Gateway监听模式（WebSocket实时收发+自动重连）")
+    parser.add_argument("--gateway", default="ws://localhost:8766",
+                        help="Gateway地址（配合--agently-listen使用）")
 
     args = parser.parse_args()
     agent_id = args.id or f"isa-{os.getpid()}"
@@ -909,6 +1015,22 @@ def main():
         agent.on_signal(lambda sig: print(
             f"  [{sig.type}] {sig.source}: {sig.body[:80]}"))
         agent.listen()
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            agent.stop()
+            print("\n[ISA] 退出")
+
+    elif args.agently_listen:
+        print(f"[ISA] 分身 '{agent_id}' Gateway监听模式")
+        profile = agent.profile()
+        agent.on_signal(lambda sig: print(
+            f"  [{sig.type}] {sig.source}: {sig.body[:80]}"))
+        agent.agently_listen(
+            gateway_url=args.gateway,
+            keywords=profile.keywords,
+        )
         try:
             while True:
                 time.sleep(1)
