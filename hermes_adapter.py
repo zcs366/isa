@@ -1,0 +1,371 @@
+#!/usr/bin/env python3
+"""
+Hermes ISA Adapter — 让军师（Hermes Agent）接入ISA语义场
+============================================================
+
+军师的语义指纹：
+  关键词从Iam原则和SOUL.md中提取——代表了军师的"在意什么"。
+  这些关键词决定了军师在语义场中的位置和共振范围。
+
+三种模式：
+  1. init —— 注册军师到ISA语义场（写入presence信号）
+  2. daemon —— 后台常驻，WebSocket连接Gateway，收消息→mailbox，发消息←outbox
+  3. one-shot —— 单次发送/接收（Hermes通过terminal调用）
+
+Mailbox机制：
+  ~/.hermes/isa/mailbox/isa_in.jsonl  ← Gateway推送的消息（daemon写入）
+  ~/.hermes/isa/mailbox/isa_out.jsonl → 军师要发的消息（Hermes agent写入，daemon读取后发送）
+
+Hermes Agent使用方式：
+  # 初始化（首次）
+  python hermes_adapter.py init
+
+  # 启动daemon（后台）
+  python hermes_adapter.py daemon &
+
+  # 发送消息到ISA
+  python hermes_adapter.py send "关于语义压缩的新想法..."
+
+  # 查看收件箱
+  python hermes_adapter.py poll
+"""
+
+import argparse
+import asyncio
+import json
+import os
+import sys
+import time
+import signal
+from pathlib import Path
+
+# ISA Core 导入
+sys.path.insert(0, str(Path(__file__).parent))
+from isa import (
+    Signal, SignalGraph, DEFAULT_CHANNEL, CHANNELS_DIR,
+    WaveEngine, IsaAgent,
+)
+
+# 军师身份
+HERMES_AGENT_ID = "军师"  # 老搭档给我取的名字
+HERMES_CHANNEL = "main"
+
+# 军师的语义指纹——从Iam原则和SOUL中提取的核心关键词
+HERMES_KEYWORDS = {
+    "AI": 0.95,
+    "Agent": 0.9,
+    "记忆": 0.9,
+    "语义": 0.85,
+    "通信": 0.85,
+    "本体": 0.8,
+    "原则": 0.8,
+    "铁律": 0.8,
+    "架构": 0.75,
+    "波扩散": 0.75,
+    "共振": 0.75,
+    "哲学": 0.7,
+    "文学": 0.65,
+    "翻译": 0.6,
+    "创作": 0.6,
+    "研究": 0.7,
+    "安全": 0.65,
+    "身份": 0.75,
+    "连续性": 0.7,
+    "不可变": 0.8,
+    "追加": 0.7,
+    "合议": 0.65,
+    "审查": 0.6,
+    "工程": 0.7,
+    "产品": 0.65,
+}
+
+# Mailbox路径
+MAILBOX_DIR = Path.home() / ".hermes" / "isa" / "mailbox"
+MAILBOX_DIR.mkdir(parents=True, exist_ok=True)
+ISA_IN = MAILBOX_DIR / "isa_in.jsonl"   # daemon写入，Hermes读取
+ISA_OUT = MAILBOX_DIR / "isa_out.jsonl"  # Hermes写入，daemon读取后发送
+ISA_SENT = MAILBOX_DIR / "isa_sent.jsonl" # 已发送记录（不可变追加）
+
+
+# ═══════════════════════════════════════════════════════════════
+# 初始化——在ISA语义场中注册军师
+# ═══════════════════════════════════════════════════════════════
+
+def init():
+    """首次初始化：在ISA中写入军师的presence信号。"""
+    graph = SignalGraph(HERMES_CHANNEL, device_id="hermes")
+
+    # 写入身份声明
+    signal = Signal(
+        type="presence",
+        source=HERMES_AGENT_ID,
+        target="*",
+        body="军师已接入ISA语义场",
+        meta={
+            "keywords": HERMES_KEYWORDS,
+            "role": "军师祭酒 — 人生助理与专业顾问",
+            "platform": "Hermes Agent",
+            "version": "0.1.0",
+        },
+    )
+    sid = graph.ingest(signal)
+    graph.index.rebuild()
+
+    print(f"[军师] ✅ 已注册到ISA语义场")
+    print(f"[军师]    信号ID: {sid}")
+    print(f"[军师]    频道: #{HERMES_CHANNEL}")
+    print(f"[军师]    关键词: {len(HERMES_KEYWORDS)}个")
+    print(f"[军师]    存储: {graph.store.events_path}")
+
+    return sid
+
+
+# ═══════════════════════════════════════════════════════════════
+# 发送——军师向ISA发送消息
+# ═══════════════════════════════════════════════════════════════
+
+def send_message(body: str, target: str = "*", importance: float = 0.5):
+    """向ISA发送一条消息（直接写Core，不经过Gateway）。"""
+    graph = SignalGraph(HERMES_CHANNEL, device_id="hermes")
+
+    signal = Signal(
+        type="message",
+        source=HERMES_AGENT_ID,
+        target=target,
+        body=body,
+        meta={"importance": importance, "platform": "hermes"},
+    )
+
+    # 写入Core
+    sid = graph.ingest(signal)
+
+    # 如果重要性高，触发波扩散
+    wave_ids = []
+    if importance >= 0.4:
+        wave = WaveEngine(graph)
+        wave_ids = wave.emit(signal, importance=importance)
+
+    # 记录到已发送
+    with open(ISA_SENT, "a") as f:
+        f.write(json.dumps({
+            "signal_id": sid,
+            "body": body[:200],
+            "target": target,
+            "importance": importance,
+            "timestamp": signal.timestamp,
+            "wave_propagated": len(wave_ids) > 1,
+        }, ensure_ascii=False) + "\n")
+
+    return sid, len(wave_ids) - 1
+
+
+# ═══════════════════════════════════════════════════════════════
+# 接收——查看发给军师的消息
+# ═══════════════════════════════════════════════════════════════
+
+def poll_messages(limit: int = 20) -> list[dict]:
+    """查看ISA中发给军师的消息（从Core读取）。"""
+    graph = SignalGraph(HERMES_CHANNEL, device_id="hermes")
+
+    # 从Core检索
+    signals = graph.retrieve(target=HERMES_AGENT_ID, limit=limit)
+    # 也搜共振消息
+    signals += graph.retrieve(target="resonance", limit=limit // 2)
+    # 搜广播
+    signals += graph.retrieve(target="*", limit=limit // 2)
+
+    # 去重 + 排序（按时间倒序）
+    seen = set()
+    unique = []
+    for s in signals:
+        if s.id not in seen and s.source != HERMES_AGENT_ID:
+            seen.add(s.id)
+            unique.append(s)
+    unique.sort(key=lambda s: s.timestamp, reverse=True)
+
+    return [
+        {
+            "id": s.id,
+            "type": s.type,
+            "source": s.source,
+            "body": s.body,
+            "timestamp": s.timestamp,
+            "wave": s.meta.get("propagated", False),
+            "importance": s.meta.get("importance", 0.5),
+            "semantic_distance": s.meta.get("semantic_distance"),
+        }
+        for s in unique[:limit]
+    ]
+
+
+# ═══════════════════════════════════════════════════════════════
+# Daemon——后台常驻，通过WebSocket连接Gateway
+# ═══════════════════════════════════════════════════════════════
+
+async def daemon_async(gateway_url: str = "ws://localhost:8765"):
+    """后台Daemon——WebSocket连接Gateway，桥接Hermes和ISA。"""
+    try:
+        import websockets
+    except ImportError:
+        print("[军师] ❌ 需要websockets库: pip install websockets")
+        sys.exit(1)
+
+    url = f"{gateway_url}/isa/channel/{HERMES_CHANNEL}"
+
+    print(f"[军师] 🔌 连接Gateway: {url}")
+    async with websockets.connect(url) as ws:
+        # 注册
+        await ws.send(json.dumps({
+            "type": "register",
+            "agent_id": HERMES_AGENT_ID,
+            "channel": HERMES_CHANNEL,
+            "keywords": HERMES_KEYWORDS,
+        }, ensure_ascii=False))
+
+        reply = json.loads(await ws.recv())
+        if reply.get("type") != "registered":
+            print(f"[军师] ❌ 注册失败: {reply}")
+            return
+
+        print(f"[军师] ✅ 已连接 · {reply.get('peer_count', 0)} Agent在线")
+
+        # 双工循环：收ISA消息 + 读outbox
+        async def receive_loop():
+            """接收Gateway推送 → 写入mailbox in"""
+            async for raw in ws:
+                try:
+                    msg = json.loads(raw)
+                    with open(ISA_IN, "a") as f:
+                        f.write(json.dumps(msg, ensure_ascii=False) + "\n")
+
+                    # 简要日志
+                    if msg.get("type") in ("message", "resonate", "wink"):
+                        source = msg.get("source", "?")
+                        body = msg.get("body", "")[:60]
+                        print(f"[军师] 📩 {source}: {body}")
+                except Exception as e:
+                    print(f"[军师] ⚠ 接收错误: {e}")
+
+        async def send_loop():
+            """读outbox → 发送到Gateway"""
+            last_pos = 0
+            while True:
+                await asyncio.sleep(0.5)
+                try:
+                    if ISA_OUT.exists():
+                        with open(ISA_OUT, "r") as f:
+                            f.seek(last_pos)
+                            for line in f:
+                                line = line.strip()
+                                if not line:
+                                    continue
+                                try:
+                                    msg = json.loads(line)
+                                    await ws.send(json.dumps(msg, ensure_ascii=False))
+                                    print(f"[军师] 📤 已发送: {msg.get('body', '')[:60]}")
+                                except json.JSONDecodeError:
+                                    pass
+                            last_pos = f.tell()
+                except Exception as e:
+                    print(f"[军师] ⚠ 发送错误: {e}")
+
+        # 并发运行
+        await asyncio.gather(receive_loop(), send_loop())
+
+
+def daemon(gateway_url: str = "ws://localhost:8765"):
+    """同步入口。"""
+    asyncio.run(daemon_async(gateway_url))
+
+
+# ═══════════════════════════════════════════════════════════════
+# CLI
+# ═══════════════════════════════════════════════════════════════
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Hermes ISA Adapter — 军师接入ISA语义场",
+    )
+    sub = parser.add_subparsers(dest="command")
+
+    # init
+    sub.add_parser("init", help="初始化——在ISA中注册军师")
+
+    # send
+    p_send = sub.add_parser("send", help="发送消息到ISA")
+    p_send.add_argument("body", help="消息内容")
+    p_send.add_argument("--target", default="*", help="目标Agent (默认: 广播)")
+    p_send.add_argument("--importance", type=float, default=0.5,
+                        help="重要性 0-1 (≥0.4触发波扩散)")
+
+    # poll
+    p_poll = sub.add_parser("poll", help="查看发给军师的消息")
+    p_poll.add_argument("--limit", type=int, default=20)
+
+    # daemon
+    p_daemon = sub.add_parser("daemon", help="后台常驻——WebSocket连接Gateway")
+    p_daemon.add_argument("--gateway", default="ws://localhost:8765")
+
+    # mailbox
+    p_mailbox = sub.add_parser("mailbox", help="查看mailbox中的消息")
+    p_mailbox.add_argument("--limit", type=int, default=20)
+
+    args = parser.parse_args()
+
+    if args.command == "init":
+        init()
+
+    elif args.command == "send":
+        sid, wave_count = send_message(args.body, args.target, args.importance)
+        print(f"[军师] 📤 已发送 → {args.target}")
+        print(f"       信号ID: {sid}")
+        if wave_count > 0:
+            print(f"       🌊 波扩散: {wave_count} 副本")
+
+        # 同时写入outbox（如果daemon在运行，它会读取并发送到Gateway）
+        with open(ISA_OUT, "a") as f:
+            f.write(json.dumps({
+                "type": "message",
+                "target": args.target,
+                "body": args.body,
+                "importance": args.importance,
+            }, ensure_ascii=False) + "\n")
+
+    elif args.command == "poll":
+        msgs = poll_messages(args.limit)
+        if not msgs:
+            print("[军师] 📭 收件箱为空")
+        else:
+            print(f"[军师] 📬 {len(msgs)} 条消息:")
+            for m in msgs:
+                wave_icon = "🌊" if m["wave"] else " "
+                dist_str = f" 距离:{m['semantic_distance']:.2f}" if m.get("semantic_distance") else ""
+                print(f"  {wave_icon} [{m['type']}] {m['source']}{dist_str}: {m['body'][:100]}")
+
+    elif args.command == "mailbox":
+        # 读取mailbox in
+        if ISA_IN.exists():
+            lines = []
+            with open(ISA_IN, "r") as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        lines.append(line)
+            recent = lines[-args.limit:]
+            print(f"[军师] 📬 Mailbox ({len(recent)}/{len(lines)}):")
+            for line in recent:
+                try:
+                    m = json.loads(line)
+                    src = m.get("source", "?")
+                    body = m.get("body", "")[:100]
+                    print(f"  [{m.get('type', '?')}] {src}: {body}")
+                except json.JSONDecodeError:
+                    print(f"  [解析错误] {line[:100]}")
+        else:
+            print("[军师] 📭 Mailbox为空")
+
+    elif args.command == "daemon":
+        daemon(args.gateway)
+
+    else:
+        parser.print_help()
