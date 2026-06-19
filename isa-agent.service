@@ -5,7 +5,6 @@ Requires=isa-gateway.service
 
 [Service]
 Type=simple
-User=zcs
 WorkingDirectory=/home/zcs/projects/isa
 ExecStart=/usr/bin/python3 /home/zcs/projects/isa/isa.py --id 军师 --channel main --agently-listen --gateway ws://localhost:8766
 Restart=always
@@ -13,14 +12,6 @@ RestartSec=5
 StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=isa-agent
-
-# 安全加固
-NoNewPrivileges=yes
-PrivateTmp=yes
-ProtectSystem=strict
-ProtectHome=read-only
-ReadWritePaths=/home/zcs/.hermes/isa
-ReadOnlyPaths=/home/zcs/projects/isa
 
 [Install]
 WantedBy=default.target
