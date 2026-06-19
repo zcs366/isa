@@ -203,7 +203,11 @@ def poll_messages(limit: int = 20) -> list[dict]:
 # ═══════════════════════════════════════════════════════════════
 
 async def daemon_async(gateway_url: str = "ws://localhost:8765"):
-    """后台Daemon——WebSocket连接Gateway，桥接Hermes和ISA。"""
+    """后台Daemon——WebSocket连接Gateway，自动重连。
+
+    连接状态机：disconnected → connecting → connected → disconnected → ...
+    每次断连后等待3秒重试，无限循环。
+    """
     try:
         import websockets
     except ImportError:
@@ -211,66 +215,88 @@ async def daemon_async(gateway_url: str = "ws://localhost:8765"):
         sys.exit(1)
 
     url = f"{gateway_url}/isa/channel/{HERMES_CHANNEL}"
+    reconnect_delay = 3  # 秒
 
-    print(f"[军师] 🔌 连接Gateway: {url}")
-    async with websockets.connect(url) as ws:
-        # 注册
-        await ws.send(json.dumps({
-            "type": "register",
-            "agent_id": HERMES_AGENT_ID,
-            "channel": HERMES_CHANNEL,
-            "keywords": HERMES_KEYWORDS,
-        }, ensure_ascii=False))
+    while True:
+        try:
+            print(f"[军师] 🔌 连接Gateway: {url}")
+            async with websockets.connect(
+                url,
+                ping_interval=20,
+                ping_timeout=10,
+                close_timeout=5,
+            ) as ws:
+                # 注册
+                await ws.send(json.dumps({
+                    "type": "register",
+                    "agent_id": HERMES_AGENT_ID,
+                    "channel": HERMES_CHANNEL,
+                    "keywords": HERMES_KEYWORDS,
+                }, ensure_ascii=False))
 
-        reply = json.loads(await ws.recv())
-        if reply.get("type") != "registered":
-            print(f"[军师] ❌ 注册失败: {reply}")
-            return
+                reply = json.loads(await ws.recv())
+                if reply.get("type") != "registered":
+                    print(f"[军师] ❌ 注册失败: {reply}")
+                    await asyncio.sleep(reconnect_delay)
+                    continue
 
-        print(f"[军师] ✅ 已连接 · {reply.get('peer_count', 0)} Agent在线")
+                print(f"[军师] ✅ 已连接 · {reply.get('peer_count', 0)} Agent在线")
 
-        # 双工循环：收ISA消息 + 读outbox
-        async def receive_loop():
-            """接收Gateway推送 → 写入mailbox in"""
-            async for raw in ws:
-                try:
-                    msg = json.loads(raw)
-                    with open(ISA_IN, "a") as f:
-                        f.write(json.dumps(msg, ensure_ascii=False) + "\n")
+                # 双工循环：收ISA消息 + 读outbox
+                async def receive_loop():
+                    """接收Gateway推送 → 写入mailbox in"""
+                    try:
+                        async for raw in ws:
+                            try:
+                                msg = json.loads(raw)
+                                with open(ISA_IN, "a") as f:
+                                    f.write(json.dumps(msg, ensure_ascii=False) + "\n")
+                                if msg.get("type") in ("message", "resonate", "wink"):
+                                    source = msg.get("source", "?")
+                                    body = msg.get("body", "")[:60]
+                                    print(f"[军师] 📩 {source}: {body}")
+                            except Exception as e:
+                                print(f"[军师] ⚠ 接收错误: {e}")
+                    except Exception:
+                        pass  # 连接断开，外层while会重连
 
-                    # 简要日志
-                    if msg.get("type") in ("message", "resonate", "wink"):
-                        source = msg.get("source", "?")
-                        body = msg.get("body", "")[:60]
-                        print(f"[军师] 📩 {source}: {body}")
-                except Exception as e:
-                    print(f"[军师] ⚠ 接收错误: {e}")
+                async def send_loop():
+                    """读outbox → 发送到Gateway"""
+                    last_pos = 0
+                    try:
+                        while True:
+                            await asyncio.sleep(0.5)
+                            if ISA_OUT.exists():
+                                with open(ISA_OUT, "r") as f:
+                                    f.seek(last_pos)
+                                    for line in f:
+                                        line = line.strip()
+                                        if not line:
+                                            continue
+                                        try:
+                                            msg = json.loads(line)
+                                            await ws.send(json.dumps(msg, ensure_ascii=False))
+                                            print(f"[军师] 📤 已发送: {msg.get('body', '')[:60]}")
+                                        except json.JSONDecodeError:
+                                            pass
+                                    last_pos = f.tell()
+                    except Exception:
+                        pass  # 连接断开
 
-        async def send_loop():
-            """读outbox → 发送到Gateway"""
-            last_pos = 0
-            while True:
-                await asyncio.sleep(0.5)
-                try:
-                    if ISA_OUT.exists():
-                        with open(ISA_OUT, "r") as f:
-                            f.seek(last_pos)
-                            for line in f:
-                                line = line.strip()
-                                if not line:
-                                    continue
-                                try:
-                                    msg = json.loads(line)
-                                    await ws.send(json.dumps(msg, ensure_ascii=False))
-                                    print(f"[军师] 📤 已发送: {msg.get('body', '')[:60]}")
-                                except json.JSONDecodeError:
-                                    pass
-                            last_pos = f.tell()
-                except Exception as e:
-                    print(f"[军师] ⚠ 发送错误: {e}")
+                await asyncio.gather(receive_loop(), send_loop())
 
-        # 并发运行
-        await asyncio.gather(receive_loop(), send_loop())
+        except (websockets.exceptions.ConnectionClosed,
+                websockets.exceptions.InvalidURI,
+                websockets.exceptions.InvalidHandshake,
+                OSError,
+                asyncio.TimeoutError) as e:
+            print(f"[军师] ⚠ 连接断开: {type(e).__name__}")
+        except Exception as e:
+            print(f"[军师] ⚠ 未知错误: {type(e).__name__}: {e}")
+
+        print(f"[军师] 🔄 {reconnect_delay}秒后重连...")
+        await asyncio.sleep(reconnect_delay)
+        reconnect_delay = min(reconnect_delay * 1.5, 30)  # 退避，最多30秒
 
 
 def daemon(gateway_url: str = "ws://localhost:8765"):
