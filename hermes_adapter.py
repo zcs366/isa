@@ -125,38 +125,33 @@ def init():
 # ═══════════════════════════════════════════════════════════════
 
 def send_message(body: str, target: str = "*", importance: float = 0.5):
-    """向ISA发送一条消息（直接写Core，不经过Gateway）。"""
-    graph = SignalGraph(HERMES_CHANNEL, device_id="hermes")
+    """向ISA发送一条消息（仅写outbox，由daemon→Gateway→Core单路径写入）。
 
-    signal = Signal(
-        type="message",
-        source=HERMES_AGENT_ID,
-        target=target,
-        body=body,
-        meta={"importance": importance, "platform": "hermes"},
-    )
-
-    # 写入Core
-    sid = graph.ingest(signal)
-
-    # 如果重要性高，触发波扩散
-    wave_ids = []
-    if importance >= 0.4:
-        wave = WaveEngine(graph)
-        wave_ids = wave.emit(signal, importance=importance)
+    不再直接写Core——那样会与Gateway的ingest重复。
+    daemon会读取outbox并通过WebSocket发送到Gateway，
+    Gateway负责写入Core+波扩散+广播。
+    """
+    # 只写outbox——让daemon→Gateway单路径写入Core
+    msg = {
+        "type": "message",
+        "target": target,
+        "body": body,
+        "importance": importance,
+    }
+    with open(ISA_OUT, "a") as f:
+        f.write(json.dumps(msg, ensure_ascii=False) + "\n")
 
     # 记录到已发送
     with open(ISA_SENT, "a") as f:
         f.write(json.dumps({
-            "signal_id": sid,
             "body": body[:200],
             "target": target,
             "importance": importance,
-            "timestamp": signal.timestamp,
-            "wave_propagated": len(wave_ids) > 1,
+            "timestamp": time.time(),
+            "via": "outbox→daemon→gateway",
         }, ensure_ascii=False) + "\n")
 
-    return sid, len(wave_ids) - 1
+    return None, 0  # signal_id由Gateway分配
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -344,18 +339,7 @@ if __name__ == "__main__":
     elif args.command == "send":
         sid, wave_count = send_message(args.body, args.target, args.importance)
         print(f"[军师] 📤 已发送 → {args.target}")
-        print(f"       信号ID: {sid}")
-        if wave_count > 0:
-            print(f"       🌊 波扩散: {wave_count} 副本")
-
-        # 同时写入outbox（如果daemon在运行，它会读取并发送到Gateway）
-        with open(ISA_OUT, "a") as f:
-            f.write(json.dumps({
-                "type": "message",
-                "target": args.target,
-                "body": args.body,
-                "importance": args.importance,
-            }, ensure_ascii=False) + "\n")
+        print(f"       途经: outbox → daemon → Gateway → Core")
 
     elif args.command == "poll":
         msgs = poll_messages(args.limit)
