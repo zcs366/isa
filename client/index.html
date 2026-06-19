@@ -436,6 +436,10 @@ let myChannel = '';
 let selectedPeer = null;
 let peers = {};
 let messages = [];
+let reconnectDelay = 3;
+let reconnectTimer = null;
+let savedKw = {};     // 保存关键词用于重连
+let savedUrl = '';    // 保存Gateway地址
 
 const msgDiv = document.getElementById('messages');
 const msgInput = document.getElementById('msgInput');
@@ -443,7 +447,7 @@ const agentListEl = document.getElementById('agentList');
 const topicCloudEl = document.getElementById('topicCloud');
 
 // 连接
-async function doConnect() {
+function doConnect() {
   const id = document.getElementById('agentIdInput').value.trim() || 'anon';
   const url = document.getElementById('gatewayUrlInput').value.trim();
   const channel = document.getElementById('channelInput').value.trim() || 'main';
@@ -457,11 +461,18 @@ async function doConnect() {
 
   myId = id;
   myChannel = channel;
+  savedKw = keywords;
+  savedUrl = url;
+  reconnectDelay = 3;  // 重置退避
   document.getElementById('myName').textContent = id;
   document.getElementById('myChannel').textContent = `#${channel}`;
   document.getElementById('connectStatus').textContent = '连接中...';
   document.getElementById('connectStatus').className = 'status';
 
+  _connect(url, channel, id, keywords);
+}
+
+function _connect(url, channel, id, keywords) {
   try {
     ws = new WebSocket(`${url}/isa/channel/${channel}`);
 
@@ -480,19 +491,31 @@ async function doConnect() {
     };
 
     ws.onerror = () => {
-      document.getElementById('connectStatus').textContent = '连接失败';
+      document.getElementById('connectStatus').textContent = `连接失败 · ${reconnectDelay}s后重连`;
       document.getElementById('connectStatus').className = 'status error';
     };
 
     ws.onclose = () => {
-      document.getElementById('connectStatus').textContent = '连接已关闭';
+      document.getElementById('connectStatus').textContent = `断开 · ${reconnectDelay}s后重连`;
       document.getElementById('connectStatus').className = 'status error';
+      _scheduleReconnect();
     };
 
   } catch(e) {
-    document.getElementById('connectStatus').textContent = '连接失败: ' + e.message;
+    document.getElementById('connectStatus').textContent = `连接失败 · ${reconnectDelay}s后重连`;
     document.getElementById('connectStatus').className = 'status error';
+    _scheduleReconnect();
   }
+}
+
+function _scheduleReconnect() {
+  if (reconnectTimer) clearTimeout(reconnectTimer);
+  reconnectTimer = setTimeout(() => {
+    reconnectDelay = Math.min(reconnectDelay * 1.5, 30);
+    document.getElementById('connectStatus').textContent = `重连中...`;
+    addSystemMsg(`🔄 自动重连 (${reconnectDelay.toFixed(0)}s退避)`);
+    _connect(savedUrl, myChannel, myId, savedKw);
+  }, reconnectDelay * 1000);
 }
 
 // 消息处理
