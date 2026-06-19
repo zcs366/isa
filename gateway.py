@@ -277,7 +277,7 @@ class IsaGateway:
                 "meta": meta,
                 "signal_id": signal.id,
                 "timestamp": signal.timestamp,
-            })
+            }, exclude=conn.agent_id)  # 不发回给自己
 
         else:  # message
             signal = Signal(
@@ -303,7 +303,7 @@ class IsaGateway:
                     "signal_id": signal.id,
                     "timestamp": signal.timestamp,
                     "wave_propagated": len(wave_ids) > 1,
-                })
+                }, exclude=conn.agent_id)  # 不发回给自己
             else:
                 # 点对点
                 await self._send_to(target, {

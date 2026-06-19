@@ -267,10 +267,10 @@ async def daemon_async(gateway_url: str = "ws://localhost:8765"):
                         while True:
                             await asyncio.sleep(0.5)
                             if ISA_OUT.exists():
-                                with open(ISA_OUT, "r") as f:
+                                with open(ISA_OUT, "rb") as f:   # 二进制模式，避免文本缓冲导致tell()不准
                                     f.seek(last_pos)
                                     for line in f:
-                                        line = line.strip()
+                                        line = line.decode("utf-8").strip()
                                         if not line:
                                             continue
                                         try:
@@ -279,7 +279,7 @@ async def daemon_async(gateway_url: str = "ws://localhost:8765"):
                                             print(f"[军师] 📤 已发送: {msg.get('body', '')[:60]}")
                                         except json.JSONDecodeError:
                                             pass
-                                    last_pos = f.tell()
+                                    last_pos = f.tell()  # 二进制模式tell()准确
                     except Exception:
                         pass  # 连接断开
 
