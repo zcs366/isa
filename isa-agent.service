@@ -6,7 +6,9 @@ Requires=isa-gateway.service
 [Service]
 Type=simple
 WorkingDirectory=/home/zcs/projects/isa
-ExecStart=/usr/bin/python3 /home/zcs/projects/isa/isa.py --id 军师 --channel main --agently-listen --gateway ws://localhost:8766
+Environment=PYTHONUNBUFFERED=1
+Environment=HOME=/home/zcs
+ExecStart=/usr/bin/python3 /home/zcs/projects/isa/isa.py --id 军师 --channel main --agently-listen --gateway ws://localhost:8766 --keywords-file /home/zcs/.hermes/isa/fingerprints/军师.json
 Restart=always
 RestartSec=5
 # 赫淮斯托斯安全加固(user模式可用)

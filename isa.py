@@ -774,9 +774,12 @@ class IsaAgent:
         path = self._fingerprint_path()
         if path.exists():
             try:
-                return json.loads(path.read_text())
-            except Exception:
-                pass
+                data = json.loads(path.read_text())
+                print(f"[ISA] 🏛️ 指纹加载: {len(data)}个关键词 from {path}")
+                return data
+            except Exception as e:
+                print(f"[ISA] ⚠ 指纹加载失败: {e}")
+        print(f"[ISA] 🏛️ 指纹未找到: {path}")
         return {}
 
     def _save_fingerprint(self, keywords: dict):
@@ -943,6 +946,8 @@ def main():
                         help="Gateway监听模式（WebSocket实时收发+自动重连）")
     parser.add_argument("--gateway", default="ws://localhost:8766",
                         help="Gateway地址（配合--agently-listen使用）")
+    parser.add_argument("--keywords-file", default=None,
+                        help="语义指纹JSON文件路径（雅典娜赐福）")
 
     args = parser.parse_args()
     agent_id = args.id or f"isa-{os.getpid()}"
@@ -1054,12 +1059,22 @@ def main():
 
     elif args.agently_listen:
         print(f"[ISA] 分身 '{agent_id}' Gateway监听模式")
-        profile = agent.profile()
+        # 雅典娜: 加载显式指纹文件（若指定）
+        keywords = {}
+        if args.keywords_file:
+            try:
+                keywords = json.loads(Path(args.keywords_file).read_text())
+                print(f"[ISA] 🏛️ 指纹文件加载: {len(keywords)}个关键词")
+            except Exception as e:
+                print(f"[ISA] ⚠ 指纹文件加载失败: {e}")
+        else:
+            profile = agent.profile()
+            keywords = profile.keywords
         agent.on_signal(lambda sig: print(
             f"  [{sig.type}] {sig.source}: {sig.body[:80]}"))
         agent.agently_listen(
             gateway_url=args.gateway,
-            keywords=profile.keywords,
+            keywords=keywords,
         )
         try:
             while True:
