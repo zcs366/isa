@@ -1,0 +1,23 @@
+# ISA
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Channels (runtime data)
+~/.hermes/isa/channels/
+
+# FTS5 database files
+*.fts5.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
