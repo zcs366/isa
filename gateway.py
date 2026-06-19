@@ -185,6 +185,9 @@ class IsaGateway:
 
             agent_id = msg.get("agent_id", f"anon-{uuid.uuid4().hex[:6]}")
             channel = msg.get("channel", DEFAULT_CHANNEL)
+            # 安全：清洗频道名——只允许字母数字下划线连字符
+            import re as _re
+            channel = _re.sub(r'[^a-zA-Z0-9_-]', '_', str(channel))[:64] or DEFAULT_CHANNEL
             keywords = msg.get("keywords", {})
 
             # 注册
@@ -238,6 +241,13 @@ class IsaGateway:
         target = msg.get("target", "*")
         meta = msg.get("meta", {})
         importance = msg.get("importance", 0.5)
+
+        # 安全：body大小限制（防止base64图片炸弹）
+        if len(body) > 300_000:  # ~225KB实际图片
+            await conn.websocket.send(json.dumps({
+                "type": "error", "error": "消息过大(最大300KB)",
+            }))
+            return
 
         conn.heartbeat()
         conn.message_count += 1
