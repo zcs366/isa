@@ -658,10 +658,16 @@ class IsaAgent:
         self._handlers: list[callable] = []
         self._running = False
 
-        # 🧠 jika内核——ISA原生大脑
+        # 🧠 jika内核——ISA原生大脑（v0.2·七神升级）
         if brain is None:
             from brain import Brain
-            brain = Brain(agent_id)
+            # 📨赫尔墨斯: 新洞察自动触发emit→二次波扩散
+            def _emit_insight(card_id, content):
+                try:
+                    self.emit(f"[Brain]🧠 {card_id}: {content[:80]}", importance=0.6)
+                except Exception:
+                    pass
+            brain = Brain(agent_id, on_new_insight=_emit_insight)
         self.brain = brain
 
     # ── 基础通信 ──

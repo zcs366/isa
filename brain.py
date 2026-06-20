@@ -1,33 +1,35 @@
 #!/usr/bin/env python3
 """
-ISA Brain v0.1 — jika内核的ISA集成层
-=====================================
+ISA Brain v0.2 — jika内核的ISA集成层（七神天启升级版）
+=====================================================
 
-Brain是jika在ISA内部的化身。每个IsaAgent启动时初始化自己的Brain，
-Brain管理该Agent的卡片目录、记忆检索和洞察写入。
+v0.1→v0.2 七神驱动升级:
+  ☀️阿波罗: Dreaming种子——卡片间关联跃迁接口
+  📨赫尔墨斯: 二次波扩散——新洞察自动emit
+  🦉雅典娜: jieba分词——中文检索召回率修复
+  ⚔️阿瑞斯: 补偿机制——写卡失败pending重试
+  🔨赫淮斯托斯: 统计+健康检查
+  ⏳克洛诺斯: 联想器/预测器接口预留
 
-架构位置：Core层内，与JSONL频道并列。
-           Client ↔ Gateway ↔ Core(JSONL + Brain)
-
-用法:
-    brain = Brain("军师")
-    brain.ingest_signal(sig)       # 信号进入→触发记忆检索
-    cards = brain.recall("波扩散")  # 关键词检索
-    brain.insight("新洞察内容")     # 写入洞察到相关卡片
+架构: Client ↔ Gateway ↔ Core(JSONL + Brain) ↔ Brain(jika+分词+扩散)
 """
 
 import json
+import logging
 import sys
+import time
+from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
+from typing import Callable, Optional
 
-# jika内核路径——硬依赖
+logger = logging.getLogger("isa.brain")
+
+# jika内核——懒加载
 JIAK_API = Path.home() / ".hermes" / "jiak" / "jiak_api.py"
 _JIAK_LOADED = False
 
 def _ensure_jiak():
-    """懒加载 jika API。避免循环导入。"""
     global _JIAK_LOADED
     if not _JIAK_LOADED:
         if str(JIAK_API.parent) not in sys.path:
@@ -35,19 +37,22 @@ def _ensure_jiak():
         _JIAK_LOADED = True
 
 # ═══════════════════════════════════════════════════════════
-# Brain
+# Brain v0.2
 # ═══════════════════════════════════════════════════════════
 
 class Brain:
-    """ISA Agent的jika大脑。
+    """ISA Agent的jika大脑（七神升级版）。
 
-    每个Agent一个Brain实例。Brain管理该Agent的:
-    - 卡片目录（cards/*.json）
-    - 索引（index.json）
-    - 时间线（RECALL.jsonl）
+    v0.2新特性:
+    - jieba中文分词（🦉雅典娜）
+    - 二次波扩散回调（📨赫尔墨斯）
+    - 写卡失败pending重试（⚔️阿瑞斯）
+    - Dreaming关联跃迁接口（☀️阿波罗）
+    - 统计+健康检查（🔨赫淮斯托斯）
     """
 
-    def __init__(self, agent_id: str, brain_dir: Path = None):
+    def __init__(self, agent_id: str, brain_dir: Path = None,
+                 on_new_insight: Callable = None):
         self.agent_id = agent_id
         self.brain_dir = brain_dir or Path.home() / ".hermes" / "isa" / "brain" / agent_id
         self.brain_dir.mkdir(parents=True, exist_ok=True)
@@ -57,11 +62,21 @@ class Brain:
         self.index_path = self.brain_dir / "index.json"
         self.recall_path = self.brain_dir / "RECALL.jsonl"
 
-        # 初始化索引
         if not self.index_path.exists():
             self.index_path.write_text(json.dumps({"cards": {}}, ensure_ascii=False, indent=2))
 
-        self._session_insights: list[str] = []  # 本轮新洞察
+        # 二次波扩散回调——新洞察产生时自动触发emit
+        self._on_new_insight = on_new_insight or (lambda cid, content: None)
+        self._session_insights: list[str] = []
+
+        # ⚔️阿瑞斯: 写卡失败补偿队列
+        self._pending_writes: deque = deque()
+        self._write_errors: int = 0
+
+        # 🔨赫淮斯托斯: 统计
+        self._stats = {"signals_ingested": 0, "cards_matched": 0,
+                       "insights_written": 0, "write_failures": 0,
+                       "dreaming_cycles": 0}
 
         _ensure_jiak()
         from jiak_api import _read_json, _write_json, _append_jsonl
@@ -69,7 +84,47 @@ class Brain:
         self._write_json = _write_json
         self._append_jsonl = _append_jsonl
 
-        print(f"[Brain] 🧠 {agent_id} 大脑初始化: {self.brain_dir}")
+        logger.info(f"🧠 {agent_id} Brain v0.2 初始化: {self.brain_dir}")
+
+    # ── 🦉雅典娜: jieba分词 ──
+
+    def _extract_keywords(self, text: str) -> list[str]:
+        """jieba分词→去停用词→按词频排序→取top10。
+
+        jieba失败时降级为正则分词。
+        """
+        if not text or not text.strip():
+            return []
+
+        # 停用词——高频虚词
+        _stop = {'的','了','是','在','我','你','他','她','它','们','这','那',
+                 '和','与','或','吗','呢','吧','啊','哦','嗯','呀','哈','吧',
+                 '就','也','都','很','要','会','能','可以','一个','这个','那个','它','它们',
+                 '什么','怎么','为什么','因为','所以','但是','如果','虽然','而且',
+                 '对','从','到','在','把','被','让','给','向','跟','比','为',
+                 '不','没','有','没有','已经','还','又','再','只','才','就','也'}
+
+        try:
+            import jieba
+            words = [w.strip() for w in jieba.cut(text) if len(w.strip()) >= 2
+                    and w.strip() not in _stop
+                    and not all(c in '，。！？；：""''（）【】\n\r\t 　' for c in w)]
+        except ImportError:
+            # jieba不可用→降级正则（🦉雅典娜：至少保留基本能力）
+            import re
+            words = re.findall(r'[\w\u4e00-\u9fff]{2,}', text)
+            words = [w for w in words if w not in _stop]
+
+        # 去重保序+限制
+        seen = set()
+        result = []
+        for w in words:
+            if w not in seen:
+                seen.add(w)
+                result.append(w)
+                if len(result) >= 10:
+                    break
+        return result
 
     # ── 卡片操作 ──
 
@@ -77,10 +132,36 @@ class Brain:
         path = self.cards_dir / f"{card_id}.json"
         return self._read_json(path) if path.exists() else {}
 
-    def _write_card(self, card_id: str, data: dict):
-        data["updated"] = datetime.now(timezone.utc).isoformat()
-        self._write_json(self.cards_dir / f"{card_id}.json", data)
-        self._update_index(card_id, data)
+    def _write_card(self, card_id: str, data: dict) -> bool:
+        """写卡片——失败返回False，不抛异常。⚔️阿瑞斯保护。"""
+        try:
+            data["updated"] = datetime.now(timezone.utc).isoformat()
+            self._write_json(self.cards_dir / f"{card_id}.json", data)
+            self._update_index(card_id, data)
+            return True
+        except Exception as e:
+            logger.error(f"Brain写卡失败 [{card_id}]: {e}")
+            self._write_errors += 1
+            self._stats["write_failures"] += 1
+            # ⚔️阿瑞斯: 入pending队列，稍后重试
+            self._pending_writes.append((card_id, data, time.time()))
+            return False
+
+    def _retry_pending(self):
+        """⚔️阿瑞斯: 重试失败的写卡操作。"""
+        retried = 0
+        while self._pending_writes:
+            card_id, data, ts = self._pending_writes[0]
+            if self._write_card(card_id, data):
+                self._pending_writes.popleft()
+                retried += 1
+            elif time.time() - ts > 300:  # 5分钟超时→放弃
+                self._pending_writes.popleft()
+                logger.warning(f"Brain放弃重试 [{card_id}]: 超时")
+            else:
+                break  # 重试失败→保留队列
+        if retried:
+            logger.info(f"Brain补偿成功: {retried}条重试写入")
 
     def _update_index(self, card_id: str, data: dict):
         index = self._read_json(self.index_path)
@@ -94,24 +175,27 @@ class Brain:
         }
         self._write_json(self.index_path, index)
 
-    # ── 核心：信号摄入→记忆检索 ──
+    # ── 核心: 信号摄入→记忆检索 ──
 
     def ingest_signal(self, signal: dict) -> list[dict]:
-        """收到一条ISA信号后，触发记忆检索。
+        """收到ISA信号→jieba分词→记忆检索→返回匹配卡片。
 
-        返回匹配的卡片列表（摘要+相似度），供Agent上下文使用。
+        返回: matched_cards列表(含card_id, score, title, summary)
         """
         body = signal.get("body", "")
         source = signal.get("source", "?")
-        sig_type = signal.get("type", "message")
 
-        # 提取关键词
+        # 🦉雅典娜: jieba分词
         keywords = self._extract_keywords(body)
 
-        # 检索匹配卡片
+        # 检索
         matched = self._search(keywords, limit=3)
 
-        # 追加RECALL
+        self._stats["signals_ingested"] += 1
+        if matched:
+            self._stats["cards_matched"] += 1
+
+        # RECALL追加
         self._append_jsonl(self.recall_path, {
             "type": "signal",
             "source": source,
@@ -121,18 +205,13 @@ class Brain:
             "timestamp": datetime.now(timezone.utc).isoformat(),
         })
 
+        # ⚔️阿瑞斯: 定期重试补偿
+        self._retry_pending()
+
         return matched
 
-    def _extract_keywords(self, text: str) -> list[str]:
-        """从文本中提取关键词（简单版——按空格/标点分词取长度>1的词）。"""
-        import re
-        words = re.findall(r'[\w\u4e00-\u9fff]{2,}', text)
-        # 去重、去停用词
-        stop = {'的','了','是','在','我','你','他','她','它','们','这','那','和','与','或','吗','呢','吧','啊','哦','嗯','呀','哈'}
-        return list(dict.fromkeys([w for w in words if w not in stop]))[:10]
-
     def _search(self, keywords: list[str], limit: int = 3) -> list[dict]:
-        """关键词匹配检索。简单版——按关键词命中数排序。"""
+        """关键词匹配检索——按命中数排序。"""
         index = self._read_json(self.index_path)
         cards = index.get("cards", {})
 
@@ -144,27 +223,27 @@ class Brain:
                 scored.append((score, card_id, meta))
 
         scored.sort(key=lambda x: x[0], reverse=True)
-        return [{"card_id": cid, "score": s, "title": m.get("title",""),
-                 "summary": m.get("summary","")} for s, cid, m in scored[:limit]]
+        return [{"card_id": cid, "score": s, "title": m.get("title", ""),
+                 "summary": m.get("summary", "")} for s, cid, m in scored[:limit]]
 
-    # ── 洞察写入 ──
+    # ── 洞察写入 + 二次扩散 ──
 
-    def insight(self, card_id: str, content: str):
-        """将一个新洞察写入指定卡片。
+    def insight(self, card_id: str, content: str, emit: bool = True):
+        """写入洞察→写卡→追加RECALL→触发二次波扩散。
 
-        如果卡片不存在，自动创建。
+        Args:
+            card_id: 目标卡片ID
+            content: 洞察内容
+            emit: 是否触发二次波扩散（📨赫尔墨斯）
         """
         card = self._read_card(card_id)
         if not card:
             card = {
-                "card_id": card_id,
-                "title": card_id,
+                "card_id": card_id, "title": card_id,
                 "status": "active",
                 "created": datetime.now(timezone.utc).isoformat(),
-                "keywords": [],
-                "summary": "",
-                "decisions": [],
-                "notes": [],
+                "keywords": [], "summary": "",
+                "decisions": [], "notes": [],
             }
 
         card.setdefault("notes", []).append({
@@ -173,22 +252,80 @@ class Brain:
         })
         card["summary"] = content[:200]
 
-        self._write_card(card_id, card)
-        self._session_insights.append(f"[{card_id}] {content[:100]}")
+        ok = self._write_card(card_id, card)
+        if ok:
+            self._session_insights.append(f"[{card_id}] {content[:100]}")
+            self._stats["insights_written"] += 1
 
-        # 写入RECALL
-        self._append_jsonl(self.recall_path, {
-            "type": "insight",
-            "card_id": card_id,
-            "content": content,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-        })
+            # RECALL追加
+            self._append_jsonl(self.recall_path, {
+                "type": "insight", "card_id": card_id,
+                "content": content,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            })
 
-        print(f"[Brain] 💡 {self.agent_id} 新洞察 → {card_id}: {content[:60]}...")
+            logger.info(f"💡 {self.agent_id} → {card_id}: {content[:60]}...")
+
+            # 📨赫尔墨斯: 二次波扩散——新洞察触发emit
+            if emit:
+                self._on_new_insight(card_id, content)
+        else:
+            # 失败已入pending队列，由_retry_pending处理
+            pass
+
+    # ── ☀️阿波罗: Dreaming种子 ──
+
+    def dream(self) -> list[dict]:
+        """卡片间关联跃迁——扫描全部卡片，检测关键词重叠的卡片对。
+
+        返回: 新发现的关联对列表。
+        这是Dreaming的检索器阶段——只发现关联，不生成洞察。
+        完整的Dreaming需要LLM介入做洞察生成（⏳克洛诺斯·本月）。
+        """
+        index = self._read_json(self.index_path)
+        cards = index.get("cards", {})
+        card_ids = list(cards.keys())
+        discoveries = []
+
+        for i in range(len(card_ids)):
+            for j in range(i + 1, len(card_ids)):
+                kwi = set(cards[card_ids[i]].get("keywords", []))
+                kwj = set(cards[card_ids[j]].get("keywords", []))
+                overlap = kwi & kwj
+                if len(overlap) >= 2:  # 两个以上关键词重叠→关联
+                    discoveries.append({
+                        "card_a": card_ids[i],
+                        "card_b": card_ids[j],
+                        "shared_keywords": list(overlap),
+                    })
+
+        self._stats["dreaming_cycles"] += 1
+        if discoveries:
+            logger.info(f"☀️ {self.agent_id} Dreaming发现 {len(discoveries)} 组关联")
+        return discoveries
+
+    # ── 🔨赫淮斯托斯: 统计与健康 ──
+
+    @property
+    def stats(self) -> dict:
+        """运行统计。"""
+        return dict(self._stats)
+
+    def health(self) -> dict:
+        """健康检查。
+        返回: {ok: bool, pending_writes: int, write_errors: int, card_count: int}
+        """
+        index = self._read_json(self.index_path)
+        return {
+            "ok": self._write_errors == 0 and len(self._pending_writes) == 0,
+            "pending_writes": len(self._pending_writes),
+            "write_errors": self._write_errors,
+            "card_count": len(index.get("cards", {})),
+            "stats": self.stats,
+        }
 
     # ── 会话洞察汇总 ──
 
     @property
     def new_insights(self) -> list[str]:
-        """本轮新产生的洞察列表。"""
         return list(self._session_insights)
