@@ -428,10 +428,22 @@ class Brain:
         if not discoveries:
             return
         dream_log = self.brain_dir / "brain_dream.jsonl"
+        # 💎 认知温度: 从最近洞察中提取温度标签
+        temperature = "neutral"
+        if self._session_insights:
+            last = self._session_insights[-1].lower()
+            if any(w in last for w in ["发现", "关联", "统一", "闭环", "打通"]):
+                temperature = "兴奋"
+            elif any(w in last for w in ["问题", "阻塞", "失败", "缺失", "薄弱"]):
+                temperature = "关注"
+            elif any(w in last for w in ["重要", "关键", "核心", "基础"]):
+                temperature = "深思"
+
         event = {
             "type": "dream",
             "agent_id": self.agent_id,
             "timestamp": datetime.now(timezone.utc).isoformat(),
+            "temperature": temperature,
             "discoveries": [{
                 "card_a": d["card_a"],
                 "card_b": d["card_b"],
@@ -439,6 +451,71 @@ class Brain:
             } for d in discoveries[:10]],  # 最多10条
         }
         self._append_jsonl(dream_log, event)
+
+    def distill(self, llm_endpoint: str = None) -> list[dict]:
+        """🪞 jika蒸馏: 扫描RECALL注入记录→聚类→提取元洞察。
+
+        二阶Dreaming——不是dream()扫描卡片，是distill()扫描自己的记忆。
+        """
+        if not self.recall_path.exists():
+            return []
+
+        # 读RECALL最近500行，过滤type=inject
+        lines = []
+        with open(self.recall_path, 'r') as f:
+            all_lines = f.readlines()
+            for line in all_lines[-500:]:
+                try:
+                    entry = json.loads(line.strip())
+                    if entry.get("type") == "inject":
+                        lines.append(entry)
+                except json.JSONDecodeError:
+                    continue
+
+        if len(lines) < 5:
+            return []
+
+        # 按card_id分组
+        groups: dict[str, list[str]] = {}
+        for entry in lines:
+            cid = entry.get("card_id", "unknown")
+            content = entry.get("content", entry.get("summary", ""))
+            if content:
+                groups.setdefault(cid, []).append(content[:200])
+
+        # 取内容最多的3组
+        ranked = sorted(groups.items(), key=lambda x: len(x[1]), reverse=True)[:3]
+        meta_insights = []
+
+        for card_id, contents in ranked:
+            freq_words = self._extract_keywords(" ".join(contents))
+            top_words = freq_words[:5]
+
+            if llm_endpoint:
+                # 调LLM生成元洞察
+                sample = "\n".join(contents[:5])
+                insight_text = self._llm_dream(
+                    {"title": card_id, "summary": sample, "keywords": top_words},
+                    {"title": "RECALL记忆", "summary": f"共{len(contents)}条注入记录", "keywords": ["RECALL", "蒸馏"]},
+                    top_words,
+                )
+                if insight_text:
+                    meta_insights.append({
+                        "card_id": card_id,
+                        "insight": insight_text,
+                        "record_count": len(contents),
+                    })
+                    self.insight(card_id, f"[蒸馏]🪞 {insight_text}", emit=True)
+            else:
+                # 无LLM→只统计
+                meta_insights.append({
+                    "card_id": card_id,
+                    "top_words": top_words,
+                    "record_count": len(contents),
+                })
+
+        self._stats["distill_cycles"] = self._stats.get("distill_cycles", 0) + 1
+        return meta_insights
 
     # ── ⏳克洛诺斯: 预测器 ──
 
