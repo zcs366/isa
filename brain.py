@@ -304,6 +304,119 @@ class Brain:
             logger.info(f"☀️ {self.agent_id} Dreaming发现 {len(discoveries)} 组关联")
         return discoveries
 
+    # ── ⏳克洛诺斯+🔨赫淮斯托斯: 异步Dreaming引擎 ──
+
+    def start_dreaming(self, llm_endpoint: str = None, interval: int = 60):
+        """启动后台Dreaming线程——定时扫描卡片→发现关联→调LLM→生成洞察。
+
+        Args:
+            llm_endpoint: LLM API endpoint (OpenAI兼容协议)。
+                          为None时只发现关联不调LLM(纯dream模式)。
+            interval: 扫描间隔(秒)，默认60s。
+        """
+        import threading
+        self._dream_config = {
+            "llm_endpoint": llm_endpoint,
+            "interval": interval,
+            "min_overlap": 2,
+            "max_pairs_per_cycle": 3,
+        }
+        self._dream_running = True
+        self._dream_thread = threading.Thread(
+            target=self._dream_worker, daemon=True,
+            name=f"brain-dream-{self.agent_id}"
+        )
+        self._dream_thread.start()
+        logger.info(f"☀️ {self.agent_id} Dreaming引擎启动 (间隔{interval}s, LLM={'on' if llm_endpoint else 'off'})")
+
+    def stop_dreaming(self):
+        """停止Dreaming引擎。"""
+        self._dream_running = False
+
+    def _dream_worker(self):
+        """后台Dreaming工作线程。"""
+        cfg = self._dream_config
+        while getattr(self, '_dream_running', False):
+            try:
+                # 1. 发现关联
+                discoveries = self.dream()
+                if not discoveries:
+                    time.sleep(cfg["interval"])
+                    continue
+
+                # 2. 如果没有LLM端点→只记录发现
+                if not cfg.get("llm_endpoint"):
+                    for d in discoveries:
+                        logger.debug(f"☀️ 关联: {d['card_a']}↔{d['card_b']} ({d['shared_keywords']})")
+                    time.sleep(cfg["interval"])
+                    continue
+
+                # 3. 取TOP N调LLM生成洞察
+                top_n = discoveries[:cfg["max_pairs_per_cycle"]]
+                for d in top_n:
+                    card_a = self._read_card(d["card_a"])
+                    card_b = self._read_card(d["card_b"])
+                    if not card_a or not card_b:
+                        continue
+
+                    insight_text = self._llm_dream(card_a, card_b, d["shared_keywords"])
+                    if insight_text:
+                        self.insight(
+                            d["card_a"],
+                            f"[Dreaming] 与「{d['card_b']}」的深层关联: {insight_text}",
+                            emit=True,
+                        )
+
+            except Exception as e:
+                logger.error(f"Dreaming worker异常: {e}")
+
+            time.sleep(cfg["interval"])
+
+    def _llm_dream(self, card_a: dict, card_b: dict, shared_kw: list[str]) -> str | None:
+        """调LLM生成两张卡片间的语义洞察。⚔️阿瑞斯: 带超时+降级。
+
+        Returns:
+            洞察文本，失败返回None。
+        """
+        import urllib.request
+
+        endpoint = self._dream_config.get("llm_endpoint", "")
+        if not endpoint:
+            return None
+
+        summary_a = card_a.get("summary", "")[:300]
+        summary_b = card_b.get("summary", "")[:300]
+        title_a = card_a.get("title", "?")
+        title_b = card_b.get("title", "?")
+        kws = ", ".join(shared_kw[:5])
+
+        prompt = (
+            f"两张知识卡片共享关键词 [{kws}]。\n"
+            f"卡片A「{title_a}」: {summary_a}\n"
+            f"卡片B「{title_b}」: {summary_b}\n\n"
+            f"请用1-2句话提炼它们的深层联系——它们在回答同一个什么问题？"
+        )
+
+        payload = json.dumps({
+            "model": "gpt-4o-mini",
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 100,
+            "temperature": 0.7,
+        }).encode()
+
+        try:
+            req = urllib.request.Request(
+                f"{endpoint}/v1/chat/completions",
+                data=payload,
+                headers={"Content-Type": "application/json"},
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read())
+                return data["choices"][0]["message"]["content"].strip()
+        except Exception as e:
+            logger.warning(f"LLM dreaming失败: {e}")
+            return None
+
     # ── ⏳克洛诺斯: 预测器 ──
 
     def predict(self, signal_body: str) -> list[dict]:

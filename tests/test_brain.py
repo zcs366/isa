@@ -8,6 +8,7 @@ Brain v0.2 单元测试
 import json
 import os
 import sys
+import time
 import tempfile
 import unittest
 from pathlib import Path
@@ -293,7 +294,6 @@ class TestBrainRecognize(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
         self.brain = Brain("test", brain_dir=Path(self.tmp))
-        # 手动建卡设关键词（insight自建卡无关键词）
         self.brain._write_card("isa-wave", {
             "card_id": "isa-wave", "title": "ISA波扩散",
             "keywords": ["波扩散", "ISA", "语义距离", "Jaccard"],
@@ -318,6 +318,59 @@ class TestBrainRecognize(unittest.TestCase):
     def test_recognize_no_match(self):
         result = self.brain.recognize("完全无关的话题")
         self.assertIsNone(result)
+
+
+class TestBrainDreamEngine(unittest.TestCase):
+    """⏳克洛诺斯+🔨赫淮斯托斯: 异步Dreaming引擎测试"""
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+        self.brain = Brain("test", brain_dir=Path(self.tmp))
+        self.brain._write_card("c1", {
+            "card_id": "c1", "title": "卡片1",
+            "keywords": ["ISA", "通信", "Gateway"],
+            "summary": "ISA通信架构", "status": "active",
+            "decisions": [], "notes": [],
+        })
+        self.brain._write_card("c2", {
+            "card_id": "c2", "title": "卡片2",
+            "keywords": ["ISA", "通信", "波扩散"],
+            "summary": "波扩散机制", "status": "active",
+            "decisions": [], "notes": [],
+        })
+
+    def tearDown(self):
+        try:
+            self.brain.stop_dreaming()
+        except Exception:
+            pass
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_dream_finds_overlap(self):
+        discoveries = self.brain.dream()
+        self.assertGreaterEqual(len(discoveries), 1)
+        self.assertIn("ISA", discoveries[0]["shared_keywords"])
+
+    def test_async_engine_starts_stops(self):
+        self.brain.start_dreaming(interval=1)
+        self.assertTrue(self.brain._dream_running)
+        self.brain.stop_dreaming()
+        self.assertFalse(self.brain._dream_running)
+
+    def test_async_engine_no_llm(self):
+        """无LLM端点→只记录关联不崩溃"""
+        self.brain.start_dreaming(interval=1)
+        time.sleep(2)  # 等一次扫描
+        self.brain.stop_dreaming()
+        self.assertGreaterEqual(self.brain.stats["dreaming_cycles"], 1)
+
+    def test_dream_stats_increment(self):
+        stats_before = self.brain.stats["dreaming_cycles"]
+        self.brain.start_dreaming(interval=1)
+        time.sleep(2)
+        self.brain.stop_dreaming()
+        self.assertGreater(self.brain.stats["dreaming_cycles"], stats_before)
 
 
 if __name__ == "__main__":
