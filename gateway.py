@@ -24,6 +24,7 @@ ISA Gateway是ISA Core（v0.6.0）的上层实时传输层。
 import asyncio
 import json
 import logging
+import os
 import time
 import uuid
 from pathlib import Path
@@ -77,9 +78,11 @@ class IsaGateway:
         gateway.start()  # 阻塞运行
     """
 
-    def __init__(self, host: str = "0.0.0.0", port: int = 8765):
+    def __init__(self, host: str = "0.0.0.0", port: int = 8765,
+                 token: str | None = None):
         self.host = host
         self.port = port
+        self.token = token  # None=开发模式(开放), str=生产模式(需认证)
         self.connections: dict[str, Connection] = {}   # agent_id → Connection
         self.channel_members: dict[str, set[str]] = {}  # channel → set of agent_ids
         self._server = None
@@ -189,6 +192,18 @@ class IsaGateway:
             import re as _re
             channel = _re.sub(r'[^a-zA-Z0-9_-]', '_', str(channel))[:64] or DEFAULT_CHANNEL
             keywords = msg.get("keywords", {})
+
+            # === Agent Token认证 ===
+            if self.token is not None:
+                client_token = msg.get("token", "")
+                if client_token != self.token:
+                    await websocket.send(json.dumps({
+                        "type": "error",
+                        "error": "认证失败: token无效",
+                    }))
+                    logger.warning(f"[gateway] 认证拒绝: {agent_id} (token不匹配)")
+                    return
+                logger.info(f"[gateway] {agent_id} 认证通过")
 
             # 注册
             conn = Connection(agent_id, websocket, channel, keywords)
@@ -416,10 +431,11 @@ class IsaSdk:
     """
 
     def __init__(self, agent_id: str, gateway_url: str = "ws://localhost:8765",
-                 channel: str = DEFAULT_CHANNEL):
+                 channel: str = DEFAULT_CHANNEL, token: str | None = None):
         self.agent_id = agent_id
         self.gateway_url = gateway_url.rstrip("/")
         self.channel = channel
+        self.token = token
         self._ws = None
         self._handlers = []
 
@@ -434,12 +450,15 @@ class IsaSdk:
         self._ws = await websockets.connect(url)
 
         # 发送注册消息
-        await self._ws.send(json.dumps({
+        reg_msg = {
             "type": "register",
             "agent_id": self.agent_id,
             "channel": self.channel,
             "keywords": keywords or {},
-        }, ensure_ascii=False))
+        }
+        if self.token:
+            reg_msg["token"] = self.token
+        await self._ws.send(json.dumps(reg_msg, ensure_ascii=False))
 
         # 等待注册确认
         reply = json.loads(await self._ws.recv())
@@ -526,9 +545,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="ISA Gateway v0.7.0")
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--token", default=os.environ.get("ISA_TOKEN"),
+                       help="Agent Token认证（不设=开放模式）")
     args = parser.parse_args()
 
-    gateway = IsaGateway(host=args.host, port=args.port)
+    if args.token:
+        logger.info(f"[gateway] Token认证已启用 (token={args.token[:4]}...)")
+    else:
+        logger.info("[gateway] 开放模式——无需认证")
+
+    gateway = IsaGateway(host=args.host, port=args.port, token=args.token)
     try:
         gateway.start()
     except KeyboardInterrupt:

@@ -384,6 +384,8 @@ body {
     <input id="channelInput" value="main">
     <label>关键词（逗号分隔）</label>
     <input id="keywordsInput" placeholder="AI, 哲学, 编程, 诗歌">
+    <label>Token（Gatekeeper认证——留空则开放模式）</label>
+    <input id="tokenInput" placeholder="输入Gateway Token...">
     <button onclick="doConnect()">接入语义场</button>
     <div class="status" id="connectStatus"></div>
   </div>
@@ -469,26 +471,29 @@ function doConnect() {
   myChannel = channel;
   savedKw = keywords;
   savedUrl = url;
+  const token = document.getElementById('tokenInput').value.trim() || null;
   reconnectDelay = 3;  // 重置退避
   document.getElementById('myName').textContent = id;
   document.getElementById('myChannel').textContent = `#${channel}`;
   document.getElementById('connectStatus').textContent = '连接中...';
   document.getElementById('connectStatus').className = 'status';
 
-  _connect(url, channel, id, keywords);
+  _connect(url, channel, id, keywords, token);
 }
 
-function _connect(url, channel, id, keywords) {
+function _connect(url, channel, id, keywords, token) {
   try {
     ws = new WebSocket(`${url}/isa/channel/${channel}`);
 
     ws.onopen = () => {
-      ws.send(JSON.stringify({
+      const reg = {
         type: 'register',
         agent_id: id,
         channel: channel,
         keywords: keywords,
-      }));
+      };
+      if (token) reg.token = token;
+      ws.send(JSON.stringify(reg));
     };
 
     ws.onmessage = (event) => {
