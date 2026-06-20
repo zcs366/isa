@@ -242,5 +242,83 @@ class TestBrainHealth(unittest.TestCase):
         self.assertEqual(h["card_count"], 1)
 
 
+class TestBrainPredict(unittest.TestCase):
+    """⏳克洛诺斯: 预测器测试"""
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+        self.brain = Brain("test", brain_dir=Path(self.tmp))
+        self.brain._write_card("isa", {
+            "card_id": "isa", "title": "ISA通信",
+            "keywords": ["ISA", "通信", "Gateway"],
+            "summary": "", "status": "active",
+            "decisions": [], "notes": [],
+        })
+        self.brain._write_card("jika", {
+            "card_id": "jika", "title": "jika记忆",
+            "keywords": ["jika", "记忆", "检索"],
+            "summary": "", "status": "active",
+            "decisions": [], "notes": [],
+        })
+        self.brain._write_card("unified", {
+            "card_id": "unified", "title": "ISA+jika统一",
+            "keywords": ["ISA", "jika", "统一", "架构"],
+            "summary": "", "status": "active",
+            "decisions": [], "notes": [],
+        })
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_direct_prediction(self):
+        preds = self.brain.predict("ISA通信协议")
+        self.assertTrue(any(p["card_id"] == "isa" for p in preds))
+
+    def test_association_prediction(self):
+        preds = self.brain.predict("jika记忆引擎")
+        # "jika" matches "jika" card, dream associates "jika" with "unified"
+        self.assertTrue(any(p["card_id"] == "jika" for p in preds))
+
+    def test_confidence_bounded(self):
+        preds = self.brain.predict("ISA通信")
+        for p in preds:
+            self.assertGreaterEqual(p["confidence"], 0.0)
+            self.assertLessEqual(p["confidence"], 1.0)
+
+
+class TestBrainRecognize(unittest.TestCase):
+    """💎阿佛洛狄忒: 仪式感测试"""
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+        self.brain = Brain("test", brain_dir=Path(self.tmp))
+        # 手动建卡设关键词（insight自建卡无关键词）
+        self.brain._write_card("isa-wave", {
+            "card_id": "isa-wave", "title": "ISA波扩散",
+            "keywords": ["波扩散", "ISA", "语义距离", "Jaccard"],
+            "summary": "波扩散机制", "status": "active",
+            "decisions": [], "notes": [
+                {"date": "2026-06-20", "content": "波扩散是语义选通在空间维的实现"},
+                {"date": "2026-06-20", "content": "Jaccard距离决定消息传播范围"},
+                {"date": "2026-06-20", "content": "三端统一验证了层间解耦"},
+            ],
+        })
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_recognize_strong_match(self):
+        result = self.brain.recognize("波扩散机制如何工作")
+        self.assertIsNotNone(result)
+        self.assertIn("ISA波扩散", result)
+        self.assertIn("三端统一", result)
+
+    def test_recognize_no_match(self):
+        result = self.brain.recognize("完全无关的话题")
+        self.assertIsNone(result)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

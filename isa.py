@@ -876,6 +876,20 @@ class IsaAgent:
                                         })
                                         if recalled:
                                             sig.meta["_brain_recall"] = recalled
+                                        # ⏳克洛诺斯: 预测
+                                        try:
+                                            preds = self.brain.predict(msg.get("body",""))
+                                            if preds:
+                                                sig.meta["_brain_predict"] = preds
+                                        except Exception:
+                                            pass
+                                        # 💎阿佛洛狄忒: 仪式感
+                                        try:
+                                            recognition = self.brain.recognize(msg.get("body",""))
+                                            if recognition:
+                                                sig.meta["_brain_recognize"] = recognition
+                                        except Exception:
+                                            pass
                                     except Exception:
                                         pass  # Brain异常不阻断通信
 

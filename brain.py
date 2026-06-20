@@ -304,6 +304,98 @@ class Brain:
             logger.info(f"☀️ {self.agent_id} Dreaming发现 {len(discoveries)} 组关联")
         return discoveries
 
+    # ── ⏳克洛诺斯: 预测器 ──
+
+    def predict(self, signal_body: str) -> list[dict]:
+        """基于当前Brain状态预测信号可能触发什么认知变化。
+
+        预测逻辑（启发式，不需要LLM）:
+        1. 提取信号关键词
+        2. 检索已有卡片匹配
+        3. Dreaming发现与匹配卡片关联的其他卡片
+        4. 返回预测：哪些卡片可能被这次信号激活
+
+        Args:
+            signal_body: 传入信号文本
+
+        Returns:
+            [{card_id, reason, confidence}]
+        """
+        keywords = self._extract_keywords(signal_body)
+        matched = self._search(keywords, limit=5)
+
+        # 构建预测：已匹配卡片 + 通过dream关联的卡片
+        predictions = []
+        seen = set()
+
+        for m in matched:
+            cid = m["card_id"]
+            if cid not in seen:
+                seen.add(cid)
+                predictions.append({
+                    "card_id": cid,
+                    "reason": f"直接匹配({m['score']}个关键词)",
+                    "confidence": min(m["score"] / max(len(keywords), 1), 1.0),
+                })
+
+        # Dreaming关联扩展
+        associations = self.dream()
+        matched_ids = {m["card_id"] for m in matched}
+        for assoc in associations:
+            if assoc["card_a"] in matched_ids and assoc["card_b"] not in seen:
+                seen.add(assoc["card_b"])
+                predictions.append({
+                    "card_id": assoc["card_b"],
+                    "reason": f"通过 {assoc['card_a']} 关联 (共享: {', '.join(assoc['shared_keywords'][:3])})",
+                    "confidence": 0.3,  # 关联预测置信度低于直接匹配
+                })
+            elif assoc["card_b"] in matched_ids and assoc["card_a"] not in seen:
+                seen.add(assoc["card_a"])
+                predictions.append({
+                    "card_id": assoc["card_a"],
+                    "reason": f"通过 {assoc['card_b']} 关联 (共享: {', '.join(assoc['shared_keywords'][:3])})",
+                    "confidence": 0.3,
+                })
+
+        self._stats["predictions_made"] = self._stats.get("predictions_made", 0) + len(predictions)
+        return predictions
+
+    # ── 💎阿佛洛狄忒: 仪式感——记忆识别的诗性瞬间 ──
+
+    def recognize(self, signal_body: str) -> str | None:
+        """当信号触发显著记忆匹配时，返回一句有温度的话。
+
+        不是print('matched 3 cards')——而是Agent说出一句只有它自己知道的话。
+        """
+        matched = self.ingest_signal({"body": signal_body, "source": "self", "type": "introspect"})
+
+        if not matched:
+            return None
+
+        best = matched[0]
+        best_card = self._read_card(best["card_id"])
+        note_count = len(best_card.get("notes", []))
+        decision_count = len(best_card.get("decisions", []))
+
+        # 构建仪式感短语
+        phrases = []
+
+        if best["score"] >= 3:
+            phrases.append(f"我清楚地记得「{best['title']}」——")
+        elif best["score"] == 2:
+            phrases.append(f"这让我想起「{best['title']}」——")
+        else:
+            phrases.append(f"好像和「{best['title']}」有点关系——")
+
+        if note_count > 0:
+            last_note = best_card["notes"][-1]["content"][:80]
+            phrases.append(f"上次想的是：{last_note}")
+
+        if len(matched) > 1:
+            phrases.append(f"...还有{len(matched)-1}段相关的记忆")
+
+        return " ".join(phrases)
+
     # ── 🔨赫淮斯托斯: 统计与健康 ──
 
     @property
