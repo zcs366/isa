@@ -367,6 +367,9 @@ class Brain:
                             emit=True,
                         )
 
+                # 📡 Δ胶囊: 记录Dreaming事件到认知日志
+                self._log_dream_event(discoveries)
+
             except Exception as e:
                 logger.error(f"Dreaming worker异常: {e}")
 
@@ -416,6 +419,26 @@ class Brain:
         except Exception as e:
             logger.warning(f"LLM dreaming失败: {e}")
             return None
+
+    def _log_dream_event(self, discoveries: list[dict]):
+        """📡 Δ胶囊: 将Dreaming发现记录到认知事件日志。
+
+        写入 brain_dream.jsonl (不可变追加)，供Δ胶囊消费。
+        """
+        if not discoveries:
+            return
+        dream_log = self.brain_dir / "brain_dream.jsonl"
+        event = {
+            "type": "dream",
+            "agent_id": self.agent_id,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "discoveries": [{
+                "card_a": d["card_a"],
+                "card_b": d["card_b"],
+                "shared_keywords": d["shared_keywords"],
+            } for d in discoveries[:10]],  # 最多10条
+        }
+        self._append_jsonl(dream_log, event)
 
     # ── ⏳克洛诺斯: 预测器 ──
 
