@@ -651,12 +651,18 @@ class WaveEngine:
 
 class IsaAgent:
     def __init__(self, agent_id: str, graph: SignalGraph = None,
-                 wave_engine: WaveEngine = None):
+                 wave_engine: WaveEngine = None, brain = None):
         self.agent_id = agent_id
         self.graph = graph or SignalGraph()
         self.wave = wave_engine or WaveEngine(self.graph)
         self._handlers: list[callable] = []
         self._running = False
+
+        # 🧠 jika内核——ISA原生大脑
+        if brain is None:
+            from brain import Brain
+            brain = Brain(agent_id)
+        self.brain = brain
 
     # ── 基础通信 ──
     def send(self, target: str, body: str, meta: dict = None) -> str:
@@ -854,6 +860,19 @@ class IsaAgent:
                                         meta=msg.get("meta",{}),
                                     )
                                     self.graph.ingest(sig)  # 写入本地Core
+
+                                    # 🧠 jika: 信号进入Brain→触发记忆检索
+                                    try:
+                                        recalled = self.brain.ingest_signal({
+                                            "type": msg.get("type","message"),
+                                            "source": msg.get("source","?"),
+                                            "body": msg.get("body",""),
+                                        })
+                                        if recalled:
+                                            sig.meta["_brain_recall"] = recalled
+                                    except Exception:
+                                        pass  # Brain异常不阻断通信
+
                                     for h in self._handlers:
                                         try: h(sig)
                                         except Exception: pass
