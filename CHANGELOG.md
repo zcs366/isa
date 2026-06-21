@@ -11,7 +11,8 @@
 - ⚔️ Arbiter: 认知仲裁层·矛盾检测·RESOLVED/CONTRADICTION/STALEMATE裁决
 - 🔗 Arbiter+DreamBridge集成: 消费时自动仲裁认知矛盾
 - 📖 MANUAL v0.8: Brain+Dreaming+三角架构完整文档
-- 🚀 GitHub 34 commits | openllm-memory DreamBridge+Arbiter f795ffc
+- 🦉 离线自洽协议: OfflineProtocol·信号缓冲+重连同步·认知不中断·delta sync
+- 🚀 GitHub 36 commits | openllm-memory 7 commits
 
 ## v0.7.0 (2026-06-20)
 - 🌊 Gateway WebSocket + Token认证
