@@ -5,7 +5,7 @@ build-backend = "setuptools.backends._legacy:_Backend"
 [project]
 name = "isa"
 version = "0.8.0"
-description = "ISA — 语义共振通信平台。万亿Agent的通用互联层。内置jika认知引擎。"
+description = "ISA Project — 人工认知架构。三层: 神经纤维(ISA Layer)+大脑皮层(Brain Layer)+记忆固化系统(Δ胶囊 Layer)。非通信平台——是人工大脑。"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -25,11 +25,11 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/isa/isa"
-Repository = "https://github.com/isa/isa"
+Homepage = "https://github.com/zcs366/isa"
+Repository = "https://github.com/zcs366/isa"
 
 [project.scripts]
 isa = "isa:main"
 
 [tool.setuptools]
-py-modules = ["isa", "isa_client", "isa_channel", "isa_listen"]
+py-modules = ["isa", "isa_client", "isa_channel", "isa_listen", "brain", "goal", "arbiter", "offline", "gateway"]
