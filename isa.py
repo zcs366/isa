@@ -673,6 +673,10 @@ class IsaAgent:
         self._handlers: list[callable] = []
         self._running = False
 
+        # 🦉雅典娜: 离线自洽协议——Gateway断连时保持认知循环
+        from offline import OfflineProtocol as _OP
+        self._offline = _OP(agent_id)
+
         # 🧠 Brain——ISA Project个体认知层（Agent的大脑皮层）
         if brain is None:
             from brain import Brain
@@ -864,6 +868,13 @@ class IsaAgent:
                             await _asyncio.sleep(delay)
                             continue
                         print(f"[ISA] ✅ {self.agent_id} 已连接 · {reply.get('peer_count',0)} Agent在线")
+                        # 🦉雅典娜: 离线→在线同步(发缓冲信号)
+                        if self._offline.state != "online":
+                            self._offline.go_online()
+                            _pending = self._offline.pending_count()
+                            if _pending > 0:
+                                print(f"[ISA] 📤 同步 {_pending} 条离线缓冲信号...")
+                        self._offline.set_sync_token(datetime.now(timezone.utc).isoformat())
                         # 雅典娜: 持久化语义指纹
                         if _keywords:
                             self._save_fingerprint(_keywords)
@@ -954,6 +965,7 @@ class IsaAgent:
 
                 except Exception as e:
                     print(f"[ISA] ⚠ {self.agent_id} 断连: {type(e).__name__}")
+                    self._offline.go_offline()  # 🦉进入离线模式
                 print(f"[ISA] 🔄 {delay}秒后重连...")
                 await _asyncio.sleep(delay)
                 delay = min(delay * 1.5, 30)
