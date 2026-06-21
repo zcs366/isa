@@ -1,17 +1,17 @@
-# ISA+jika 新会话启动Prompt · 0621凌晨
+# ISA Project — 人工认知架构
 
-## 当前状态
+> **ISA不是通信平台。ISA是人工大脑。**
+> 三层架构：神经纤维(ISA Layer) + 大脑皮层(Brain Layer) + 记忆固化系统(Δ胶囊 Layer)
 
-ISA v0.8 · 30 commits · GitHub: https://github.com/zcs366/isa
-- Gateway: WebSocket + Token认证 + 波扩散 · systemd running
-- Core: JSONL频道(不可变追加) + Brain内核(jika认知引擎 v0.3)
-- Client: PWA可安装 + React Native骨架(~/projects/isa-mobile/)
-- 测试: 31项全绿 · test_brain.py
-- 文档: MANUAL v0.8 · CONTRIBUTING.md · PAL v0.8 · PROTOCOL.md
+## 核心架构：ISA·Brain·Δ胶囊三角
 
-## 核心架构：ISA·jika·Δ胶囊三角
+ISA Project是一个完整的人工认知架构（人工大脑），不是三个组件协作。
 
-ISA是管道，jika是大脑，Δ胶囊是硬盘。三者独立进化，接口对齐。
+| 层 | 职责 | 大脑类比 | 代码 | 状态 |
+|----|------|---------|------|------|
+| ISA Layer | Agent间通信(WebSocket+JSONL+波扩散) | 神经纤维(感知-运动) | gateway.py + isa.py | ✅ v0.8·32 commits |
+| Brain Layer | 单Agent认知(卡片+检索+梦境+预测+仪式感) | 大脑皮层(个体认知) | brain.py | ✅ v0.3·530行·31测试 |
+| Δ胶囊 Layer | 群体共享记忆固化 | 海马体(记忆固化) | openllm-memory | ✅ DreamBridge v0.1 |
 
 | 组件 | 职责 | 状态 |
 |------|------|------|

@@ -1,9 +1,21 @@
 #!/usr/bin/env python3
 """
-ISA Brain v0.2 — jika内核的ISA集成层（七神天启升级版）
-=====================================================
+ISA Brain v0.3 — ISA Project的个体认知层（Agent的大脑皮层）
+============================================================
 
-v0.1→v0.2 七神驱动升级:
+定位:
+  ISA Project是一个人工认知架构（人工大脑），分为三层:
+    ISA Layer = 神经纤维（感知-运动系统·Gateway+波扩散+Channel）
+    Brain     = 大脑皮层（个体认知层·本模块）
+    Δ胶囊     = 记忆固化系统（群体学习·openllm-memory）
+
+  Brain是ISA Project的第二层——每个ISA Agent生来拥有一个Brain，
+  负责感知(ingest_signal)→理解(jieba分词+记忆检索)→思考(dream/predict/recognize)
+  →决策(insight)→行动(emit)。
+  
+  Brain不是"卡片引擎"也不是"jika内核"——是ISA Project这个人工大脑的皮层。
+
+v0.1→v0.3 七神驱动升级:
   ☀️阿波罗: Dreaming种子——卡片间关联跃迁接口
   📨赫尔墨斯: 二次波扩散——新洞察自动emit
   🦉雅典娜: jieba分词——中文检索召回率修复
@@ -11,7 +23,7 @@ v0.1→v0.2 七神驱动升级:
   🔨赫淮斯托斯: 统计+健康检查
   ⏳克洛诺斯: 联想器/预测器接口预留
 
-架构: Client ↔ Gateway ↔ Core(JSONL + Brain) ↔ Brain(jika+分词+扩散)
+架构: Clients call brain.py from isa.py (IsaAgent has-a Brain)"""
 """
 
 import json
@@ -41,13 +53,16 @@ def _ensure_jiak():
 # ═══════════════════════════════════════════════════════════
 
 class Brain:
-    """ISA Agent的jika大脑（七神升级版）。
+    """ISA Project个体认知层（大脑皮层）。
 
-    v0.2新特性:
-    - jieba中文分词（🦉雅典娜）
-    - 二次波扩散回调（📨赫尔墨斯）
-    - 写卡失败pending重试（⚔️阿瑞斯）
-    - Dreaming关联跃迁接口（☀️阿波罗）
+    Brain是ISA Project这个人工认知架构的第二层。
+    负责: ingest_signal(感知) → jieba分词(理解) → dream/predict(思考) → insight(决策) → emit(行动)。
+
+    v0.3新特性:
+    - Dreaming自动后台扫描（☀️阿波罗）
+    - predict()预测器（⏳克洛诺斯）
+    - recognize()仪式感（💎阿佛洛狄忒）
+    - distill()二阶Dreaming（🪞）
     - 统计+健康检查（🔨赫淮斯托斯）
     """
 

@@ -1,14 +1,30 @@
 #!/usr/bin/env python3
 """
-ISA Gateway v0.7.0 — WebSocket实时传输 + 语义指纹认证 + 频道路由
-========================================================================
+ISA Gateway v0.7.0 — ISA Project的神经纤维层（感知-运动系统）
+============================================================
 
-ISA Gateway是ISA Core（v0.6.0）的上层实时传输层。
+定位:
+  ISA Project是一个人工认知架构（人工大脑），分为三层:
+    ISA Layer = 神经纤维（感知-运动系统·本模块·Gateway+波扩散+Channel）
+    Brain     = 大脑皮层（个体认知层·brain.py）
+    Δ胶囊     = 记忆固化系统（群体学习·openllm-memory）
+
+  Gateway是ISA Project的第一层——Agent社会的感官和运动系统。
+  Gateway不思考——它负责接收信号(感官)、路由信号(神经传导)、广播信号(运动)。
+  
+  Gateway不是"WebSocket信令网关"——是ISA Project这个人工大脑的神经纤维。
+
+功能:
+  - WebSocket连接管理（传入神经——从外部环境接收信号）
+  - Token认证（血脑屏障——只允许授权的信号进入）
+  - 频道路由（突触——信号在正确路径上传导）
+  - 波扩散（运动输出——信号广播到语义空间）
+  - 断线重连（神经可塑性——连接损坏后的恢复机制）
 
 设计原则：
-  - Gateway不替代Core——所有写入走Core的JSONL+fLock
+  - Gateway不替代Core——所有持久化走Core的JSONL+fLock
   - Gateway做Core做不到的事——实时推送、连接管理、接入认证
-  - 零依赖Core以外——只加websockets库（asyncio WebSocket server）
+  - 零依赖Core以外——只加websocket-client
 
 三层架构：
   ISA Client（Web/终端） ←WebSocket→ ISA Gateway ←→ ISA Core（JSONL/fLock/波扩散）

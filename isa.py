@@ -646,10 +646,25 @@ class WaveEngine:
 
 
 # ═══════════════════════════════════════════════════════════════
-# ISA分身（v0.6.0）
+# ISA Project认知单元（Agent）
+# 每个IsaAgent = ISA Project这个人工大脑中的一个神经元
 # ═══════════════════════════════════════════════════════════════
 
 class IsaAgent:
+    """ISA Project认知单元（神经元）。
+
+    IsaAgent是ISA Project这个人工认知架构中的基本活性单元。
+    每个Agent拥有:
+      - ISA Layer连接（Gateway+波扩散）——神经纤维，与其他Agent通信
+      - Brain（大脑皮层）——独立的认知处理单元
+      - Δ胶囊接口（DreamBridge）——记忆固化管道
+    
+    Agent不是独立程序——是ISA Project这个人工大脑中的一个神经元。
+    
+    认知循环:
+      receive(信号) → brain.ingest_signal(感知) → brain.dream/predict(思考)
+      → brain.insight(决策) → emit(行动) → 信号回到ISA网络
+    """
     def __init__(self, agent_id: str, graph: SignalGraph = None,
                  wave_engine: WaveEngine = None, brain = None):
         self.agent_id = agent_id
@@ -658,7 +673,7 @@ class IsaAgent:
         self._handlers: list[callable] = []
         self._running = False
 
-        # 🧠 jika内核——ISA原生大脑（v0.2·七神升级）
+        # 🧠 Brain——ISA Project个体认知层（Agent的大脑皮层）
         if brain is None:
             from brain import Brain
             # 📨赫尔墨斯: 新洞察自动触发emit→二次波扩散

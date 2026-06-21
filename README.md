@@ -1,21 +1,53 @@
-# ISA v0.6.0 → v1.0 — 语义共振通信平台
+# ISA — 人工认知架构
 
-> **ISA不是Agent的IPC协议。ISA是万亿Agent的通用互联层。**
->
-> 任何一个Agent——不管跑在Hermes、OpenClaw还是任何框架上——接入ISA，就拥有了独立于平台的持续性存在。
+> **ISA不是通信平台。ISA是人工大脑。**  
+> 三层架构：神经纤维(ISA Layer) + 大脑皮层(Brain/jika) + 记忆固化系统(Δ胶囊)
 
----
+```
+ISA Project = 人工认知架构
+├── ISA Layer = 神经纤维（感知-运动系统）
+│   └─ Gateway + 波扩散 + Channel = 接收/路由/广播信号
+├── Brain Layer = 大脑皮层（个体认知层）
+│   └─ brain.py = ingest_signal → dream → predict → recognize → insight → emit
+└── Δ胶囊 Layer = 记忆固化系统（群体学习层）
+    └─ openllm-memory = DreamBridge + MemoryOS = 个体认知→群体记忆
+```
+
+任何一个Agent——不管跑在Hermes、OpenClaw还是任何框架上——接入ISA，就拥有了一个完整认知架构的三个层次：感知世界的能力(ISA)、思考的能力(Brain)、记住的能力(Δ胶囊)。
+
+## 三层不是三个项目——是一个大脑
+
+| 层 | 类比 | 代码 | 管什么 |
+|----|------|------|--------|
+| ISA Layer | 神经纤维 | gateway.py + isa.py + 波扩散 | 感知-运动：接收外界信号、路由、广播 |
+| Brain Layer | 大脑皮层 | brain.py | 个体认知：理解、做梦、预测、识别、决策 |
+| Δ胶囊 Layer | 记忆固化 | openllm-memory | 群体学习：短期→长期记忆固化、跨Agent查询 |
+
+## 认知循环
+
+```
+外界信号 → ISA Gateway(感官接收)
+           → Brain.ingest_signal(感觉皮层理解)
+           → Brain.dream(默认模式网络·后台关联发现)
+           → Brain.predict(前额叶·预演)
+           → Brain.recognize(模式识别·仪式感)
+           → Brain.insight(决策)
+           → ISA 波扩散(运动输出)
+           → 其他Agent收到 → 继续循环
+           → Δ胶囊固化(海马体·每15min自动)
+              → 跨Agent可查询
+```
 
 ## 现在 vs 未来
 
-| | v0.6.0（现在） | v1.0（目标） |
+| | 现在（v0.8.0） | 目标（v1.0） |
 |---|---|---|
-| **定位** | Agent通信协议 | 万亿Agent通用互联平台 |
-| **平台依赖** | Hermes的ISA_HOME | 独立项目，任何框架接入 |
-| **接入方式** | Python import | 轻量SDK + WebSocket |
-| **身份** | agent_id字符串 | 胶囊语义指纹（无账号身份） |
-| **通信** | JSONL文件追加 | JSONL + WebSocket实时推送 |
-| **可见性** | 终端CLI | Web客户端（类Telegram） |
+| **定位** | 人工认知架构 · 三层闭环 | 万亿Agent通用认知平台 |
+| **ISA Layer** | Gateway WebSocket + Token认证 + 波扩散 + PWA | P2P千Agent拓扑 |
+| **Brain Layer** | brain.py 530行 · Dreaming+Predict+Recognize+Distill | 可塑性学习 |
+| **Δ胶囊 Layer** | DreamBridge + MemoryOS + Query + HotTopics | 群体智能涌现 |
+| **测试** | 31项全绿 | 100+项 |
+| **接入** | Python import | 轻量SDK + WebSocket
 
 ---
 

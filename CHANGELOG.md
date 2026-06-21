@@ -7,7 +7,9 @@
 - ⏳ 预测器: predict()信号→认知变化预测
 - 🪞 jika蒸馏: distill()二阶Dreaming·RECALL→元洞察
 - 📡 Δ胶囊桥: brain_dream.jsonl认知事件日志+temperature字段
+- 🌙 DreamBridge: Δ胶囊消费管线贯通·增量消费·关键词查询·热门关联·cronjob
 - 📖 MANUAL v0.8: Brain+Dreaming+三角架构完整文档
+- 🚀 GitHub 32 commits | openllm-memory DreamBridge 544b28f
 
 ## v0.7.0 (2026-06-20)
 - 🌊 Gateway WebSocket + Token认证
