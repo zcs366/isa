@@ -1043,6 +1043,8 @@ def main():
                         help="Gateway监听模式（WebSocket实时收发+自动重连）")
     parser.add_argument("--gateway", default="ws://localhost:8766",
                         help="Gateway地址（配合--agently-listen使用）")
+    parser.add_argument("--agent-data", default="",
+                        help="认知数据目录(Git同步的Agent身份), 默认~/.hermes/isa/brain/{agent_id}")
     parser.add_argument("--keywords-file", default=None,
                         help="语义指纹JSON文件路径（雅典娜赐福）")
 
@@ -1156,6 +1158,10 @@ def main():
 
     elif args.agently_listen:
         print(f"[ISA] 分身 '{agent_id}' Gateway监听模式")
+        # 🦉雅典娜: 认知数据目录(跨设备同步的Agent身份)
+        if args.agent_data:
+            os.environ["ISA_AGENT_DATA"] = str(Path(args.agent_data).resolve())
+            print(f"[ISA] 📁 Agent认知数据: {args.agent_data}")
         # 雅典娜: 加载显式指纹文件（若指定）
         keywords = {}
         if args.keywords_file:
