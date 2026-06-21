@@ -1,0 +1,22 @@
+{
+  "name": "ISA — 语义共振",
+  "short_name": "ISA",
+  "description": "语义共振通信平台 — 消息不按时间线，按意义扩散",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#7c6ff7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

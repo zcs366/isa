@@ -854,6 +854,20 @@ class IsaAgent:
                             self._save_fingerprint(_keywords)
                             print(f"[ISA] 🏛️ 语义指纹已持久化: {len(_keywords)}个关键词")
 
+                        # ☀️⏳ Dreaming引擎: Agent在线后自动启动认知循环
+                        # 如果设了ISA_DREAM_LLM环境变量→启动LLM增强Dreaming
+                        _dream_llm = os.environ.get("ISA_DREAM_LLM", "")
+                        if not _dream_llm:
+                            # 尝试从Gateway地址推导本地LLM端点
+                            _dream_llm = os.environ.get("ISA_LLM_ENDPOINT", "")
+                        try:
+                            self.brain.start_dreaming(
+                                llm_endpoint=_dream_llm or None,
+                                interval=300,  # 5分钟扫描一次
+                            )
+                        except Exception:
+                            pass  # Dreaming启动失败不影响通信
+
                         async def _recv():
                             try:
                                 async for raw in ws:
