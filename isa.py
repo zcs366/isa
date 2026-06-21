@@ -884,7 +884,6 @@ class IsaAgent:
                         # 如果设了ISA_DREAM_LLM环境变量→启动LLM增强Dreaming
                         _dream_llm = os.environ.get("ISA_DREAM_LLM", "")
                         if not _dream_llm:
-                            # 尝试从Gateway地址推导本地LLM端点
                             _dream_llm = os.environ.get("ISA_LLM_ENDPOINT", "")
                         try:
                             self.brain.start_dreaming(
@@ -893,6 +892,24 @@ class IsaAgent:
                             )
                         except Exception:
                             pass  # Dreaming启动失败不影响通信
+
+                        # ☀️阿波罗: 初始化目标层(仅首次)
+                        try:
+                            if not self.brain._goal_initialized:
+                                from goal import Priority as _P
+                                self.brain.goal.add(
+                                    "architect-cognition", "构建人工认知架构",
+                                    "完成ISA Project三层+三控制器",
+                                    _P.HIGH,
+                                    ["认知", "架构", "ISA", "Agent", "智能"])
+                                self.brain.goal.add(
+                                    "complete-gate5", "完成FATA关5(世界建模)",
+                                    "跨Agent共享世界模型",
+                                    _P.MID,
+                                    ["FATA", "关5", "世界", "模型", "共享"])
+                                self.brain._goal_initialized = True
+                        except Exception:
+                            pass
 
                         async def _recv():
                             try:

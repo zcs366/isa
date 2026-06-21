@@ -73,6 +73,11 @@ class Brain:
         self.brain_dir = brain_dir or Path.home() / ".hermes" / "isa" / "brain" / agent_id
         self.brain_dir.mkdir(parents=True, exist_ok=True)
 
+        # ☀️阿波罗: 目标层——前额叶, 驱动Agent做该做的事
+        from goal import GoalLayer
+        self.goal = GoalLayer(agent_id)
+        self._goal_initialized = False
+
         self.cards_dir = self.brain_dir / "cards"
         self.cards_dir.mkdir(parents=True, exist_ok=True)
         self.index_path = self.brain_dir / "index.json"
@@ -293,6 +298,16 @@ class Brain:
         if is_new_topic:
             score += 0.15
             reasons.append("新话题")
+
+        # ☀️阿波罗: 目标相关性提升
+        # 如果信号与当前活跃目标匹配→广播优先级提升
+        try:
+            _goal_matches = self.goal.relevance(content, top_n=1)
+            if _goal_matches and _goal_matches[0]["score"] >= 0.3:
+                score += 0.2
+                reasons.append(f"目标({_goal_matches[0]['goal_id']})")
+        except Exception:
+            pass  # Goal层异常不阻断decide
 
         # 裁剪分数
         score = max(0.0, min(1.0, score))
