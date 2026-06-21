@@ -43,9 +43,14 @@ def _run(cmd: list[str], cwd: Path = None, timeout: int = 30) -> tuple[int, str]
 
 
 def _isa_home() -> Path:
-    env = os.environ.get("ISA_HOME", "")
-    if env:
-        return Path(env)
+    """ISA认知数据根目录。
+
+    优先级: ISA_AGENT_DATA环境变量 > ISA_HOME环境变量 > ~/.hermes/isa
+    """
+    for var in ["ISA_AGENT_DATA", "ISA_HOME"]:
+        val = os.environ.get(var, "")
+        if val:
+            return Path(val)
     return Path.home() / ".hermes" / "isa"
 
 
