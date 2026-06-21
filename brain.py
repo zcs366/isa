@@ -24,7 +24,6 @@ v0.1→v0.3 七神驱动升级:
   ⏳克洛诺斯: 联想器/预测器接口预留
 
 架构: Clients call brain.py from isa.py (IsaAgent has-a Brain)"""
-"""
 
 import json
 import logging
@@ -53,17 +52,19 @@ def _ensure_jiak():
 # ═══════════════════════════════════════════════════════════
 
 class Brain:
-    """ISA Project个体认知层（大脑皮层）。
+    """ISA Project individual cognitive layer (cerebral cortex).
 
-    Brain是ISA Project这个人工认知架构的第二层。
-    负责: ingest_signal(感知) → jieba分词(理解) → dream/predict(思考) → insight(决策) → emit(行动)。
+    Brain is layer 2 of the ISA Project artificial cognitive architecture.
+    Pipeline: ingest_signal(receive) -> jieba segment(understand) -> 
+               dream/predict(think) -> insight(decide) -> emit(act).
 
-    v0.3新特性:
-    - Dreaming自动后台扫描（☀️阿波罗）
-    - predict()预测器（⏳克洛诺斯）
-    - recognize()仪式感（💎阿佛洛狄忒）
-    - distill()二阶Dreaming（🪞）
-    - 统计+健康检查（🔨赫淮斯托斯）
+    v0.3 features:
+    - Dreaming auto background scan (Apollo)
+    - predict() forecaster (Chronos)
+    - recognize() ritual sense (Aphrodite)
+    - distill() second-order dreaming
+    - stats + health check (Hephaestus)
+    - decide() signal cycle controller (Hermes v2)
     """
 
     def __init__(self, agent_id: str, brain_dir: Path = None,
@@ -83,6 +84,11 @@ class Brain:
         # 二次波扩散回调——新洞察产生时自动触发emit
         self._on_new_insight = on_new_insight or (lambda cid, content: None)
         self._session_insights: list[str] = []
+
+        # 📨赫尔墨斯v2: 信号循环控制器
+        # decide()用来阻断低价值信号回流ISA，只让高价值信号通过
+        self._recent_emits: deque = deque(maxlen=20)  # 最近20条已广播内容
+        self._recent_keywords: set = set()             # 最近已广播关键词池
 
         # ⚔️阿瑞斯: 写卡失败补偿队列
         self._pending_writes: deque = deque()
@@ -241,15 +247,80 @@ class Brain:
         return [{"card_id": cid, "score": s, "title": m.get("title", ""),
                  "summary": m.get("summary", "")} for s, cid, m in scored[:limit]]
 
+    # ── 📨赫尔墨斯v2: 信号循环控制器 ──
+
+    def decide(self, card_id: str, content: str) -> dict:
+        """决定一个洞察是否值得广播回ISA网络。
+
+        Args:
+            card_id: 目标卡片ID
+            content: 洞察内容
+
+        Returns:
+            {"should_emit": bool, "score": float, "reason": str}
+            只有score >= 0.5时should_emit=True。
+        """
+        score = 0.5  # 基线
+        reasons = []
+
+        # ① 查重：刚说过的不再说
+        for prev in self._recent_emits:
+            if content[:60] == prev[:60] or card_id == prev:
+                score -= 0.3
+                reasons.append("重复")
+                break
+
+        # ② 关键词重叠检测：如果和最近广播的关键词高度重叠→降权
+        kw = set(self._extract_keywords(content))
+        if self._recent_keywords:
+            overlap = len(kw & self._recent_keywords)
+            total = len(kw | self._recent_keywords)
+            if total > 0 and overlap / total > 0.5:
+                score -= 0.2
+                reasons.append("关键词重叠")
+
+        # ③ 紧急度提升：包含危机/发现关键词
+        urgency_words = {"问题", "阻塞", "失败", "发现", "关键", "核心",
+                         "重要", "突破", "统一", "闭环", "打通", "缺失", "薄弱"}
+        found_urgent = [w for w in urgency_words if w in content]
+        if found_urgent:
+            boost = min(len(found_urgent) * 0.1, 0.3)
+            score += boost
+            reasons.append(f"紧急({','.join(found_urgent[:3])})")
+
+        # ④ 新卡片权重提升：如果是第一次出现的话题
+        is_new_topic = not any(card_id in em for em in self._recent_emits)
+        if is_new_topic:
+            score += 0.15
+            reasons.append("新话题")
+
+        # 裁剪分数
+        score = max(0.0, min(1.0, score))
+
+        result = {
+            "should_emit": score >= 0.5,
+            "score": round(score, 2),
+            "reason": " + ".join(reasons) if reasons else "基线",
+        }
+
+        # 更新追踪
+        if result["should_emit"]:
+            self._recent_emits.append(card_id)
+            self._recent_emits.append(content[:60])
+            self._recent_keywords.update(kw)
+
+        return result
+
     # ── 洞察写入 + 二次扩散 ──
 
     def insight(self, card_id: str, content: str, emit: bool = True):
-        """写入洞察→写卡→追加RECALL→触发二次波扩散。
+        """写入洞察→写卡→追加RECALL→信号循环控制器→二次扩散。
 
         Args:
             card_id: 目标卡片ID
             content: 洞察内容
             emit: 是否触发二次波扩散（📨赫尔墨斯）
+                  为True时自动经decide()评估后再决定是否广播。
         """
         card = self._read_card(card_id)
         if not card:
@@ -281,9 +352,15 @@ class Brain:
 
             logger.info(f"💡 {self.agent_id} → {card_id}: {content[:60]}...")
 
-            # 📨赫尔墨斯: 二次波扩散——新洞察触发emit
+            # 📨赫尔墨斯v2: 信号循环控制器
+            # emit=True只代表"允许广播"，实际由decide()裁决
             if emit:
-                self._on_new_insight(card_id, content)
+                decision = self.decide(card_id, content)
+                if decision["should_emit"]:
+                    self._on_new_insight(card_id, content)
+                    logger.info(f"📨 {self.agent_id} → ISA: {card_id} (score={decision['score']}, {decision['reason']})")
+                else:
+                    logger.info(f"🔇 {self.agent_id} → local: {card_id} (score={decision['score']}, {decision['reason']})")
         else:
             # 失败已入pending队列，由_retry_pending处理
             pass
