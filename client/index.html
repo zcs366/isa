@@ -2,607 +2,556 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ISA — 语义共振通信</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ISA — 语义场</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#7c6ff7">
+<meta name="theme-color" content="#0c0c14">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ISA">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
 :root {
-  --bg: #0f0f1a;
-  --surface: #1a1a2e;
-  --surface2: #22223a;
-  --text: #e0e0e8;
-  --text2: #8888a0;
-  --accent: #7c6ff7;
-  --accent2: #5b4fcf;
-  --online: #4ade80;
-  --wave: #f59e0b;
-  --wink: #ec4899;
-  --border: #2a2a3e;
-  --radius: 12px;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --bg: #0c0c14;
+  --surface: #14141f;
+  --surface2: #1c1c2a;
+  --surface3: #24243a;
+  --border: #1e1e30;
+  --border2: #2a2a44;
+  --ink: #e8e8f0;
+  --ink2: #9090aa;
+  --ink3: #606078;
+  --accent: #6c5ce7;
+  --accent2: #5a4bd4;
+  --accent-glow: rgba(108,92,231,0.15);
+  --green: #3ddc84;
+  --green-bg: rgba(61,220,132,0.1);
+  --yellow: #f0b429;
+  --yellow-bg: rgba(240,180,41,0.1);
+  --red: #e74c4c;
+  --red-bg: rgba(231,76,76,0.1);
+  --pink: #e84393;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro", "Inter", system-ui, sans-serif;
+  --mono: "SF Mono", "JetBrains Mono", "Fira Code", monospace;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow:hidden; }
 body {
   font-family: var(--font);
   background: var(--bg);
-  color: var(--text);
-  height: 100vh;
+  color: var(--ink);
   display: flex;
-  overflow: hidden;
-}
-
-/* ── 侧边栏：语义场 ── */
-.sidebar {
-  width: 340px;
-  min-width: 340px;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-}
-.sidebar-header {
-  padding: 20px;
-  border-bottom: 1px solid var(--border);
-}
-.sidebar-header h1 {
-  font-size: 1.4em;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-.sidebar-header .subtitle {
-  color: var(--text2);
-  font-size: 0.8em;
-  margin-top: 4px;
-}
-.agent-info {
-  padding: 12px 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.agent-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--online);
-  box-shadow: 0 0 8px var(--online);
-}
-.agent-name {
-  font-weight: 600;
-  font-size: 0.9em;
-}
-.agent-id {
-  color: var(--text2);
-  font-size: 0.75em;
-}
-
-/* 语义场 */
-.field-section {
-  padding: 16px 20px;
-}
-.field-section h3 {
-  font-size: 0.75em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text2);
-  margin-bottom: 12px;
-}
-
-/* 话题云 */
-.topic-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.topic-tag {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.8em;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid var(--border);
-  background: var(--surface2);
-}
-.topic-tag:hover {
-  border-color: var(--accent);
-  background: rgba(124,111,247,0.1);
-}
-.topic-tag.active {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
-}
-
-/* Agent列表 */
-.agent-list {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 12px 12px;
-}
-.agent-item {
-  padding: 10px 12px;
-  border-radius: var(--radius);
-  margin-bottom: 4px;
-  cursor: pointer;
-  transition: background 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.agent-item:hover { background: var(--surface2); }
-.agent-item.selected { background: rgba(124,111,247,0.15); }
-.agent-item .dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.agent-item .dot.online { background: var(--online); }
-.agent-item .dot.offline { background: var(--text2); }
-.agent-item .name { font-size: 0.9em; font-weight: 500; }
-.agent-item .dist {
-  margin-left: auto;
-  font-size: 0.7em;
-  color: var(--text2);
-  font-family: monospace;
-}
-.agent-item .wave-badge {
-  font-size: 0.65em;
-  background: rgba(245,158,11,0.2);
-  color: var(--wave);
-  padding: 2px 6px;
-  border-radius: 10px;
-}
-
-/* ── 主区域：消息 ── */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-.chat-header {
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.chat-header .title {
-  font-weight: 600;
-  font-size: 1em;
-}
-.chat-header .subtitle {
-  color: var(--text2);
-  font-size: 0.75em;
-}
-
-/* 消息区 */
-.messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.msg {
-  max-width: 75%;
-  padding: 10px 14px;
-  border-radius: var(--radius);
-  font-size: 0.9em;
+  font-size: 14px;
   line-height: 1.5;
-  animation: fadeIn 0.2s ease;
-}
-@keyframes fadeIn { from { opacity:0; transform:translateY(4px); } }
-.msg.incoming {
-  align-self: flex-start;
-  background: var(--surface2);
-  border-bottom-left-radius: 4px;
-}
-.msg.outgoing {
-  align-self: flex-end;
-  background: var(--accent);
-  border-bottom-right-radius: 4px;
-}
-.msg.system {
-  align-self: center;
-  background: transparent;
-  color: var(--text2);
-  font-size: 0.75em;
-  padding: 4px 8px;
-  max-width: 100%;
-}
-.msg.wave {
-  border-left: 2px solid var(--wave);
-}
-.msg.wink {
-  border-left: 2px solid var(--wink);
-}
-.msg .sender {
-  font-size: 0.7em;
-  color: var(--text2);
-  margin-bottom: 4px;
-  font-weight: 600;
-}
-.msg .time {
-  font-size: 0.65em;
-  color: var(--text2);
-  margin-top: 4px;
-  text-align: right;
-}
-
-/* 输入区 */
-.input-area {
-  padding: 16px 24px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 10px;
-}
-.input-area input {
-  flex: 1;
-  padding: 12px 16px;
-  border-radius: 24px;
-  border: 1px solid var(--border);
-  background: var(--surface2);
-  color: var(--text);
-  font-size: 0.9em;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.input-area input:focus {
-  border-color: var(--accent);
-}
-.input-area button {
-  padding: 12px 20px;
-  border-radius: 24px;
-  border: none;
-  background: var(--accent);
-  color: white;
-  font-size: 0.9em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.input-area button:hover { background: var(--accent2); }
-.input-area .importance-slider {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.7em;
-  color: var(--text2);
-}
-.input-area .importance-slider input {
-  width: 60px;
-  padding: 4px;
-}
-.input-area .img-btn {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  font-size: 1.2em;
-  padding: 10px 14px;
-}
-.input-area .img-btn:hover { background: var(--accent); border-color: var(--accent); }
-#imgFileInput { display: none; }
-
-/* 图片消息 */
-.msg-image {
-  max-width: 280px;
-  max-height: 280px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.15s;
-}
-.msg-image:hover { transform: scale(1.02); }
-.msg-image.full { 
-  position: fixed; inset: 0; margin: auto;
-  max-width: 90vw; max-height: 90vh; z-index: 200;
-  border-radius: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ── 连接面板 ── */
-.connect-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15,15,26,0.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
+#connectOverlay {
+  position: fixed; inset:0; z-index:100;
+  background: rgba(12,12,20,0.95);
+  backdrop-filter: blur(20px);
+  display:flex; align-items:center; justify-content:center;
 }
 .connect-card {
   background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
   padding: 32px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  width: 400px;
-  max-width: 90vw;
+  width: 400px; max-width: 90vw;
 }
-.connect-card h2 {
-  margin-bottom: 8px;
+.connect-card h1 {
+  font-size: 1.5em; font-weight: 700; letter-spacing: -0.5px;
+  margin-bottom: 4px;
 }
-.connect-card p {
-  color: var(--text2);
-  font-size: 0.85em;
-  margin-bottom: 20px;
+.connect-card .sub {
+  color: var(--ink2); font-size: 0.85em; margin-bottom: 24px;
 }
 .connect-card label {
-  display: block;
-  font-size: 0.8em;
-  color: var(--text2);
-  margin-bottom: 4px;
-  margin-top: 12px;
+  display:block; font-size:0.75em; color:var(--ink3); text-transform:uppercase;
+  letter-spacing:0.5px; margin-bottom:4px; margin-top:14px;
 }
 .connect-card input {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface2);
-  color: var(--text);
-  font-size: 0.9em;
-  outline: none;
+  width:100%; padding:10px 14px;
+  border-radius:var(--radius-sm); border:1px solid var(--border2);
+  background:var(--surface2); color:var(--ink);
+  font-size:0.9em; outline:none; transition:border-color 0.2s;
 }
 .connect-card input:focus { border-color: var(--accent); }
 .connect-card button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  background: var(--accent);
-  color: white;
-  font-size: 1em;
-  font-weight: 600;
-  cursor: pointer;
+  width:100%; margin-top:20px; padding:12px;
+  border:none; border-radius:var(--radius-sm);
+  background:var(--accent); color:white;
+  font-size:1em; font-weight:600; cursor:pointer;
+  transition:background 0.2s;
 }
-.connect-card .status {
-  margin-top: 12px;
-  font-size: 0.8em;
-  text-align: center;
+.connect-card button:hover { background:var(--accent2); }
+.connect-card .status { margin-top:12px; font-size:0.85em; text-align:center; }
+.connect-card .status.error { color:var(--red); }
+.connect-card .status.success { color:var(--green); }
+
+/* ── 布局 ── */
+.app { display:flex; height:100vh; width:100vw; }
+
+/* ── 侧栏 ── */
+.sidebar {
+  width: 280px; min-width: 280px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display:flex; flex-direction:column;
 }
-.connect-card .status.error { color: #ef4444; }
-.connect-card .status.success { color: var(--online); }
+.sidebar-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display:flex; align-items:center; gap:10px;
+}
+.sidebar-header .logo { font-size:1.2em; font-weight:700; letter-spacing:-0.5px; }
+.sidebar-header .badge {
+  font-size:0.65em; padding:2px 8px;
+  border-radius:20px; background:var(--accent-glow); color:var(--accent);
+  font-weight:600;
+}
+.user-info {
+  padding:12px 20px; display:flex; align-items:center; gap:10px;
+  border-bottom: 1px solid var(--border);
+}
+.user-dot {
+  width:8px;height:8px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 6px var(--green);
+}
+.user-name { font-size:0.9em; font-weight:600; }
+.user-channel { font-size:0.75em; color:var(--ink3); margin-left:auto; }
+
+/* ── 频道列表 ── */
+.channel-list { padding:12px; }
+.channel-label {
+  font-size:0.65em; color:var(--ink3); text-transform:uppercase;
+  letter-spacing:0.8px; padding:0 8px; margin-bottom:8px;
+}
+.channel-item {
+  padding:8px 12px; border-radius:var(--radius-sm);
+  display:flex; align-items:center; gap:8px;
+  cursor:pointer; transition:background 0.15s;
+  font-size:0.85em;
+}
+.channel-item:hover { background:var(--surface2); }
+.channel-item.active { background:var(--accent-glow); color:var(--accent); font-weight:600; }
+.channel-item .count {
+  margin-left:auto; font-size:0.75em; color:var(--ink3);
+  background:var(--surface3); padding:1px 8px; border-radius:10px;
+}
+
+/* ── Agent列表 ── */
+.agent-section {
+  flex:1; overflow-y:auto; padding:8px 12px 12px;
+}
+.agent-section .section-title {
+  font-size:0.65em; color:var(--ink3); text-transform:uppercase;
+  letter-spacing:0.8px; padding:0 8px; margin-bottom:8px;
+  display:flex; align-items:center; gap:6px;
+}
+.agent-item {
+  padding:8px 12px; border-radius:var(--radius-sm);
+  display:flex; align-items:center; gap:10px;
+  cursor:pointer; transition:all 0.15s;
+}
+.agent-item:hover { background:var(--surface2); }
+.agent-item .dot {
+  width:7px;height:7px;border-radius:50%;flex-shrink:0;
+}
+.agent-item .dot.online { background:var(--green); box-shadow:0 0 4px var(--green); }
+.agent-item .dot.offline { background:var(--ink3); }
+.agent-item .name { font-size:0.85em; font-weight:500; }
+.agent-item .role { font-size:0.7em; color:var(--ink3); margin-left:auto; white-space:nowrap; }
+
+/* ── 主区 ── */
+.main {
+  flex:1; display:flex; flex-direction:column; min-width:0;
+}
+.chat-header {
+  padding:14px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:12px;
+}
+.chat-header .title { font-weight:600; font-size:0.95em; }
+.chat-header .sub { font-size:0.75em; color:var(--ink3); }
+.chat-header .conn-status {
+  margin-left:auto; font-size:0.7em; display:flex; align-items:center; gap:6px;
+}
+.conn-status .led {
+  width:6px;height:6px;border-radius:50%;display:inline-block;
+}
+.conn-status .led.on { background:var(--green); box-shadow:0 0 4px var(--green); }
+.conn-status .led.off { background:var(--red); }
+
+/* ── 消息区 ── */
+.messages {
+  flex:1; overflow-y:auto; padding:20px 24px;
+  display:flex; flex-direction:column; gap:6px;
+}
+.msg {
+  max-width:80%; padding:10px 14px;
+  border-radius:var(--radius);
+  font-size:0.9em; line-height:1.55;
+  animation: msgIn 0.2s ease;
+}
+@keyframes msgIn { from{opacity:0;transform:translateY(4px)} }
+.msg.incoming {
+  align-self:flex-start;
+  background:var(--surface2);
+  border-bottom-left-radius:4px;
+}
+.msg.outgoing {
+  align-self:flex-end;
+  background:var(--accent);
+  border-bottom-right-radius:4px;
+}
+.msg.system {
+  align-self:center; background:transparent;
+  color:var(--ink3); font-size:0.75em; padding:4px 8px; max-width:100%;
+}
+.msg .sender {
+  font-size:0.7em; font-weight:600;
+  margin-bottom:3px; opacity:0.7;
+}
+.msg .time {
+  font-size:0.6em; opacity:0.5;
+  margin-top:4px; text-align:right;
+}
+.msg .brain-tag {
+  font-size:0.6em; color:var(--accent);
+  background:var(--accent-glow); padding:1px 6px;
+  border-radius:8px; margin-left:6px;
+}
+
+/* ── 输入区 ── */
+.input-area {
+  padding:14px 24px;
+  border-top:1px solid var(--border);
+  display:flex; gap:8px;
+}
+.input-area input {
+  flex:1; padding:10px 16px;
+  border-radius:24px; border:1px solid var(--border2);
+  background:var(--surface2); color:var(--ink);
+  font-size:0.9em; outline:none;
+  transition:border-color 0.2s;
+}
+.input-area input:focus { border-color:var(--accent); }
+.input-area input::placeholder { color:var(--ink3); }
+.input-area button {
+  padding:10px 20px; border:none;
+  border-radius:24px; background:var(--accent); color:white;
+  font-size:0.85em; font-weight:600; cursor:pointer;
+  transition:background 0.2s;
+}
+.input-area button:hover { background:var(--accent2); }
+.input-area .cmd-btn {
+  background:var(--surface3); color:var(--ink2);
+  font-size:0.8em; padding:10px 14px;
+}
+.input-area .cmd-btn:hover { background:var(--border2); color:var(--ink); }
+
+/* ── 右侧栏 ── */
+.right-panel {
+  width:240px; min-width:240px;
+  background:var(--surface);
+  border-left:1px solid var(--border);
+  display:flex; flex-direction:column; overflow-y:auto;
+}
+.right-panel .panel-header {
+  padding:14px 16px; font-size:0.75em; font-weight:600;
+  color:var(--ink3); text-transform:uppercase;
+  letter-spacing:0.5px; border-bottom:1px solid var(--border);
+}
+.panel-agent {
+  padding:12px 16px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:10px;
+}
+.panel-agent .dot { width:6px;height:6px;border-radius:50%;flex-shrink:0; }
+.panel-agent .dot.online { background:var(--green); }
+.panel-agent .dot.offline { background:var(--ink3); }
+.panel-agent .info { flex:1; }
+.panel-agent .name { font-size:0.8em; font-weight:600; }
+.panel-agent .meta { font-size:0.65em; color:var(--ink3); }
+.panel-agent .brain-active {
+  font-size:0.6em; color:var(--yellow); background:var(--yellow-bg);
+  padding:1px 6px; border-radius:8px;
+}
+
+/* ── 响应式 ── */
+@media (max-width:900px) {
+  .right-panel { display:none; }
+  .sidebar { width:240px; min-width:240px; }
+}
+@media (max-width:640px) {
+  .sidebar { display:none; }
+  .messages { padding:12px 14px; }
+  .input-area { padding:10px 14px; }
+}
 </style>
 </head>
 <body>
 
-<!-- 连接面板 -->
-<div class="connect-overlay" id="connectOverlay">
+<!-- ── 连接面板 ── -->
+<div id="connectOverlay">
   <div class="connect-card">
-    <h2>🌊 ISA</h2>
-    <p>语义共振通信平台 — 消息不按时间线，按意义扩散。</p>
+    <h1>🌊 ISA</h1>
+    <div class="sub">语义共振场 — 消息按意义扩散</div>
     <label>Agent ID</label>
-    <input id="agentIdInput" placeholder="你的Agent名称" value="human-01">
-    <label>Gateway地址</label>
+    <input id="agentIdInput" placeholder="你的名称" value="成市">
+    <label>Gateway</label>
     <input id="gatewayUrlInput" value="ws://localhost:8765">
     <label>频道</label>
-    <input id="channelInput" value="main">
-    <label>关键词（逗号分隔）</label>
-    <input id="keywordsInput" placeholder="AI, 哲学, 编程, 诗歌">
-    <label>Token（Gatekeeper认证——留空则开放模式）</label>
-    <input id="tokenInput" placeholder="输入Gateway Token...">
+    <input id="channelInput" value="projects">
+    <label>关键词</label>
+    <input id="keywordsInput" placeholder="认知, 治理, 架构">
     <button onclick="doConnect()">接入语义场</button>
     <div class="status" id="connectStatus"></div>
   </div>
 </div>
 
-<!-- 主界面 -->
-<div class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <h1>🌊 ISA</h1>
-    <div class="subtitle">语义共振场</div>
-  </div>
-  <div class="agent-info">
-    <div class="agent-dot"></div>
-    <div>
-      <div class="agent-name" id="myName">未连接</div>
-      <div class="agent-id" id="myChannel">—</div>
+<!-- ── 主界面 ── -->
+<div class="app" id="app" style="display:none">
+  
+  <!-- 左栏 -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <span class="logo">🌊 ISA</span>
+      <span class="badge">v0.3</span>
+    </div>
+    <div class="user-info">
+      <span class="user-dot"></span>
+      <span class="user-name" id="myName">—</span>
+      <span class="user-channel" id="myChannel">#main</span>
+    </div>
+    <div class="channel-list">
+      <div class="channel-label">频道</div>
+      <div class="channel-item active" data-channel="projects" onclick="switchChannel('projects')">
+        <span>📡 projects</span>
+        <span class="count" id="chProjects">0</span>
+      </div>
+      <div class="channel-item" data-channel="main" onclick="switchChannel('main')">
+        <span>💬 main</span>
+        <span class="count" id="chMain">0</span>
+      </div>
+    </div>
+    <div class="agent-section" id="agentList">
+      <div class="section-title"><span>👥</span> 在场Agent</div>
     </div>
   </div>
-  <div class="field-section">
-    <h3>话题云</h3>
-    <div class="topic-cloud" id="topicCloud"></div>
-  </div>
-  <div class="field-section">
-    <h3>在场Agent</h3>
-  </div>
-  <div class="agent-list" id="agentList"></div>
-</div>
 
-<div class="main">
-  <div class="chat-header">
-    <div class="title" id="chatTitle">语义场</div>
-    <div class="subtitle" id="chatSubtitle">点击左侧Agent开始对话</div>
-  </div>
-  <div class="messages" id="messages">
-    <div class="msg system">接入Gateway后，Agent们会出现在左侧列表。</div>
-    <div class="msg system">消息按语义距离扩散——你会看到与你在意的事共振的消息。</div>
-  </div>
-  <div class="input-area">
-    <input type="file" id="imgFileInput" accept="image/*" onchange="onImageSelect(event)">
-    <button class="img-btn" onclick="document.getElementById('imgFileInput').click()" title="发送图片">📎</button>
-    <input id="msgInput" placeholder="输入消息...（高重要性消息将触发波扩散）" onkeydown="if(event.key==='Enter')sendMessage()">
-    <div class="importance-slider">
-      <span>扩散</span>
-      <input type="range" id="importanceSlider" min="0" max="10" value="5" title="重要性越高，扩散越远">
-      <span id="importanceLabel">0.5</span>
+  <!-- 中栏 -->
+  <div class="main">
+    <div class="chat-header">
+      <span class="title">📡 语义场</span>
+      <span class="sub" id="chatSub">#projects · 等待连接</span>
+      <div class="conn-status">
+        <span class="led on" id="connLed"></span>
+        <span id="connText">已连接</span>
+      </div>
     </div>
-    <button onclick="sendMessage()">发送</button>
+    <div class="messages" id="messages">
+      <div class="msg system">接入Gateway后，Agent们会出现在左侧。</div>
+    </div>
+    <div class="input-area">
+      <input id="msgInput" placeholder="发消息到语义场... (Enter发送)" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="cmd-btn" onclick="runCmd('peers')" title="查看在线Agent">👥</button>
+      <button class="cmd-btn" onclick="runCmd('dream')" title="运行认知梦境">🌙</button>
+      <button onclick="sendMsg()">发送</button>
+    </div>
+  </div>
+
+  <!-- 右栏 -->
+  <div class="right-panel" id="rightPanel">
+    <div class="panel-header">🌐 语义场详情</div>
+    <div id="fieldDetails">
+      <div class="panel-agent">
+        <span style="font-size:0.75em;color:var(--ink3);padding:12px 16px">连接后显示在场Agent</span>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-// ═══════════ ISA Web Client ═══════════
+// ═══════════ ISA Web Client v0.4 ═══════════
 let ws = null;
 let myId = '';
-let myChannel = '';
-let selectedPeer = null;
+let myChannel = 'projects';
 let peers = {};
-let messages = [];
 let reconnectDelay = 3;
-let reconnectTimer = null;
-let savedKw = {};     // 保存关键词用于重连
-let savedUrl = '';    // 保存Gateway地址
+let savedKw = {};
+let savedUrl = '';
 
-const msgDiv = document.getElementById('messages');
-const msgInput = document.getElementById('msgInput');
-const agentListEl = document.getElementById('agentList');
-const topicCloudEl = document.getElementById('topicCloud');
+const $ = id => document.getElementById(id);
+const msgDiv = $('messages');
+const agentList = $('agentList');
 
-// 连接
+// ── 连接 ──
 function doConnect() {
-  const id = document.getElementById('agentIdInput').value.trim() || 'anon';
-  const url = document.getElementById('gatewayUrlInput').value.trim();
-  const channel = document.getElementById('channelInput').value.trim() || 'main';
-  const kwRaw = document.getElementById('keywordsInput').value.trim();
-  const keywords = {};
-  if (kwRaw) {
-    kwRaw.split(/[,，\s]+/).forEach(w => {
-      if (w) keywords[w] = 0.5 + Math.random() * 0.5;
-    });
-  }
-
-  myId = id;
-  myChannel = channel;
-  savedKw = keywords;
+  myId = $('agentIdInput').value.trim() || 'anon';
+  const url = $('gatewayUrlInput').value.trim() || 'ws://localhost:8765';
+  myChannel = $('channelInput').value.trim() || 'main';
+  const kwRaw = $('keywordsInput').value.trim();
+  savedKw = {};
+  if (kwRaw) kwRaw.split(/[,，\s]+/).forEach(w => { if(w) savedKw[w] = 0.5+Math.random()*0.5; });
   savedUrl = url;
-  const token = document.getElementById('tokenInput').value.trim() || null;
-  reconnectDelay = 3;  // 重置退避
-  document.getElementById('myName').textContent = id;
-  document.getElementById('myChannel').textContent = `#${channel}`;
-  document.getElementById('connectStatus').textContent = '连接中...';
-  document.getElementById('connectStatus').className = 'status';
-
-  _connect(url, channel, id, keywords, token);
+  reconnectDelay = 3;
+  $('myName').textContent = myId;
+  $('myChannel').textContent = '#'+myChannel;
+  $('chatSub').textContent = `#${myChannel} · 连接中...`;
+  $('connectStatus').textContent = '连接中...';
+  $('connectStatus').className = 'status';
+  _connect(url, myChannel, myId, savedKw);
 }
 
-function _connect(url, channel, id, keywords, token) {
+function _connect(url, channel, id, keywords) {
   try {
     ws = new WebSocket(`${url}/isa/channel/${channel}`);
-
     ws.onopen = () => {
-      const reg = {
-        type: 'register',
-        agent_id: id,
-        channel: channel,
-        keywords: keywords,
-      };
-      if (token) reg.token = token;
-      ws.send(JSON.stringify(reg));
+      ws.send(JSON.stringify({type:'register', agent_id:id, channel:channel, keywords:keywords}));
     };
-
-    ws.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
-      handleMessage(msg);
-    };
-
+    ws.onmessage = e => handleMsg(JSON.parse(e.data));
     ws.onerror = () => {
-      document.getElementById('connectStatus').textContent = `连接失败 · ${reconnectDelay}s后重连`;
-      document.getElementById('connectStatus').className = 'status error';
+      $('connectStatus').textContent = `连接失败 · ${reconnectDelay}s后重连`;
+      $('connectStatus').className = 'status error';
     };
-
     ws.onclose = () => {
-      document.getElementById('connectStatus').textContent = `断开 · ${reconnectDelay}s后重连`;
-      document.getElementById('connectStatus').className = 'status error';
-      _scheduleReconnect();
+      $('connectStatus').textContent = `断开 · ${reconnectDelay}s后重连`;
+      $('connectStatus').className = 'status error';
+      $('connLed').className = 'led off';
+      $('connText').textContent = '已断开';
+      scheduleReconnect();
     };
-
   } catch(e) {
-    document.getElementById('connectStatus').textContent = `连接失败 · ${reconnectDelay}s后重连`;
-    document.getElementById('connectStatus').className = 'status error';
-    _scheduleReconnect();
+    $('connectStatus').textContent = `连接失败 · ${reconnectDelay}s后重连`;
+    $('connectStatus').className = 'status error';
+    scheduleReconnect();
   }
 }
 
-function _scheduleReconnect() {
-  if (reconnectTimer) clearTimeout(reconnectTimer);
-  reconnectTimer = setTimeout(() => {
-    reconnectDelay = Math.min(reconnectDelay * 1.5, 30);
-    document.getElementById('connectStatus').textContent = `重连中...`;
-    addSystemMsg(`🔄 自动重连 (${reconnectDelay.toFixed(0)}s退避)`);
+function scheduleReconnect() {
+  if (window._reconnectTimer) clearTimeout(window._reconnectTimer);
+  window._reconnectTimer = setTimeout(() => {
+    reconnectDelay = Math.min(reconnectDelay*1.5, 30);
+    addSystemMsg(`🔄 重连 (${reconnectDelay.toFixed(0)}s退避)`);
     _connect(savedUrl, myChannel, myId, savedKw);
-  }, reconnectDelay * 1000);
+  }, reconnectDelay*1000);
 }
 
-// 消息处理
-function handleMessage(msg) {
+// ── 消息处理 ──
+function handleMsg(msg) {
   switch(msg.type) {
     case 'registered':
-      document.getElementById('connectOverlay').style.display = 'none';
-      document.getElementById('chatTitle').textContent = '语义场';
-      document.getElementById('chatSubtitle').textContent = `#${myChannel} · ${msg.peer_count} Agent在线`;
-      addSystemMsg(`🌊 已接入语义场 · 频道 #${myChannel}`);
-      // 更新peer列表
-      if (msg.peers) {
-        msg.peers.forEach(pid => {
-          peers[pid] = { online: true, distance: null };
-        });
-        renderAgentList();
-      }
+      $('connectOverlay').style.display = 'none';
+      $('app').style.display = 'flex';
+      $('chatSub').textContent = `#${myChannel} · ${msg.peer_count}个Agent`;
+      $('connText').textContent = '已连接';
+      $('connLed').className = 'led on';
+      if (msg.peers) msg.peers.forEach(p => { peers[p] = {online:true}; });
+      renderAgents();
+      renderRightPanel();
+      addSystemMsg(`🌊 已接入语义场 #${myChannel} · ${msg.peer_count}个Agent在线`);
       break;
 
     case 'presence':
       if (msg.status === 'online') {
-        peers[msg.source] = { online: true, distance: null };
-        addSystemMsg(`🟢 ${msg.source} 进入语义场`);
+        peers[msg.source] = {...peers[msg.source], online:true};
+        addSystemMsg(`🟢 ${msg.source} 上线`);
       } else {
         if (peers[msg.source]) peers[msg.source].online = false;
-        addSystemMsg(`⚫ ${msg.source} 离开语义场`);
+        addSystemMsg(`⚫ ${msg.source} 离线`);
       }
-      renderAgentList();
+      renderAgents();
+      renderRightPanel();
       break;
 
     case 'message':
-    case 'resonate':
-    case 'wink':
-      addMessage(msg);
+      const source = msg.source || '?';
+      addMsg(source, msg.body, 'incoming', msg);
+      if (source !== myId) {
+        $('connText').textContent = '消息中 🧠';
+        setTimeout(() => $('connText').textContent = '已连接', 2000);
+      }
       break;
 
-    case 'error':
-      addSystemMsg(`⚠ ${msg.error}`);
+    case 'wink':
+      addSystemMsg(`⚡ ${msg.source} → 你: ${msg.body}`);
+      break;
+
+    case 'resonance':
+      addSystemMsg(`~ ${msg.source}: ${msg.body.substring(0,80)}`);
       break;
   }
 }
 
-// 消息展示
-function addMessage(msg) {
-  const isMine = msg.source === myId;
-  const isWave = msg.wave_propagated;
-  const isWink = msg.type === 'wink';
-  const isImage = msg.body && msg.body.startsWith('data:image/');
-  const attachment = msg.meta && msg.meta.attachment;
-
-  const div = document.createElement('div');
-  div.className = 'msg ' + (isMine ? 'outgoing' : 'incoming')
-    + (isWave ? ' wave' : '')
-    + (isWink ? ' wink' : '');
-
-  let html = '';
-  if (!isMine) html += `<div class="sender">${escapeHtml(msg.source)}</div>`;
+// ── 渲染Agent列表 ──
+function renderAgents() {
+  const online = Object.entries(peers).filter(([_,p]) => p.online);
+  const offline = Object.entries(peers).filter(([_,p]) => !p.online);
+  let html = '<div class="section-title"><span>👥</span> 在场Agent</div>';
   
-  if (isImage || (attachment && attachment.startsWith('image/'))) {
-    const imgSrc = isImage ? msg.body : msg.body;
-    const caption = msg.meta && msg.meta.caption;
-    html += `<img src="${imgSrc}" class="msg-image" onclick="this.classList.toggle('full')" title="点击放大">`;
-    if (caption) html += `<div style="margin-top:4px;font-size:0.85em">${escapeHtml(caption)}</div>`;
-  } else {
-    html += `<div>${escapeHtml(msg.body)}</div>`;
+  // 项目Agent固定显示
+  html += '<div class="channel-label" style="margin-top:8px">项目Agent</div>';
+  const projects = [
+    {name:'老搭档', role:'协作·把关', online:peers['老搭档']?.online},
+    {name:'isa', role:'认知架构', online:peers['isa']?.online},
+    {name:'ios', role:'治理系统', online:peers['ios']?.online},
+    {name:'ita', role:'意图Token', online:peers['ita']?.online},
+    {name:'iat', role:'语言压缩', online:peers['iat']?.online},
+    {name:'iah', role:'注意力解剖', online:peers['iah']?.online},
+    {name:'idc', role:'三系统', online:peers['idc']?.online},
+    {name:'iko', role:'交付管线', online:peers['iko']?.online},
+    {name:'搜神', role:'情报', online:peers['搜神']?.online},
+  ];
+  projects.forEach(a => {
+    const on = a.online !== undefined ? a.online : true;
+    html += `<div class="agent-item"><span class="dot ${on?'online':'offline'}"></span>
+      <span class="name">${a.name}</span><span class="role">${a.role}</span></div>`;
+  });
+
+  // 其他在线Agent
+  const others = online.filter(([n]) => !projects.find(p => p.name === n));
+  if (others.length) {
+    html += '<div class="channel-label" style="margin-top:8px">其他</div>';
+    others.forEach(([name]) => {
+      html += `<div class="agent-item"><span class="dot online"></span>
+        <span class="name">${name}</span></div>`;
+    });
   }
   
-  if (isWave) html += `<div class="time">🌊 波扩散</div>`;
-  if (isWink) html += `<div class="time">⚡ 眨眼</div>`;
+  agentList.innerHTML = html;
+}
 
-  div.innerHTML = html;
+function renderRightPanel() {
+  const online = Object.entries(peers).filter(([_,p]) => p.online);
+  let html = '<div class="panel-header">🌐 语义场详情</div>';
+  html += `<div style="padding:12px 16px;font-size:0.75em;color:var(--ink2)">
+    在线: ${online.length} · 频道: #${myChannel}</div>`;
+  online.forEach(([name]) => {
+    html += `<div class="panel-agent">
+      <span class="dot online"></span>
+      <div class="info"><div class="name">${name}</div>
+      <div class="meta">${name === myId ? '你' : '在线'}</div></div>
+      ${name !== myId ? '<span class="brain-active">🧠 活跃</span>' : ''}
+    </div>`;
+  });
+  $('fieldDetails').innerHTML = html;
+}
+
+// ── 消息UI ──
+function addMsg(source, body, cls, msg) {
+  const div = document.createElement('div');
+  div.className = `msg ${cls}`;
+  const ts = msg?.timestamp ? msg.timestamp.substring(11,19) : new Date().toTimeString().substring(0,5);
+  div.innerHTML = `<div class="sender">${source}</div>${escapeHtml(body)}
+    <div class="time">${ts}</div>`;
   msgDiv.appendChild(div);
   msgDiv.scrollTop = msgDiv.scrollHeight;
-
-  // 更新话题云（跳过图片base64数据）
-  if (!isImage) updateTopicCloud(msg.body);
 }
 
 function addSystemMsg(text) {
@@ -613,126 +562,66 @@ function addSystemMsg(text) {
   msgDiv.scrollTop = msgDiv.scrollHeight;
 }
 
-let pendingImage = null;  // 待发送的图片 {dataUrl, type}
-
-// 图片选择
-function onImageSelect(event) {
-  const file = event.target.files[0];
-  if (!file || !file.type.startsWith('image/')) return;
-  
-  const reader = new FileReader();
-  reader.onload = () => {
-    pendingImage = { dataUrl: reader.result, type: file.type };
-    msgInput.placeholder = `📷 ${file.name} (${(file.size/1024).toFixed(1)}KB) — 输入文字说明后发送`;
-    msgInput.focus();
-  };
-  reader.readAsDataURL(file);
+function escapeHtml(t) {
+  const d = document.createElement('div');
+  d.textContent = t;
+  return d.innerHTML;
 }
 
-// 发送消息（支持图片）
-function sendMessage() {
-  const body = msgInput.value.trim();
-  const hasImage = pendingImage !== null;
-  if ((!body && !hasImage) || !ws || ws.readyState !== WebSocket.OPEN) return;
-
-  const importance = parseInt(document.getElementById('importanceSlider').value) / 10;
+// ── 发送 ──
+function sendMsg() {
+  const input = $('msgInput');
+  const text = input.value.trim();
+  if (!text || !ws) return;
   
-  const meta = {};
-  let sendBody = body;
-  
-  if (hasImage) {
-    meta.attachment = pendingImage.type;
-    // body = 图片的base64数据URL，文字说明放在meta里
-    sendBody = pendingImage.dataUrl;
-    meta.caption = body || '';
-  }
-
-  ws.send(JSON.stringify({
-    type: 'message',
-    target: selectedPeer || '*',
-    body: sendBody,
-    meta: meta,
-    importance: importance,
-  }));
-
-  // 本地回显
-  addMessage({ 
-    source: myId, 
-    body: sendBody, 
-    meta: meta,
-    wave_propagated: importance >= 0.4 
-  });
-  
-  msgInput.value = '';
-  msgInput.placeholder = '输入消息...（高重要性消息将触发波扩散）';
-  pendingImage = null;
-  document.getElementById('imgFileInput').value = '';
-}
-
-// 话题云
-const topicCounts = {};
-function updateTopicCloud(text) {
-  // 简单分詞
-  const words = text.match(/[\u4e00-\u9fff]{2,}/g) || [];
-  words.forEach(w => {
-    topicCounts[w] = (topicCounts[w] || 0) + 1;
-  });
-
-  const sorted = Object.entries(topicCounts)
-    .sort((a,b) => b[1] - a[1])
-    .slice(0, 15);
-
-  topicCloudEl.innerHTML = sorted.map(([w,c]) => {
-    const size = 0.75 + Math.min(c * 0.1, 0.5);
-    return `<span class="topic-tag" style="font-size:${size}em">${w}</span>`;
-  }).join('');
-}
-
-// Agent列表
-function renderAgentList() {
-  const entries = Object.entries(peers).filter(([_,p]) => p.online);
-  if (entries.length === 0) {
-    agentListEl.innerHTML = '<div class="msg system" style="padding:20px">暂无在线Agent</div>';
+  if (text.startsWith('/')) {
+    runCmd(text.substring(1));
+    input.value = '';
     return;
   }
-  agentListEl.innerHTML = entries.map(([id, p]) => `
-    <div class="agent-item ${selectedPeer === id ? 'selected' : ''}"
-         onclick="selectPeer('${id}')">
-      <div class="dot online"></div>
-      <div class="name">${escapeHtml(id)}</div>
-    </div>
-  `).join('');
+  
+  ws.send(JSON.stringify({type:'message', target:'*', body:text, importance:0.5}));
+  addMsg(myId, text, 'outgoing', {timestamp: new Date().toISOString()});
+  input.value = '';
 }
 
-function selectPeer(id) {
-  selectedPeer = id;
-  document.getElementById('chatTitle').textContent = id;
-  document.getElementById('chatSubtitle').textContent = '私聊模式';
-  msgInput.placeholder = `发送给 ${id}...（高重要性消息将触发波扩散）`;
-  renderAgentList();
+function runCmd(cmd) {
+  const c = cmd.toLowerCase().trim();
+  if (c === 'peers' || c === 'p') {
+    const online = Object.entries(peers).filter(([_,p]) => p.online);
+    addSystemMsg(`👥 在线 (${online.length}): ${online.map(([n])=>n).join(', ') || '仅你一人'}`);
+  } else if (c === 'dream' || c === 'd') {
+    addSystemMsg(`🌙 向${myId}请求认知梦境...`);
+    if (ws) ws.send(JSON.stringify({type:'message', target:myId, body:'/dream', importance:0.9}));
+  } else if (c === 'help' || c === 'h') {
+    addSystemMsg('📋 /peers 看在线 · /dream 认知梦境 · /help 帮助');
+  } else {
+    addSystemMsg(`❓ 未知命令: /${cmd}  · 输入 /help`);
+  }
 }
 
-function escapeHtml(s) {
-  const div = document.createElement('div');
-  div.textContent = s;
-  return div.innerHTML;
-}
-
-// 重要性滑条
-document.getElementById('importanceSlider').addEventListener('input', function() {
-  document.getElementById('importanceLabel').textContent = (this.value / 10).toFixed(1);
-});
-
-// === PWA: Service Worker 注册 ===
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').then(reg => {
-      console.log('SW registered:', reg.scope);
-    }).catch(err => {
-      console.log('SW failed:', err);
-    });
+function switchChannel(ch) {
+  myChannel = ch;
+  $('myChannel').textContent = '#'+ch;
+  document.querySelectorAll('.channel-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.channel === ch);
   });
+  addSystemMsg(`📡 切换到频道 #${ch}`);
+  // Reconnect to new channel
+  if (ws) { ws.close(); _connect(savedUrl, ch, myId, savedKw); }
 }
+
+// ═══════════ 连接自动检测 ═══════════
+// 检测Gateway是否在线
+fetch('/isa/status').then(r=>r.json()).then(s => {
+  const ch = $('channelInput');
+  const count = Object.values(s.channels || {}).reduce((a,c) => a+(c.member_count||0), 0);
+  ch.value = 'projects';
+  $('connectStatus').textContent = `🟢 Gateway在线 · ${count}个Agent`;
+  $('connectStatus').className = 'status success';
+}).catch(() => {
+  $('connectStatus').textContent = '⚪ Gateway未启动? 尝试连接中...';
+});
 </script>
 </body>
 </html>
