@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>ISA — 语义场</title>
+<title>ISA v0.5.1 — 语义场</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1a1a24">
+<meta name="theme-color" content="#2d2d3a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ISA">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
 :root {
-  --bg: #1a1a24;
-  --surface: #222230;
-  --surface2: #2a2a3a;
-  --surface3: #323248;
-  --border: #2e2e42;
-  --ink: #eeeef5;
-  --ink2: #9999b0;
+  --bg: #2d2d3a;
+  --surface: #35354a;
+  --surface2: #3d3d52;
+  --surface3: #45455a;
+  --border: #424258;
+  --ink: #e8e8f0;
+  --ink2: #9090aa;
   --ink3: #6a6a80;
   --accent: #6c5ce7;
   --accent2: #5a4bd4;
@@ -192,6 +192,8 @@ body {
 .input-area {
   padding:14px 24px; border-top:1px solid var(--border);
   display:flex; gap:8px; align-items:center;
+  background:var(--surface);
+  z-index:10;
 }
 .input-area .dm-tag {
   font-size:0.75em; color:var(--accent); background:var(--accent-glow);
@@ -215,9 +217,11 @@ body {
 .input-area .send-btn {
   padding:12px 24px; border:none; border-radius:24px;
   background:var(--accent); color:white; font-size:0.95em;
-  font-weight:600; cursor:pointer; transition:background 0.15s;
+  font-weight:600; cursor:pointer; transition:all 0.15s;
+  min-width:72px;
+  flex-shrink:0;
 }
-.input-area .send-btn:hover { background:var(--accent2); }
+.input-area .send-btn:hover { background:var(--accent2); transform:scale(1.02); }
 
 @media (max-width:640px) {
   .sidebar { display:none; }
