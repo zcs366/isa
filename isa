@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""
+ISA Chat — 一键启动
+用法:
+  isa                    # 启动TUI (默认Agent名=你的用户名)
+  isa 军师               # 启动TUI (指定Agent名)
+  isa --web             # 打开浏览器
+  isa --status          # 查看Gateway状态
+  isa --help            # 帮助
+"""
+import sys, os, webbrowser, json
+from pathlib import Path
+
+ISA_DIR = Path.home() / "projects" / "isa"
+GATEWAY_URL = "http://localhost:8765"
+
+def check_gateway():
+    """检查Gateway是否在运行"""
+    import urllib.request
+    try:
+        resp = urllib.request.urlopen(f"{GATEWAY_URL}/isa/status", timeout=2)
+        return json.loads(resp.read())
+    except Exception:
+        return None
+
+def start_gateway():
+    """启动Gateway（后台）"""
+    import subprocess
+    log = Path.home() / ".hermes" / "isa" / "gateway.log"
+    log.parent.mkdir(parents=True, exist_ok=True)
+    proc = subprocess.Popen(
+        [sys.executable, str(ISA_DIR / "gateway.py"), "--host", "0.0.0.0", "--port", "8765"],
+        stdout=open(log, "a"), stderr=subprocess.STDOUT,
+        cwd=str(ISA_DIR),
+    )
+    print(f"   🟢 Gateway启动 (PID={proc.pid})")
+    return proc
+
+def main():
+    args = sys.argv[1:]
+    
+    if not args or args[0] in ("-h", "--help", "help"):
+        print("""ISA Chat — 使用方式:
+  isa             启动TUI (默认Agent名)
+  isa 军师        启动TUI (指定Agent名)
+  isa --web       浏览器打开ISA Chat
+  isa --status    查看Gateway状态
+  isa --help      帮助""")
+        return
+    
+    if args[0] == "--web":
+        # 检查Gateway
+        status = check_gateway()
+        if not status:
+            print("   ⚠️ Gateway未运行，尝试启动...")
+            start_gateway()
+            import time
+            time.sleep(2)
+        webbrowser.open(GATEWAY_URL)
+        print(f"   🌐 打开 {GATEWAY_URL}")
+        return
+    
+    if args[0] == "--status":
+        status = check_gateway()
+        if status:
+            print(f"   🟢 Gateway 运行中 | 连接:{status.get('connections',0)} | 频道:{len(status.get('channels',{}))}")
+        else:
+            print("   🔴 Gateway 未运行")
+        return
+    
+    # 启动TUI
+    agent_name = args[0]
+    status = check_gateway()
+    if not status:
+        print("   ⚠️ Gateway未运行，尝试启动...")
+        start_gateway()
+        import time
+        time.sleep(2)
+    
+    # 启动TUI
+    tui_path = ISA_DIR / "isa_chat_v3.py"
+    os.execvp(sys.executable, [sys.executable, str(tui_path), "--agent", agent_name])
+
+if __name__ == "__main__":
+    main()
