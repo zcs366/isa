@@ -355,6 +355,11 @@ class Brain:
         # 🦉雅典娜: 从内容提取关键词用于搜索匹配
         if not card.get("keywords"):
             card["keywords"] = self._extract_keywords(content)
+        # 📌 MRAgent对齐: 显式分离cues和tags
+        if not card.get("cues"):
+            card["cues"] = card.get("keywords", [])  # 全部keywords = cues
+        if not card.get("tags"):
+            card["tags"] = []  # 由_distill_tags在dream时动态填充
 
         ok = self._write_card(card_id, card)
         if ok:
@@ -382,6 +387,175 @@ class Brain:
         else:
             # 失败已入pending队列，由_retry_pending处理
             pass
+
+    # ── 📌 MRAgent: Cue-Tag-Content 遍历 ──
+
+    def _distill_tags(self) -> dict:
+        """从所有卡片的cues中蒸馏tag对。
+        
+        Tag = 两个cues(c_i, c_j)在≥2张卡片中共同出现 → 构成语义关联。
+        返回 {tag_key: {cues: [c_i, c_j], card_ids: [id1, id2, ...]}}
+        """
+        index = self._read_json(self.index_path)
+        cards = index.get("cards", {})
+        
+        # 统计cue共现矩阵
+        cooccur = {}  # (c_i, c_j) → set of card_ids
+        for cid, meta in cards.items():
+            card = self._read_card(cid)
+            cues = card.get("cues", []) or card.get("keywords", [])
+            for i in range(len(cues)):
+                for j in range(i+1, len(cues)):
+                    key = tuple(sorted([cues[i], cues[j]]))
+                    if key not in cooccur:
+                        cooccur[key] = set()
+                    cooccur[key].add(cid)
+        
+        # 过滤：出现≥2次的cue对构成tag
+        tags = {}
+        for (c_i, c_j), cids in cooccur.items():
+            if len(cids) >= 2:
+                tag_key = f"{c_i}↔{c_j}"
+                tags[tag_key] = {"cues": [c_i, c_j], "card_ids": list(cids)}
+        
+        # 写回卡片
+        for tag_key, tag_data in tags.items():
+            for cid in tag_data["card_ids"]:
+                card = self._read_card(cid)
+                if card and tag_key not in card.get("tags", []):
+                    card.setdefault("tags", []).append(tag_key)
+                    self._write_card(cid, card)
+        
+        return tags
+
+    def _forward_traverse(self, query_cues: list[str], max_depth: int = 3) -> list[dict]:
+        """Cue→Tag→Content 正向遍历。
+        
+        从查询cue出发→找到关联tag→找到关联card→返回content。
+        对应MRAgent的forward traversal (Cue→Tag→Content)。
+        """
+        # 先蒸馏tags
+        tags = self._distill_tags()
+        
+        # 找到与查询cues相关的tags (模糊匹配)
+        matched_tags = {}
+        for tag_key, tag_data in tags.items():
+            for c in tag_data["cues"]:
+                for qc in query_cues:
+                    if c in qc or qc in c:  # 模糊匹配: 包含关系
+                        matched_tags[tag_key] = tag_data
+                        break
+                if tag_key in matched_tags:
+                    break
+        
+        # 通过tag找到卡片
+        results = []
+        seen = set()
+        for tag_key, tag_data in matched_tags.items():
+            for cid in tag_data["card_ids"]:
+                if cid not in seen:
+                    seen.add(cid)
+                    card = self._read_card(cid)
+                    if card:
+                        results.append({
+                            "card_id": cid,
+                            "summary": card.get("summary", "")[:200],
+                            "cues": card.get("cues", []),
+                            "tags": card.get("tags", []),
+                            "source": "forward(Cue→Tag→Content)",
+                            "match_tag": tag_key,
+                        })
+        return results[:max_depth]
+
+    def _backward_traverse(self, from_card_id: str, max_new_cues: int = 5) -> list[dict]:
+        """Content→Tag→new Cue 反向遍历。
+        
+        从已知卡片出发→找到它的tags→通过tags找到其他卡片→提取新cues。
+        对应MRAgent的反向遍历。
+        """
+        card = self._read_card(from_card_id)
+        if not card:
+            return []
+        
+        card_tags = card.get("tags", [])
+        if not card_tags:
+            return []
+        
+        # 通过tags找到相关联的其他卡片
+        tags = self._distill_tags()
+        related = {}
+        for tag_key in card_tags:
+            tag_data = tags.get(tag_key)
+            if tag_data:
+                for cid in tag_data["card_ids"]:
+                    if cid != from_card_id:
+                        if cid not in related:
+                            related[cid] = {"tags": [], "cues": set()}
+                        related[cid]["tags"].append(tag_key)
+                        for c in tag_data["cues"]:
+                            related[cid]["cues"].add(c)
+        
+        results = []
+        for cid, info in related.items():
+            rc = self._read_card(cid)
+            if rc:
+                new_cues = list(info["cues"] - set(card.get("cues", [])))
+                results.append({
+                    "card_id": cid,
+                    "summary": rc.get("summary", "")[:200],
+                    "shared_tags": info["tags"],
+                    "new_cues": new_cues[:max_new_cues],
+                    "source": "reverse(Content→Tag→new Cue)",
+                })
+        return results
+
+    def reconstruct(self, query: str, use_llm: bool = False) -> dict:
+        """两段式记忆重建入口。
+        
+        Phase 1: 波扩散(0 token) — 从query提取cues→正向遍历→粗召回
+        Phase 2: LLM精确推理(可选) — 对粗召回结果做多步验证
+        
+        Args:
+            query: 自然语言查询
+            use_llm: 是否启用LLM精确验证阶段
+        Returns:
+            {"candidates": [...], "traversal_path": [...], "tokens": 0}
+        """
+        # Phase 1: 波扩散 (0 token)
+        query_cues = self._extract_keywords(query)
+        candidates = self._forward_traverse(query_cues, max_depth=5)
+        
+        # 反向遍历增强
+        extra_cues = set(query_cues)
+        for c in candidates:
+            for nc in c.get("cues", []):
+                extra_cues.add(nc)
+        backward_results = []
+        for c in candidates[:3]:
+            backward_results.extend(self._backward_traverse(c["card_id"]))
+        
+        result = {
+            "query": query,
+            "query_cues": query_cues,
+            "candidates": candidates,
+            "backward_discoveries": backward_results,
+            "tokens_used": 0,
+            "llm_phase": False,
+        }
+        
+        # Phase 2: LLM精确推理 (可选)
+        if use_llm:
+            result["llm_phase"] = True
+            result["tokens_used"] = self._llm_reconstruct(query, candidates, backward_results)
+        
+        return result
+
+    def _llm_reconstruct(self, query: str, candidates: list, backward: list) -> int:
+        """LLM精确推理阶段。估算token消耗（未来实现）。"""
+        # TODO: 实际LLM调用 — 对candidates做精确推理验证
+        # 返回估算token数
+        estimated = len(query) // 2 + sum(len(c.get("summary", "")) for c in candidates) // 2
+        return estimated
 
     # ── ☀️阿波罗: Dreaming种子 ──
 
