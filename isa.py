@@ -37,6 +37,21 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+# 可靠会话协议（赫耳墨斯：可靠交付扩展）
+try:
+    from isa_session import SessionManager, AgentSession, SessionStatus
+except ImportError:
+    # 允许在isa_session未完成时仍能部分工作
+    SessionManager = None  # type: ignore
+    AgentSession = None    # type: ignore
+    class SessionStatus:   # type: ignore
+        INITIATED = "initiated"
+        ACKED = "acked"
+        RESPONDED = "responded"
+        CLOSED = "closed"
+        TIMEOUT = "timeout"
+        ESCALATED = "escalated"
+
 # ═══════════════════════════════════════════════════════════════
 # 配置
 # ═══════════════════════════════════════════════════════════════
@@ -672,6 +687,10 @@ class IsaAgent:
         self.wave = wave_engine or WaveEngine(self.graph)
         self._handlers: list[callable] = []
         self._running = False
+        self._running_watchdog = False
+
+        # 可靠会话管理器（赫耳墨斯：可靠交付协议）
+        self._session_mgr = SessionManager() if SessionManager is not None else None
 
         # 🦉雅典娜: 离线自洽协议——Gateway断连时保持认知循环
         from offline import OfflineProtocol as _OP
@@ -704,6 +723,135 @@ class IsaAgent:
         sig = Signal(type="resonance", source=self.agent_id, target="resonance",
                      body=content, meta=meta or {})
         return self.graph.ingest(sig)
+
+    # ── 可靠会话（赫耳墨斯：可靠交付协议）──
+
+    def send_reliable(self, target: str, body: str,
+                      sla: int = 30, meta: dict = None) -> str:
+        """可靠发送——带Session追踪的确保送达消息。
+
+        创建Session(INITIATED) → 发射信号 → 启动后台超时检测
+        返回session_id（非阻塞）。
+        """
+        meta = dict(meta or {})
+        sig = Signal(type="message", source=self.agent_id,
+                     target=target, body=body)
+
+        # 创建Session
+        session = self._session_mgr.create(
+            initiator=self.agent_id,
+            target=target,
+            init_signal_id=sig.id,
+            sla_seconds=sla,
+            meta=meta,
+        )
+
+        # 扩展meta：注入session追踪信息（向后兼容，全可选）
+        sig.meta["session_id"] = session.session_id
+        sig.meta["sla_seconds"] = sla
+        sig.meta["session_status"] = str(SessionStatus.INITIATED)
+
+        # 持久化信号
+        self.graph.ingest(sig)
+
+        return session.session_id
+
+    def ack(self, session_id: str, meta: dict = None) -> str:
+        """确认收到——向发起方发送ACK信号。
+
+        更新Session → ACKED，发射ACK信号。
+        """
+        session = self._session_mgr.get(session_id)
+        if session is None:
+            raise KeyError(f"会话不存在: {session_id}")
+
+        sig = Signal(type="message", source=self.agent_id,
+                     target=session.initiator,
+                     body="ACK", meta={
+                         "session_id": session_id,
+                         "ack_to": session.init_signal_id,
+                         "session_status": str(SessionStatus.ACKED),
+                         **(meta or {}),
+                     })
+        sid = self.graph.ingest(sig)
+        self._session_mgr.set_ack(session_id, sid)
+        return sid
+
+    def reply(self, session_id: str, response_body: str,
+              meta: dict = None) -> str:
+        """回复会话——向发起方发送响应消息。
+
+        更新Session → RESPONDED，发射回复信号。
+        """
+        session = self._session_mgr.get(session_id)
+        if session is None:
+            raise KeyError(f"会话不存在: {session_id}")
+
+        sig = Signal(type="message", source=self.agent_id,
+                     target=session.initiator,
+                     body=response_body, meta={
+                         "session_id": session_id,
+                         "response_to": session.init_signal_id,
+                         "session_status": str(SessionStatus.RESPONDED),
+                         **(meta or {}),
+                     })
+        sid = self.graph.ingest(sig)
+        self._session_mgr.set_response(session_id, sid)
+        return sid
+
+    def check_session(self, session_id: str) -> dict:
+        """查询会话状态。"""
+        session = self._session_mgr.get(session_id)
+        if session is None:
+            return {"session_id": session_id, "exists": False}
+        return session.to_dict()
+
+    def active_sessions(self) -> list[dict]:
+        """列出所有活跃（未终结）会话。"""
+        return [s.to_dict() for s in self._session_mgr.get_active()]
+
+    def register_sla(self, sla_seconds: int, max_concurrent: int = 50) -> dict:
+        """声明SLA能力（此Agent可处理的最大并发和超时配置）。"""
+        return self._session_mgr.register_sla(sla_seconds, max_concurrent)
+
+    def _start_session_watchdog(self):
+        """启动后台会话超时看门狗线程。
+
+        每5秒扫描一次活跃会话，超时自动重试（最多3次），
+        超限则标记ESCALATED并触发_on_delivery_failure。
+        """
+        def _watchdog_loop():
+            while self._running_watchdog:
+                time.sleep(5)
+                try:
+                    timed_out = self._session_mgr.timeout_check()
+                    for session in timed_out:
+                        if session.status == SessionStatus.ESCALATED:
+                            self._on_delivery_failure(session)
+                except Exception:
+                    pass  # 看门狗异常不能杀死线程
+
+        self._running_watchdog = True
+        t = threading.Thread(target=_watchdog_loop, daemon=True,
+                             name=f"session-watchdog-{self.agent_id}")
+        t.start()
+
+    def _on_delivery_failure(self, session: AgentSession):
+        """交付失败回调——ESCALATED会话处理。
+
+        默认行为：发射一条失败通知信号。
+        Agent可重写此方法实现自定义的失败处理逻辑。
+        """
+        sig = Signal(type="message", source=self.agent_id,
+                     target=session.initiator,
+                     body=f"[ISA] 交付失败: session={session.session_id}, "
+                          f"target={session.target}, retries={session.retry_count}",
+                     meta={
+                         "session_id": session.session_id,
+                         "session_status": str(SessionStatus.ESCALATED),
+                         "delivery_failure": True,
+                     })
+        self.graph.ingest(sig)
 
     def emit(self, body: str, importance: float = 0.5,
              target: str = "*", radius: float = None,

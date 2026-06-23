@@ -352,6 +352,9 @@ class Brain:
             "content": content,
         })
         card["summary"] = content[:200]
+        # 🦉雅典娜: 从内容提取关键词用于搜索匹配
+        if not card.get("keywords"):
+            card["keywords"] = self._extract_keywords(content)
 
         ok = self._write_card(card_id, card)
         if ok:
@@ -383,32 +386,72 @@ class Brain:
     # ── ☀️阿波罗: Dreaming种子 ──
 
     def dream(self) -> list[dict]:
-        """卡片间关联跃迁——扫描全部卡片，检测关键词重叠的卡片对。
+        """卡片间关联跃迁——关键词+语义向量双通道发现。
 
-        返回: 新发现的关联对列表。
-        这是Dreaming的检索器阶段——只发现关联，不生成洞察。
-        完整的Dreaming需要LLM介入做洞察生成（⏳克洛诺斯·本月）。
+        返回: 新发现的关联对列表（关键词关联+语义关联）。
         """
         index = self._read_json(self.index_path)
         cards = index.get("cards", {})
         card_ids = list(cards.keys())
         discoveries = []
+        seen_pairs = set()
 
+        # 通道1: 关键词重叠（已有逻辑，保留）
         for i in range(len(card_ids)):
             for j in range(i + 1, len(card_ids)):
                 kwi = set(cards[card_ids[i]].get("keywords", []))
                 kwj = set(cards[card_ids[j]].get("keywords", []))
                 overlap = kwi & kwj
-                if len(overlap) >= 2:  # 两个以上关键词重叠→关联
+                if len(overlap) >= 2:
                     discoveries.append({
                         "card_a": card_ids[i],
                         "card_b": card_ids[j],
                         "shared_keywords": list(overlap),
+                        "source": "keyword",
                     })
+                    seen_pairs.add((card_ids[i], card_ids[j]))
+
+        # 通道2: 语义向量相似（新增——BGE-zh 512d）
+        try:
+            from jika_vector import JikaVector
+            import numpy as np
+            jv = JikaVector()
+            
+            # 收集有向量的卡片
+            vec_map = {}
+            for cid in card_ids:
+                card_path = self.cards_dir / f"{cid}.json"
+                try:
+                    card = self._read_json(card_path) if hasattr(self, '_read_json') else json.loads(card_path.read_text())
+                except:
+                    continue
+                v = card.get("v")
+                if v:
+                    vec_map[cid] = np.array(v)
+            
+            # 余弦相似度发现
+            cid_list = list(vec_map.keys())
+            for i in range(len(cid_list)):
+                for j in range(i + 1, len(cid_list)):
+                    pair = (cid_list[i], cid_list[j])
+                    if pair in seen_pairs:
+                        continue
+                    cos = float(np.dot(vec_map[cid_list[i]], vec_map[cid_list[j]]))
+                    if cos >= 0.6:  # 语义相似度阈值
+                        discoveries.append({
+                            "card_a": cid_list[i],
+                            "card_b": cid_list[j],
+                            "cosine_similarity": round(cos, 3),
+                            "source": "vector",
+                        })
+        except Exception:
+            pass  # 向量模块不可用时降级为纯关键词
 
         self._stats["dreaming_cycles"] += 1
         if discoveries:
-            logger.info(f"☀️ {self.agent_id} Dreaming发现 {len(discoveries)} 组关联")
+            keyword_count = sum(1 for d in discoveries if d.get("source") == "keyword")
+            vector_count = sum(1 for d in discoveries if d.get("source") == "vector")
+            logger.info(f"☀️ {self.agent_id} Dreaming: {keyword_count} keyword + {vector_count} vector = {len(discoveries)} 组关联")
         return discoveries
 
     # ── ⏳克洛诺斯+🔨赫淮斯托斯: 异步Dreaming引擎 ──
