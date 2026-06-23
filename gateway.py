@@ -390,6 +390,51 @@ class IsaGateway:
             from websockets.datastructures import Headers
             return 200, Headers({"Access-Control-Allow-Origin": "*"}), b"OK"
 
+        # Web客户端静态文件服务
+        elif path.startswith("/isa/chat") or path == "/":
+            from websockets.datastructures import Headers
+            client_dir = Path(__file__).parent / "client"
+            html_path = client_dir / "index.html"
+            if html_path.exists():
+                body = html_path.read_bytes()
+                return 200, Headers({
+                    "Content-Type": "text/html; charset=utf-8",
+                    "Access-Control-Allow-Origin": "*",
+                }), body
+            return 404, Headers({"Content-Type": "text/plain"}), b"Not Found"
+
+        # PWA manifest
+        elif path == "/manifest.json":
+            from websockets.datastructures import Headers
+            manifest_path = Path(__file__).parent / "client" / "manifest.json"
+            if manifest_path.exists():
+                return 200, Headers({
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                }), manifest_path.read_bytes()
+            return 404, Headers({}), b""
+
+        # Service Worker
+        elif path == "/sw.js":
+            from websockets.datastructures import Headers
+            sw_path = Path(__file__).parent / "client" / "sw.js"
+            if sw_path.exists():
+                return 200, Headers({
+                    "Content-Type": "application/javascript",
+                    "Access-Control-Allow-Origin": "*",
+                }), sw_path.read_bytes()
+            return 404, Headers({}), b""
+
+        # PWA icons
+        elif "icon" in path and path.endswith(".png"):
+            from websockets.datastructures import Headers
+            icon_path = Path(__file__).parent / "client" / path.lstrip("/")
+            if icon_path.exists():
+                return 200, Headers({
+                    "Content-Type": "image/png",
+                }), icon_path.read_bytes()
+            return 404, Headers({}), b""
+
     # ── 启动/停止 ──
 
     async def _start_async(self):
