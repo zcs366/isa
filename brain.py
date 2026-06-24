@@ -797,6 +797,113 @@ class Brain:
         }
         self._append_jsonl(dream_log, event)
 
+    # ── 📡 DreamBridge: skill_created事件处理 ──
+
+    def process_skill_created_events(self) -> list[dict]:
+        """扫描brain_dream.jsonl中未处理的skill_created事件→关联发现→发送dream_insight。
+
+        DreamBridge扩展: 当ISN创建新skill时, ISA通过Dreaming发现关联,
+        自动发送dream_insight给ISN。
+
+        Returns:
+            [{skill_name, related_cards, sent: bool}, ...]
+        """
+        dream_log = self.brain_dir / "brain_dream.jsonl"
+        if not dream_log.exists():
+            return []
+
+        # 读取所有skill_created事件
+        skill_events = []
+        try:
+            with open(dream_log) as f:
+                for line in f:
+                    try:
+                        entry = json.loads(line.strip())
+                        if entry.get("type") == "skill_created" and not entry.get("_processed"):
+                            skill_events.append(entry)
+                    except json.JSONDecodeError:
+                        continue
+        except Exception as e:
+            logger.error(f"Failed to read brain_dream.jsonl: {e}")
+            return []
+
+        if not skill_events:
+            return []
+
+        results = []
+        for event in skill_events:
+            skill_name = event.get("skill_name", "unknown")
+            keywords = event.get("keywords", [])
+
+            # 用cues/tags遍历找关联卡片
+            related_cards = []
+            if keywords:
+                # 正向遍历: keywords→tag→content
+                forward = self._forward_traverse(keywords, max_depth=3)
+                related_cards.extend(forward)
+
+                # 反向遍历: 从找到的卡片发现更多
+                for fc in forward[:2]:
+                    backward = self._backward_traverse(fc["card_id"])
+                    related_cards.extend(backward)
+
+            # 去重
+            seen = set()
+            unique_related = []
+            for rc in related_cards:
+                cid = rc.get("card_id", "")
+                if cid and cid not in seen:
+                    seen.add(cid)
+                    unique_related.append(rc)
+
+            # 发送dream_insight到ISN
+            sent = False
+            try:
+                import sys
+                sys.path.insert(0, str(Path(__file__).parent))
+                from dream_insight_sender import send_dream_insight
+
+                # 构造discovery格式
+                discovery = {
+                    "card_a": skill_name,
+                    "card_b": ",".join([rc["card_id"] for rc in unique_related[:3]]),
+                    "shared_keywords": keywords[:5],
+                    "source": "skill_created_dreambridge",
+                }
+                result = send_dream_insight(discovery, self.agent_id)
+                sent = result.get("ok", False)
+            except Exception as e:
+                logger.warning(f"dream_insight send failed for {skill_name}: {e}")
+
+            # 标记为已处理
+            event["_processed"] = True
+            results.append({
+                "skill_name": skill_name,
+                "related_cards": [rc["card_id"] for rc in unique_related],
+                "sent": sent,
+            })
+
+            logger.info(f"📡 DreamBridge skill_created: {skill_name} → "
+                        f"{len(unique_related)} related, sent={sent}")
+
+        # 重写brain_dream.jsonl(标记已处理)
+        self._rewrite_dream_log(dream_log)
+
+        return results
+
+    def _rewrite_dream_log(self, dream_log: Path):
+        """重写brain_dream.jsonl, 保留所有行(已处理标记已写入event dict)。"""
+        try:
+            lines = []
+            with open(dream_log) as f:
+                for line in f:
+                    lines.append(line)
+            with open(dream_log, "w") as f:
+                for line in lines:
+                    f.write(line)
+        except Exception as e:
+            logger.error(f"Failed to rewrite dream log: {e}")
+
     def distill(self, llm_endpoint: str = None) -> list[dict]:
         """🪞 jika蒸馏: 扫描RECALL注入记录→聚类→提取元洞察。
 
