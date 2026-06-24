@@ -90,6 +90,41 @@ class TestSkillSignalReceiver(unittest.TestCase):
         self.assertEqual(parsed["skill_name"], "my-skill")
 
 
+    def test_validate_payload_valid(self):
+        """合法payload通过验证"""
+        from skill_signal_receiver import _validate_payload
+        result = _validate_payload({"name": "my-skill", "description": "ok"})
+        self.assertTrue(result["ok"])
+
+    def test_validate_payload_missing_name(self):
+        """缺少name被拒绝"""
+        from skill_signal_receiver import _validate_payload
+        result = _validate_payload({"description": "no name"})
+        self.assertFalse(result["ok"])
+        self.assertIn("missing name", result["error"])
+
+    def test_validate_payload_long_name(self):
+        """name超长被拒绝"""
+        from skill_signal_receiver import _validate_payload
+        result = _validate_payload({"name": "x" * 65})
+        self.assertFalse(result["ok"])
+        self.assertIn("too long", result["error"])
+
+    def test_validate_payload_illegal_chars(self):
+        """name含非法字符被拒绝"""
+        from skill_signal_receiver import _validate_payload
+        result = _validate_payload({"name": "my skill!"})
+        self.assertFalse(result["ok"])
+        self.assertIn("illegal chars", result["error"])
+
+    def test_validate_payload_long_description(self):
+        """description超长被拒绝"""
+        from skill_signal_receiver import _validate_payload
+        result = _validate_payload({"name": "ok", "description": "x" * 1025})
+        self.assertFalse(result["ok"])
+        self.assertIn("too long", result["error"])
+
+
 class TestDreamInsightSender(unittest.TestCase):
     """Step 2: dream_insight信号发送器"""
 

@@ -22,13 +22,25 @@ from typing import Optional
 logger = logging.getLogger("isa.dream_sender")
 
 # ── IO-S syscall 接口 ──
-def _sys_signal_send(dest: str, body: str, meta: dict = None) -> Optional[str]:
-    """通过syscall层发送信号。"""
+_IO_S_URL = "http://127.0.0.1:8770/syscall"
+
+def _sys_signal_send(signal_envelope: dict) -> Optional[str]:
+    """通过HTTP POST发送IO-S信号（新信封格式）。"""
+    import urllib.request
     try:
-        import sys
-        sys.path.insert(0, str(Path(__file__).parent))
-        from syscall import signal_send
-        return signal_send(dest=dest, body=body, meta=meta or {}, caller_pid="isa")
+        envelope = {
+            "syscall": "signal_send",
+            "args": {"signal": signal_envelope},
+            "caller_pid": "isa",
+        }
+        data = json.dumps(envelope, ensure_ascii=False).encode()
+        req = urllib.request.Request(_IO_S_URL, data=data,
+                                     headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            result = json.loads(resp.read().decode())
+            if result.get("ok"):
+                return result.get("data", {}).get("signal_id")
+        return None
     except Exception as e:
         logger.warning(f"signal_send failed: {e}")
         return None
@@ -114,12 +126,8 @@ def send_dream_insight(discovery: dict, agent_id: str = "军师") -> dict:
     envelope = format_dream_insight(discovery, agent_id)
     payload = envelope["payload"]
 
-    # 发送到IO-S
-    signal_id = _sys_signal_send(
-        dest="isn",
-        body=json.dumps(envelope, ensure_ascii=False),
-        meta={"type": "dream_insight", "from": agent_id, "to": "isn"}
-    )
+    # 发送到IO-S（新信封格式）
+    signal_id = _sys_signal_send(envelope)
 
     # 记录到RECALL
     recall_entry = {

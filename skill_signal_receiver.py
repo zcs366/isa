@@ -28,14 +28,26 @@ BRAIN_DIR = Path.home() / ".hermes" / "isa" / "brain"
 DELTA_E_LAYER = Path.home() / ".hermes" / "isa" / "delta_e_layer.jsonl"
 
 # ── IO-S syscall 接口 ──
+_IO_S_URL = "http://127.0.0.1:8770/syscall"
+
 def _sys_signal_recv(target: str = "isa", filter_type: str = "skill_created",
                      limit: int = 20) -> list:
-    """通过syscall层接收信号。优先IO-S, 降级本地。"""
+    """通过HTTP POST接收IO-S信号。只接收指定filter_type。"""
+    import urllib.request
     try:
-        import sys
-        sys.path.insert(0, str(Path(__file__).parent))
-        from syscall import signal_recv
-        return signal_recv(target=target, limit=limit, caller_pid="isa")
+        envelope = {
+            "syscall": "signal_recv",
+            "args": {"target": target, "filter": {"type": filter_type}, "limit": limit},
+            "caller_pid": "isa",
+        }
+        data = json.dumps(envelope, ensure_ascii=False).encode()
+        req = urllib.request.Request(_IO_S_URL, data=data,
+                                     headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            result = json.loads(resp.read().decode())
+            if result.get("ok"):
+                return result.get("data", [])
+        return []
     except Exception as e:
         logger.warning(f"signal_recv failed: {e}")
         return []
@@ -80,6 +92,22 @@ def append_to_brain_dream(agent_id: str, entry: dict) -> bool:
         return False
 
 
+# ── Payload安全验证 ──
+def _validate_payload(payload: dict) -> dict:
+    """验证skill_created payload安全性。"""
+    name = payload.get("name", "")
+    if not name:
+        return {"ok": False, "error": "missing name"}
+    if len(name) > 64:
+        return {"ok": False, "error": f"name too long ({len(name)})"}
+    if not all(c.isalnum() or c in '-_' for c in name):
+        return {"ok": False, "error": f"name contains illegal chars: '{name}'"}
+    desc = payload.get("description", "")
+    if len(desc) > 1024:
+        return {"ok": False, "error": f"description too long ({len(desc)})"}
+    return {"ok": True}
+
+
 # ── 核心处理 ──
 def process_skill_received(signal: dict, agent_id: str = "军师") -> dict:
     """处理单条skill_created信号。
@@ -94,6 +122,13 @@ def process_skill_received(signal: dict, agent_id: str = "军师") -> dict:
     payload = signal.get("payload", signal.get("data", {}))
     skill_name = payload.get("name", "unknown")
     ts = datetime.now(timezone.utc).isoformat()
+
+    # P0安全验证
+    validation = _validate_payload(payload)
+    if not validation["ok"]:
+        logger.warning(f"[ISA] skill_created rejected: {validation['error']}")
+        return {"ok": False, "skill_name": skill_name, "error": validation["error"],
+                "writes": {"e_layer": False, "brain_dream": False, "recall": False}}
 
     result = {
         "ok": True,
@@ -134,7 +169,7 @@ def process_skill_received(signal: dict, agent_id: str = "军师") -> dict:
         "keywords": payload.get("keywords", []),
         "timestamp": ts,
         "_written_by": "isa",
-        "_checksum": hashlib.md5(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16],
+        "_checksum": hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16],
     }
     result["writes"]["recall"] = _sys_recall_append(recall_entry)
 
