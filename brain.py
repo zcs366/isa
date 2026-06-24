@@ -551,11 +551,32 @@ class Brain:
         return result
 
     def _llm_reconstruct(self, query: str, candidates: list, backward: list) -> int:
-        """LLM精确推理阶段。估算token消耗（未来实现）。"""
-        # TODO: 实际LLM调用 — 对candidates做精确推理验证
-        # 返回估算token数
-        estimated = len(query) // 2 + sum(len(c.get("summary", "")) for c in candidates) // 2
-        return estimated
+        """Phase 2: LLM精确推理——写RECALL事件，由外部子Agent消费。
+
+        不直接调LLM——写reconstruct_phase2_request到RECALL，
+        子Agent或cron job读取后执行精确推理，结果写回reconstruct_phase2_result。
+
+        Returns: 估算token数（供Phase 1返回值参考）
+        """
+        # 写RECALL事件——子Agent的入口
+        request = {
+            "type": "reconstruct_phase2_request",
+            "query": query,
+            "query_cues": self._extract_keywords(query),
+            "candidate_card_ids": [c["card_id"] for c in candidates],
+            "backward_card_ids": [b["card_id"] for b in backward],
+            "estimated_tokens": len(query) // 2 + sum(
+                len(c.get("summary", "")) for c in candidates
+            ) // 2,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+        self._append_jsonl(self.recall_path, request)
+
+        logger.info(
+            f"🔍 {self.agent_id} Phase 2 queued: {len(candidates)} candidates, "
+            f"{len(backward)} backward → RECALL"
+        )
+        return request["estimated_tokens"]
 
     # ── ☀️阿波罗: Dreaming种子 ──
 
