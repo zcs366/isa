@@ -86,15 +86,19 @@ def _make_envelope(syscall: str, resource: str, operation: str,
 def _io_s_dispatch(envelope: dict) -> dict:
     """向IO-S发送syscall并返回响应。
     
-    TODO: IO-S dispatch通道待定义 (socket/HTTP/stdin?)
-    当前: 返回LOCAL_FALLBACK结果
+    通道: HTTP POST to 127.0.0.1:8770/syscall
+    超时: 5秒
     """
-    # TODO: 替换为真实IO-S dispatch
-    # 例如: HTTP POST to IO-S syscall endpoint
-    # or: unix socket
-    # or: stdin/stdout subprocess
-    logger.warning(f"syscall: IO-S dispatch未实现, 使用LOCAL_FALLBACK")
-    return {"ok": False, "error": {"code": "NOT_IMPLEMENTED", "message": "IO-S dispatch通道待实现"}, "trace_id": envelope.get("trace_id", "")}
+    import urllib.request
+    url = "http://127.0.0.1:8770/syscall"
+    data = json.dumps(envelope, ensure_ascii=False).encode()
+    req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
+    try:
+        resp = urllib.request.urlopen(req, timeout=5)
+        return json.loads(resp.read().decode())
+    except Exception as e:
+        logger.warning(f"syscall: IO-S dispatch失败: {e}")
+        return {"ok": False, "error": {"code": "IO_S_UNREACHABLE", "message": str(e)}, "trace_id": envelope.get("trace_id", "")}
 
 # ═══════════════════════════════════════
 # syscall: card_read
@@ -154,24 +158,42 @@ def card_list(pattern: str = "*.json", caller_pid: str = "isa") -> list:
         return []
 
 # ═══════════════════════════════════════
-# syscall: recall_append
+# syscall: recall_append (Phase 1: Hash去重)
 # ═══════════════════════════════════════
-def recall_append(entry: dict, caller_pid: str = "isa") -> bool:
-    """追加RECALL。"""
+def recall_append(entry: dict, caller_pid: str = "isa", force: bool = False) -> dict:
+    """追加RECALL（带Hash去重）。
+    
+    返回:
+        {"ok": True, "action": "appended", "hash": "..."}  — 成功写入
+        {"ok": True, "action": "duplicate", "hash": "..."}  — 重复，跳过
+        {"ok": False, "error": "..."}  — 失败
+    """
     if _check_io_s():
         env = _make_envelope("recall_append", "signal", "write",
                             {"entry": entry}, caller_pid)
         resp = _io_s_dispatch(env)
         if resp.get("ok"):
-            return True
+            return resp
+    # LOCAL_FALLBACK: 使用 recall_append.py 的去重逻辑
     try:
+        from recall_append import validate_and_append
+        return validate_and_append(entry, written_by=caller_pid, force=force)
+    except ImportError:
+        # fallback: 如果 recall_append.py 不在 path 中，直接用路径导入
+        import importlib.util
+        script = JIAK_RECALL.parent / "recall_append.py"
+        if script.exists():
+            spec = importlib.util.spec_from_file_location("recall_append", script)
+            if spec and spec.loader:
+                mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(mod)
+                return mod.validate_and_append(entry, written_by=caller_pid, force=force)
+        # 最终 fallback: 裸追加（无去重）
+        logger.warning("syscall.recall_append: recall_append.py not found, bare append")
         JIAK_RECALL.parent.mkdir(parents=True, exist_ok=True)
         with open(JIAK_RECALL, "a") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-        return True
-    except Exception as e:
-        logger.warning(f"syscall.recall_append: {e}")
-        return False
+        return {"ok": True, "action": "appended_bare", "hash": "unknown"}
 
 # ═══════════════════════════════════════
 # syscall: recall_query

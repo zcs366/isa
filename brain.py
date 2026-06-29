@@ -152,6 +152,26 @@ class Brain:
                     break
         return result
 
+    # ── 🐙章鱼: session历史搜索 ──
+
+    def recall_sessions(self, text: str) -> Optional[str]:
+        """搜索Hermes session历史，返回相关上下文（≤1000字符）。
+
+        零LLM，确定性FTS5查询，性能保护>500ms自动跳过。
+        搜索范围：近30天session。
+
+        Returns:
+            None — 无相关session或性能超时
+            str  — 格式化的session上下文
+        """
+        try:
+            from octopus import inject_session_context
+            return inject_session_context(text)
+        except ImportError:
+            return None
+        except Exception:
+            return None
+
     # ── 卡片操作 ──
 
     def _read_card(self, card_id: str) -> dict:

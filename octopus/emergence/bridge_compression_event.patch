@@ -1,0 +1,47 @@
+# 桥接层补丁 — 压缩事件 → RECALL
+#
+# 改动文件:
+#   1. ~/.hermes/hermes-agent/agent/context_compressor.py  (+27行)
+#   2. ~/.hermes/plugins/jika/__init__.py                  (+26行)
+#
+# 用途:
+#   Hermes ContextCompressor 压缩后写 RECALL(compression_event)
+#   → jika 插件 post_llm_call 检测到后重置去重缓存(dedup_reset)
+#
+# 升级后重新应用:
+#   patch -p0 < ~/projects/isa/octopus/emergence/bridge_compression_event.patch
+#
+# 如果升级后源码变化导致patch失败，手动改动：
+#
+# ## context_compressor.py
+# 在 `return compressed` 之前（L2426附近），插入：
+# ```
+# try:
+#     from jiak_api import recall_append
+#     recall_append({
+#         "type": "compression_event",
+#         "agent": "context_compressor",
+#         "compression_no": self.compression_count,
+#         "content": f"[压缩] 第{compress_start+1}-{compress_end}轮→摘要, "
+#                    f"释放{savings_pct:.0f}% "
+#                    f"({display_tokens//1000}K→{new_estimate//1000}K), "
+#                    f"{n_messages}条→{len(compressed)}条",
+#         "summary_short": f"压缩#{self.compression_count}: "
+#                         f"{n_messages}→{len(compressed)}条 "
+#                         f"{display_tokens//1000}K→{new_estimate//1000}K",
+#         "model_used": (
+#             "static_fallback" if getattr(self, "_last_summary_fallback_used", False)
+#             else getattr(self, "_last_aux_model", "unknown")
+#         ),
+#     })
+# except Exception:
+#     pass
+# ```
+#
+# ## plugins/jika/__init__.py
+# 在 on_post_llm_call 的末尾（`except Exception` 之前），插入桥接层监听代码。
+# 注意：
+#   - 扫描窗口 = 200行（原30行，修复活跃session挤出问题）
+#   - 调用 dedup_reset(session_id) 替代 dedup_reset()（只清当前session）
+#   - 使用 logger.info 替代 logger.debug（运维可观测）
+# 见完整代码：~/projects/isa/octopus/emergence/bridge_listener.py

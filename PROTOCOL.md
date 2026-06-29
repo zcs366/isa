@@ -44,6 +44,39 @@ Every message in ISA is a **Signal** — a JSON object on one line (JSONL).
 | `presence` | Online/offline notification | `*` | Join/leave events |
 | `wave` | Propagated signal | agent-id | Wave diffusion copy |
 
+### 1.2a System-Level Signal Types (v0.2 — IDC Integration)
+
+以下信号类型为openLLM四系统间的认知事件通道——ISA波扩散作为统一信号总线：
+
+| Type | Meaning | Target | Description |
+|------|---------|--------|-------------|
+| `io-s.governance.cap-check` | IO-S权限检查结果 | io-s | cap_check结果广播 |
+| `io-s.governance.policy-update` | IO-S权限策略变更 | all | 策略变更通知所有系统 |
+| `isn.skill-exec.called` | ISN技能被调用 | isn | 技能执行记录 |
+| `isn.skill-exec.created` | ISN新技能创建 | all | 新技能通知所有系统 |
+| `isn.skill-exec.error` | ISN技能执行错误 | all | 错误通知所有系统 |
+| `iko.publish.created` | IKO新资产创建 | all | 待发布资产通知 |
+| `iko.publish.confirmed` | IKO发布确认 | all | 发布完成通知 |
+
+**路由规则**（按优先级）：
+- `io-s.governance.*` → io-s (P10)
+- `io-s.governance.policy-update` → all (P9, 精确匹配优先)
+- `isn.skill-exec.*` → isn (P5)
+- `isn.skill-exec.created` → all (P5, 精确匹配优先)
+- `isn.skill-exec.error` → all (P8)
+- `iko.publish.*` → iko (P1)
+- `iko.publish.created/confirmed` → all (P2, 精确匹配优先)
+
+**桥接接口**（供其他系统调用ISA信号总线）：
+- `bridge_signal_send(to, signal_type, payload, source_agent)` → 发送信号
+- `bridge_signal_recv(system, signal_type, limit)` → 接收信号
+- `bridge_signal_query(signal_type, window, limit)` → 查询信号历史
+- `registry_summary()` → 信号注册表摘要
+
+**身份传播**：当信号流经多个系统时，`_identity` 字段（含agent_id/session_id/system/propagated_from）随信号传播，接收方可追溯完整处理链路。
+
+详见 `signal_registry.py` 和 `identity_propagation.py`。
+
 ### 1.3 Storage
 
 All signals are stored as **JSONL** (one JSON object per line) with **immutable append** semantics.

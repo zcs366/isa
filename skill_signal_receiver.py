@@ -54,12 +54,15 @@ def _sys_signal_recv(target: str = "isa", filter_type: str = "skill_created",
 
 
 def _sys_recall_append(entry: dict) -> bool:
-    """通过syscall层追加RECALL。"""
+    """通过syscall层追加RECALL（带Hash去重）。"""
     try:
         import sys
         sys.path.insert(0, str(Path(__file__).parent))
         from syscall import recall_append
-        return recall_append(entry, caller_pid="isa")
+        result = recall_append(entry, caller_pid="isa")
+        if isinstance(result, dict):
+            return result.get("ok", False)
+        return bool(result)  # backward compat
     except Exception as e:
         logger.warning(f"recall_append failed: {e}")
         return False

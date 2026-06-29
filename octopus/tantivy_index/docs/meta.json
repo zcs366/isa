@@ -1,0 +1,183 @@
+{
+  "index_settings": {
+    "docstore_compression": "lz4",
+    "docstore_blocksize": 16384
+  },
+  "segments": [
+    {
+      "segment_id": "d8f70eed-c587-4b46-aff6-43a8db0bf608",
+      "max_doc": 12,
+      "deletes": null
+    },
+    {
+      "segment_id": "619b7444-dac3-4d7b-9fa7-19da97abd9ca",
+      "max_doc": 12,
+      "deletes": null
+    },
+    {
+      "segment_id": "1d3bb23d-e19f-4117-84a9-f9aff31e3c73",
+      "max_doc": 12,
+      "deletes": null
+    },
+    {
+      "segment_id": "8f6079d4-fbdc-4ec3-a66a-b449291a783e",
+      "max_doc": 12,
+      "deletes": null
+    },
+    {
+      "segment_id": "3699b76d-312b-489d-8c5c-c68caef7bdd6",
+      "max_doc": 11,
+      "deletes": null
+    },
+    {
+      "segment_id": "6fdb09ce-08dc-4c50-8391-38b44e31ffde",
+      "max_doc": 11,
+      "deletes": null
+    },
+    {
+      "segment_id": "d2c14661-c62b-4566-bc63-760dcf893265",
+      "max_doc": 11,
+      "deletes": null
+    },
+    {
+      "segment_id": "60c6575c-4575-44b3-a6c3-7268734a4dbd",
+      "max_doc": 11,
+      "deletes": null
+    },
+    {
+      "segment_id": "cf90f385-3428-4231-9f6a-d09ed8f606b7",
+      "max_doc": 9,
+      "deletes": null
+    },
+    {
+      "segment_id": "72d3dc6a-285d-40cd-9bfe-dcd2627c2c2e",
+      "max_doc": 7,
+      "deletes": null
+    },
+    {
+      "segment_id": "cc2a8738-8179-4c4b-bc71-d8b07a61542c",
+      "max_doc": 3,
+      "deletes": null
+    },
+    {
+      "segment_id": "7792754b-fca6-41fc-8ab4-e679e634ee2b",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "14a6aaa1-fe41-445d-8c7f-b722307fafb4",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "c67ae352-8ccf-4d3d-9522-6046a6be027c",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "ce2b1266-d0a5-46a2-a64f-f573ef53ff0a",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "57634d02-ebd0-4a32-ae31-15b847e7a1f3",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "14e4fb46-f824-4902-a226-8c863541471e",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "79fa3ae7-1969-427f-9b8f-7bdb2116cf2a",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "849fe64c-c2a3-42eb-bdba-350910ec1954",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "53f26c13-1b98-408b-b7b0-d211b33f103a",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "58d4febb-2284-4073-8c25-dd988272006b",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "a6e88539-fe58-414d-b357-0651924d0da8",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "e780e98b-e35a-4b72-877d-75821cc36131",
+      "max_doc": 1,
+      "deletes": null
+    },
+    {
+      "segment_id": "73d8d3d2-b406-426b-8624-a24bb59cf529",
+      "max_doc": 1,
+      "deletes": null
+    }
+  ],
+  "schema": [
+    {
+      "name": "id",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    },
+    {
+      "name": "tentacle",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    },
+    {
+      "name": "body",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    }
+  ],
+  "opstamp": 148
+}

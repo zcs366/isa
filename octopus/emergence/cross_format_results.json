@@ -1,0 +1,344 @@
+{
+  "timestamp": "2026-06-28T04:57:17.969823+00:00",
+  "time_window_minutes": 60,
+  "total_files": 307,
+  "total_pairs": 135,
+  "pairs": [
+    {
+      "file_a": "2026-06-28_备忘录_五线P0行动全完成.md",
+      "file_b": "write_card_notes_roadmap.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 17.9,
+      "common_keywords": [
+        "card",
+        "anthropic",
+        "home",
+        "hermes",
+        "fata",
+        "jiak",
+        "gates",
+        "json"
+      ],
+      "match_count": 9
+    },
+    {
+      "file_a": "2026-06-28_备忘录_五线P0行动全完成.md",
+      "file_b": "write_card_notes_roadmap_1782610729103149235.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 17.9,
+      "common_keywords": [
+        "card",
+        "anthropic",
+        "home",
+        "hermes",
+        "fata",
+        "jiak",
+        "gates",
+        "json"
+      ],
+      "match_count": 9
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "rebuild_files_v2.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 24.3,
+      "common_keywords": [
+        "home",
+        "hermes",
+        "项目",
+        "python",
+        "代码",
+        "json",
+        "name",
+        "commit"
+      ],
+      "match_count": 8
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "rebuild_files_v2_1782617237173964532.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 24.3,
+      "common_keywords": [
+        "home",
+        "hermes",
+        "项目",
+        "python",
+        "代码",
+        "json",
+        "name",
+        "commit"
+      ],
+      "match_count": 8
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "find_audit_job.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 51.2,
+      "common_keywords": [
+        "home",
+        "hermes",
+        "dict",
+        "audit",
+        "json",
+        "name",
+        "context"
+      ],
+      "match_count": 7
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "find_audit_job_1782612703095829519.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 51.2,
+      "common_keywords": [
+        "home",
+        "hermes",
+        "dict",
+        "audit",
+        "json",
+        "name",
+        "context"
+      ],
+      "match_count": 7
+    },
+    {
+      "file_a": "2026-06-28_备忘录_五线P0行动全完成.md",
+      "file_b": "jiak_audit.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 13.0,
+      "common_keywords": [
+        "card",
+        "recall",
+        "hermes",
+        "home",
+        "list",
+        "jiak",
+        "json"
+      ],
+      "match_count": 7
+    },
+    {
+      "file_a": "2026-06-28_备忘录_五线P0行动全完成.md",
+      "file_b": "jiak_audit_1782612578419851652.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 13.0,
+      "common_keywords": [
+        "card",
+        "recall",
+        "hermes",
+        "home",
+        "list",
+        "jiak",
+        "json"
+      ],
+      "match_count": 7
+    },
+    {
+      "file_a": "2026-06-28_备忘录_五线P0行动全完成.md",
+      "file_b": "jiak_dup_detail.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 13.3,
+      "common_keywords": [
+        "recall",
+        "hermes",
+        "home",
+        "fata",
+        "jiak",
+        "json",
+        "gates"
+      ],
+      "match_count": 7
+    },
+    {
+      "file_a": "2026-06-28_备忘录_五线P0行动全完成.md",
+      "file_b": "jiak_dup_detail_1782612598825546604.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 13.3,
+      "common_keywords": [
+        "recall",
+        "hermes",
+        "home",
+        "fata",
+        "jiak",
+        "json",
+        "gates"
+      ],
+      "match_count": 7
+    },
+    {
+      "file_a": "INDEX.md",
+      "file_b": "baozheng_final.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 43.4,
+      "common_keywords": [
+        "索引",
+        "hermes",
+        "目录",
+        "文件",
+        "index",
+        "日期",
+        "状态"
+      ],
+      "match_count": 7
+    },
+    {
+      "file_a": "INDEX.md",
+      "file_b": "baozheng_final_1782622221132512750.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 43.4,
+      "common_keywords": [
+        "索引",
+        "hermes",
+        "目录",
+        "文件",
+        "index",
+        "日期",
+        "状态"
+      ],
+      "match_count": 7
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "build_files_index.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 29.9,
+      "common_keywords": [
+        "home",
+        "hermes",
+        "python",
+        "json",
+        "name",
+        "commit"
+      ],
+      "match_count": 6
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "build_files_index_1782617569945471784.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 29.9,
+      "common_keywords": [
+        "home",
+        "hermes",
+        "python",
+        "json",
+        "name",
+        "commit"
+      ],
+      "match_count": 6
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "build_files_v3.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 35.5,
+      "common_keywords": [
+        "home",
+        "hermes",
+        "python",
+        "json",
+        "name",
+        "commit"
+      ],
+      "match_count": 6
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "build_files_v3_1782617907569369580.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 35.5,
+      "common_keywords": [
+        "home",
+        "hermes",
+        "python",
+        "json",
+        "name",
+        "commit"
+      ],
+      "match_count": 6
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "jiak_audit.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 53.3,
+      "common_keywords": [
+        "agent",
+        "home",
+        "hermes",
+        "list",
+        "audit",
+        "json"
+      ],
+      "match_count": 6
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "jiak_audit_1782612578419851652.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 53.3,
+      "common_keywords": [
+        "agent",
+        "home",
+        "hermes",
+        "list",
+        "audit",
+        "json"
+      ],
+      "match_count": 6
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "jiak_meta.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 40.6,
+      "common_keywords": [
+        "agent",
+        "done",
+        "hermes",
+        "token",
+        "json",
+        "context"
+      ],
+      "match_count": 6
+    },
+    {
+      "file_a": "2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+      "file_b": "jiak_meta_1782618211426675588.py",
+      "type_a": "doc",
+      "type_b": "script",
+      "time_gap_min": 40.6,
+      "common_keywords": [
+        "agent",
+        "done",
+        "hermes",
+        "token",
+        "json",
+        "context"
+      ],
+      "match_count": 6
+    }
+  ]
+}

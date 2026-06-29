@@ -1,0 +1,2991 @@
+{
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_agentic_compressor.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_agentic_compressor.md",
+    "type": "tentacle",
+    "mtime": 1782625758.472139,
+    "chunk_count": 6,
+    "chunk_start": 0
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_PEEU规划经验探索利用.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_PEEU规划经验探索利用.md",
+    "type": "tentacle",
+    "mtime": 1782614649.2635286,
+    "chunk_count": 25,
+    "chunk_start": 6
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_contagion.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_contagion.md",
+    "type": "tentacle",
+    "mtime": 1782625583.389969,
+    "chunk_count": 13,
+    "chunk_start": 31
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_四大参考项目架构拆解.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_四大参考项目架构拆解.md",
+    "type": "tentacle",
+    "mtime": 1782663662.33476,
+    "chunk_count": 21,
+    "chunk_start": 44
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_17层工作详解.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_17层工作详解.md",
+    "type": "tentacle",
+    "mtime": 1782651750.400369,
+    "chunk_count": 22,
+    "chunk_start": 65
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_report_四体上下文管理架构交付.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_report_四体上下文管理架构交付.md",
+    "type": "tentacle",
+    "mtime": 1782641150.2930467,
+    "chunk_count": 9,
+    "chunk_start": 87
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_Hermes内置压缩系统深度分析.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_Hermes内置压缩系统深度分析.md",
+    "type": "tentacle",
+    "mtime": 1782632920.562584,
+    "chunk_count": 12,
+    "chunk_start": 96
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_Web4AgentEconomy协议生态.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_Web4AgentEconomy协议生态.md",
+    "type": "tentacle",
+    "mtime": 1782614531.4447045,
+    "chunk_count": 16,
+    "chunk_start": 108
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_五大参考项目架构拆解.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_五大参考项目架构拆解.md",
+    "type": "tentacle",
+    "mtime": 1782664916.483559,
+    "chunk_count": 18,
+    "chunk_start": 124
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_物种章鱼垂直叶连接组_搜索引擎架构.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_物种章鱼垂直叶连接组_搜索引擎架构.md",
+    "type": "tentacle",
+    "mtime": 1782626846.0244417,
+    "chunk_count": 18,
+    "chunk_start": 142
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_triggerbench.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_triggerbench.md",
+    "type": "tentacle",
+    "mtime": 1782625524.537273,
+    "chunk_count": 11,
+    "chunk_start": 160
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-27_analysis_守恒律跨架构验证.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-27_analysis_守恒律跨架构验证.md",
+    "type": "tentacle",
+    "mtime": 1782574944.5615373,
+    "chunk_count": 4,
+    "chunk_start": 171
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_RoleConfusion.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_RoleConfusion.md",
+    "type": "tentacle",
+    "mtime": 1782633929.804302,
+    "chunk_count": 5,
+    "chunk_start": 175
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_AutoPass.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_AutoPass.md",
+    "type": "tentacle",
+    "mtime": 1782625466.2855058,
+    "chunk_count": 6,
+    "chunk_start": 180
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_ssvp.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_ssvp.md",
+    "type": "tentacle",
+    "mtime": 1782625758.5235603,
+    "chunk_count": 6,
+    "chunk_start": 186
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_self-harness.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_self-harness.md",
+    "type": "tentacle",
+    "mtime": 1782625395.9934611,
+    "chunk_count": 9,
+    "chunk_start": 192
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_Layered-Security_RAG.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_Layered-Security_RAG.md",
+    "type": "tentacle",
+    "mtime": 1782625448.013033,
+    "chunk_count": 6,
+    "chunk_start": 201
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_kamera.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_kamera.md",
+    "type": "tentacle",
+    "mtime": 1782625470.7087836,
+    "chunk_count": 8,
+    "chunk_start": 207
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_openLLM四体与Hermes全景分析.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_openLLM四体与Hermes全景分析.md",
+    "type": "tentacle",
+    "mtime": 1782641724.1240892,
+    "chunk_count": 26,
+    "chunk_start": 215
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_harness-sensitivity.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_harness-sensitivity.md",
+    "type": "tentacle",
+    "mtime": 1782625456.749862,
+    "chunk_count": 14,
+    "chunk_start": 241
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_Concordia持久内核检查点.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_Concordia持久内核检查点.md",
+    "type": "tentacle",
+    "mtime": 1782615141.351827,
+    "chunk_count": 10,
+    "chunk_start": 255
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_seb.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_seb.md",
+    "type": "tentacle",
+    "mtime": 1782625625.3618448,
+    "chunk_count": 17,
+    "chunk_start": 265
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_mas_promptbench.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_mas_promptbench.md",
+    "type": "tentacle",
+    "mtime": 1782625758.6028817,
+    "chunk_count": 6,
+    "chunk_start": 282
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_selfcompact.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_selfcompact.md",
+    "type": "tentacle",
+    "mtime": 1782625494.764038,
+    "chunk_count": 10,
+    "chunk_start": 288
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_apex.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_apex.md",
+    "type": "tentacle",
+    "mtime": 1782625424.6055067,
+    "chunk_count": 13,
+    "chunk_start": 298
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_MACR.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/analysis/2026-06-28_analysis_MACR.md",
+    "type": "tentacle",
+    "mtime": 1782625429.633432,
+    "chunk_count": 5,
+    "chunk_start": 311
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/lesson/2026-06-28_lesson_补强最弱层方法论-ddgs替代web_search.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/lesson/2026-06-28_lesson_补强最弱层方法论-ddgs替代web_search.md",
+    "type": "tentacle",
+    "mtime": 1782628723.060226,
+    "chunk_count": 4,
+    "chunk_start": 316
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/lesson/2026-06-28_lesson_代码审查教训.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/lesson/2026-06-28_lesson_代码审查教训.md",
+    "type": "tentacle",
+    "mtime": 1782622177.7706006,
+    "chunk_count": 7,
+    "chunk_start": 320
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/lesson/2026-06-27_lesson_ISN-IO-S静默拒绝踩坑.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/lesson/2026-06-27_lesson_ISN-IO-S静默拒绝踩坑.md",
+    "type": "tentacle",
+    "mtime": 1782575984.8349576,
+    "chunk_count": 5,
+    "chunk_start": 327
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/execution/2026-06-27_execution_ISN全链路.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/execution/2026-06-27_execution_ISN全链路.md",
+    "type": "tentacle",
+    "mtime": 1782574895.1827414,
+    "chunk_count": 3,
+    "chunk_start": 332
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/execution/2026-06-27_execution_Δ胶囊波面2+3.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/execution/2026-06-27_execution_Δ胶囊波面2+3.md",
+    "type": "tentacle",
+    "mtime": 1782574926.3514798,
+    "chunk_count": 3,
+    "chunk_start": 335
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/execution/2026-06-27_execution_SA生命周期Plugin.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/execution/2026-06-27_execution_SA生命周期Plugin.md",
+    "type": "tentacle",
+    "mtime": 1782574944.5495765,
+    "chunk_count": 4,
+    "chunk_start": 338
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼搜索v3.1三路搜索引擎.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼搜索v3.1三路搜索引擎.md",
+    "type": "tentacle",
+    "mtime": 1782608217.2260413,
+    "chunk_count": 10,
+    "chunk_start": 342
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_AGI贯通师技术文档.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_AGI贯通师技术文档.md",
+    "type": "tentacle",
+    "mtime": 1782627004.116676,
+    "chunk_count": 7,
+    "chunk_start": 352
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_output归藏协议_联邦法第2号.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_output归藏协议_联邦法第2号.md",
+    "type": "tentacle",
+    "mtime": 1782608766.927699,
+    "chunk_count": 5,
+    "chunk_start": 359
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-27_techdoc_八触须合规审计报告001.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-27_techdoc_八触须合规审计报告001.md",
+    "type": "tentacle",
+    "mtime": 1782576055.2445338,
+    "chunk_count": 6,
+    "chunk_start": 364
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼读取强制法.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼读取强制法.md",
+    "type": "tentacle",
+    "mtime": 1782634584.2543166,
+    "chunk_count": 8,
+    "chunk_start": 370
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_阿瑞斯校准门_calibrate.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_阿瑞斯校准门_calibrate.md",
+    "type": "tentacle",
+    "mtime": 1782641551.5465944,
+    "chunk_count": 6,
+    "chunk_start": 378
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼使用指南_强制读取法.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼使用指南_强制读取法.md",
+    "type": "tentacle",
+    "mtime": 1782641497.1010725,
+    "chunk_count": 5,
+    "chunk_start": 384
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_上下文压缩标准操作协议_联邦法第3号.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_上下文压缩标准操作协议_联邦法第3号.md",
+    "type": "tentacle",
+    "mtime": 1782641159.2049832,
+    "chunk_count": 4,
+    "chunk_start": 389
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼项目立项书_全息文件搜索引擎.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼项目立项书_全息文件搜索引擎.md",
+    "type": "tentacle",
+    "mtime": 1782610230.4724011,
+    "chunk_count": 19,
+    "chunk_start": 393
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_Δ胶囊共振_快速参考.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_Δ胶囊共振_快速参考.md",
+    "type": "tentacle",
+    "mtime": 1782637528.9889476,
+    "chunk_count": 12,
+    "chunk_start": 412
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_守恒律核心度量框架_克洛诺斯之门.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_守恒律核心度量框架_克洛诺斯之门.md",
+    "type": "tentacle",
+    "mtime": 1782641551.5504293,
+    "chunk_count": 8,
+    "chunk_start": 424
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-25_techdoc_章鱼八触须写作输出标准.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-25_techdoc_章鱼八触须写作输出标准.md",
+    "type": "tentacle",
+    "mtime": 1782579434.1936083,
+    "chunk_count": 14,
+    "chunk_start": 432
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼项目立项书v2_全息认知记忆引擎.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼项目立项书v2_全息认知记忆引擎.md",
+    "type": "tentacle",
+    "mtime": 1782635888.73633,
+    "chunk_count": 10,
+    "chunk_start": 446
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-27_techdoc_Δ胶囊共振协议.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-27_techdoc_Δ胶囊共振协议.md",
+    "type": "tentacle",
+    "mtime": 1782577312.1483603,
+    "chunk_count": 10,
+    "chunk_start": 456
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼八触须输出标准_v2.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/techdoc/2026-06-28_techdoc_章鱼八触须输出标准_v2.md",
+    "type": "tentacle",
+    "mtime": 1782641403.6423626,
+    "chunk_count": 4,
+    "chunk_start": 466
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/meeting/2026-06-27_meeting_七神天启ISN架构审查.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/meeting/2026-06-27_meeting_七神天启ISN架构审查.md",
+    "type": "tentacle",
+    "mtime": 1782575984.8520637,
+    "chunk_count": 3,
+    "chunk_start": 470
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼八触须文档系统.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼八触须文档系统.md",
+    "type": "tentacle",
+    "mtime": 1782635477.0259929,
+    "chunk_count": 4,
+    "chunk_start": 473
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文管理×习惯养成.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文管理×习惯养成.md",
+    "type": "tentacle",
+    "mtime": 1782612862.4117277,
+    "chunk_count": 6,
+    "chunk_start": 477
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-26_memo_384点D0相变实验分析.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-26_memo_384点D0相变实验分析.md",
+    "type": "tentacle",
+    "mtime": 1782456729.6819713,
+    "chunk_count": 21,
+    "chunk_start": 483
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼全息文件搜索立项.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼全息文件搜索立项.md",
+    "type": "tentacle",
+    "mtime": 1782610221.2542655,
+    "chunk_count": 7,
+    "chunk_start": 504
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼jiakΔ胶囊协调协议.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼jiakΔ胶囊协调协议.md",
+    "type": "tentacle",
+    "mtime": 1782641607.08627,
+    "chunk_count": 6,
+    "chunk_start": 511
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-27_memo_Δ胶囊波面2+3.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-27_memo_Δ胶囊波面2+3.md",
+    "type": "tentacle",
+    "mtime": 1782574926.3794801,
+    "chunk_count": 4,
+    "chunk_start": 517
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文×习惯PALv2.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文×习惯PALv2.md",
+    "type": "tentacle",
+    "mtime": 1782614665.0927968,
+    "chunk_count": 2,
+    "chunk_start": 521
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_搜神方法论复盘与执行纪律.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_搜神方法论复盘与执行纪律.md",
+    "type": "tentacle",
+    "mtime": 1782625592.5091124,
+    "chunk_count": 5,
+    "chunk_start": 523
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文管理=管理章鱼的艺术.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文管理=管理章鱼的艺术.md",
+    "type": "tentacle",
+    "mtime": 1782614061.6597896,
+    "chunk_count": 3,
+    "chunk_start": 528
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_AGI贯通师标准备忘录.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_AGI贯通师标准备忘录.md",
+    "type": "tentacle",
+    "mtime": 1782626988.771579,
+    "chunk_count": 4,
+    "chunk_start": 531
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼v3.1_session原文全线归位.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼v3.1_session原文全线归位.md",
+    "type": "tentacle",
+    "mtime": 1782608203.5247655,
+    "chunk_count": 7,
+    "chunk_start": 535
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文管理公式补全_加入读取.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文管理公式补全_加入读取.md",
+    "type": "tentacle",
+    "mtime": 1782634560.9763763,
+    "chunk_count": 3,
+    "chunk_start": 542
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼搜索引擎终极方向.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_章鱼搜索引擎终极方向.md",
+    "type": "tentacle",
+    "mtime": 1782632069.6782358,
+    "chunk_count": 11,
+    "chunk_start": 545
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-25_memo_章鱼系统设计备忘录.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-25_memo_章鱼系统设计备忘录.md",
+    "type": "tentacle",
+    "mtime": 1782575853.7922382,
+    "chunk_count": 1,
+    "chunk_start": 556
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文会话章鱼Δ胶囊四层关系.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文会话章鱼Δ胶囊四层关系.md",
+    "type": "tentacle",
+    "mtime": 1782651169.041109,
+    "chunk_count": 5,
+    "chunk_start": 557
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_IO-S-v0.3进化史_成长故事.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_IO-S-v0.3进化史_成长故事.md",
+    "type": "tentacle",
+    "mtime": 1782641228.762054,
+    "chunk_count": 11,
+    "chunk_start": 562
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-27_memo_ISN技能系统全链路.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-27_memo_ISN技能系统全链路.md",
+    "type": "tentacle",
+    "mtime": 1782574877.707087,
+    "chunk_count": 4,
+    "chunk_start": 573
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_八触须输出标准备忘录.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_八触须输出标准备忘录.md",
+    "type": "tentacle",
+    "mtime": 1782641411.2713845,
+    "chunk_count": 2,
+    "chunk_start": 577
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_Δ胶囊共振完整落地.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_Δ胶囊共振完整落地.md",
+    "type": "tentacle",
+    "mtime": 1782615161.761721,
+    "chunk_count": 5,
+    "chunk_start": 579
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文窗口重算1M标准转折.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_上下文窗口重算1M标准转折.md",
+    "type": "tentacle",
+    "mtime": 1782613648.3719327,
+    "chunk_count": 3,
+    "chunk_start": 584
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_代码审查铁律.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_代码审查铁律.md",
+    "type": "tentacle",
+    "mtime": 1782622358.6903417,
+    "chunk_count": 3,
+    "chunk_start": 587
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_五线P0行动全完成.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_五线P0行动全完成.md",
+    "type": "tentacle",
+    "mtime": 1782611785.997168,
+    "chunk_count": 8,
+    "chunk_start": 590
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-27_memo_八触须强制执行方案.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-27_memo_八触须强制执行方案.md",
+    "type": "tentacle",
+    "mtime": 1782575873.791133,
+    "chunk_count": 4,
+    "chunk_start": 598
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-25_memo_章鱼本地搜索引擎.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-25_memo_章鱼本地搜索引擎.md",
+    "type": "tentacle",
+    "mtime": 1782397140.7944026,
+    "chunk_count": 14,
+    "chunk_start": 602
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_七神启示三缺补全记录.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/memo/2026-06-28_memo_七神启示三缺补全记录.md",
+    "type": "tentacle",
+    "mtime": 1782641551.4862096,
+    "chunk_count": 4,
+    "chunk_start": 616
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_RoleConfusion.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_RoleConfusion.md",
+    "type": "tentacle",
+    "mtime": 1782633943.5496752,
+    "chunk_count": 6,
+    "chunk_start": 620
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_MACR.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_MACR.md",
+    "type": "tentacle",
+    "mtime": 1782629487.5974627,
+    "chunk_count": 49,
+    "chunk_start": 626
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_AutoPass.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_AutoPass.md",
+    "type": "tentacle",
+    "mtime": 1782630078.0554552,
+    "chunk_count": 26,
+    "chunk_start": 675
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_web4.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_web4.md",
+    "type": "tentacle",
+    "mtime": 1782632473.0178986,
+    "chunk_count": 5,
+    "chunk_start": 701
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_Layered-Security_RAG.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_Layered-Security_RAG.md",
+    "type": "tentacle",
+    "mtime": 1782629479.3815248,
+    "chunk_count": 38,
+    "chunk_start": 706
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_ssvp.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_ssvp.md",
+    "type": "tentacle",
+    "mtime": 1782632037.1009142,
+    "chunk_count": 4,
+    "chunk_start": 744
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_apex.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_apex.md",
+    "type": "tentacle",
+    "mtime": 1782631335.8837194,
+    "chunk_count": 5,
+    "chunk_start": 748
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_concordia.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_concordia.md",
+    "type": "tentacle",
+    "mtime": 1782632591.2300687,
+    "chunk_count": 7,
+    "chunk_start": 753
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_harness_sensitivity.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_harness_sensitivity.md",
+    "type": "tentacle",
+    "mtime": 1782632383.950876,
+    "chunk_count": 6,
+    "chunk_start": 760
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_PEEU.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_PEEU.md",
+    "type": "tentacle",
+    "mtime": 1782632441.436777,
+    "chunk_count": 5,
+    "chunk_start": 766
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_mas_promptbench.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_mas_promptbench.md",
+    "type": "tentacle",
+    "mtime": 1782632040.9768226,
+    "chunk_count": 5,
+    "chunk_start": 771
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_agentic_compressor.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_agentic_compressor.md",
+    "type": "tentacle",
+    "mtime": 1782632077.2889428,
+    "chunk_count": 6,
+    "chunk_start": 776
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_contagion.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_contagion.md",
+    "type": "tentacle",
+    "mtime": 1782630734.5225534,
+    "chunk_count": 16,
+    "chunk_start": 782
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_selfcompact.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_selfcompact.md",
+    "type": "tentacle",
+    "mtime": 1782632445.36799,
+    "chunk_count": 6,
+    "chunk_start": 798
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_selfharness.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_selfharness.md",
+    "type": "tentacle",
+    "mtime": 1782631344.4156275,
+    "chunk_count": 6,
+    "chunk_start": 804
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_SEB.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_SEB.md",
+    "type": "tentacle",
+    "mtime": 1782630638.4065485,
+    "chunk_count": 7,
+    "chunk_start": 810
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_kamera.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_kamera.md",
+    "type": "tentacle",
+    "mtime": 1782632461.642293,
+    "chunk_count": 7,
+    "chunk_start": 817
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_triggerbench.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/notes/2026-06-28_notes_triggerbench.md",
+    "type": "tentacle",
+    "mtime": 1782631356.670263,
+    "chunk_count": 6,
+    "chunk_start": 824
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/intel/2026-06-27_intel_openLLM与Agent行业动态.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/intel/2026-06-27_intel_openLLM与Agent行业动态.md",
+    "type": "tentacle",
+    "mtime": 1782575984.8618116,
+    "chunk_count": 4,
+    "chunk_start": 830
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/intel/2026-06-28_intel_Agent框架17层设计要求清单.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/intel/2026-06-28_intel_Agent框架17层设计要求清单.md",
+    "type": "tentacle",
+    "mtime": 1782613260.1041474,
+    "chunk_count": 12,
+    "chunk_start": 834
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_session_search开机必搜.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_session_search开机必搜.md",
+    "type": "tentacle",
+    "mtime": 1782578331.9037905,
+    "chunk_count": 4,
+    "chunk_start": 846
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_章鱼搜索方向与优先级.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_章鱼搜索方向与优先级.md",
+    "type": "tentacle",
+    "mtime": 1782629493.8032525,
+    "chunk_count": 5,
+    "chunk_start": 850
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_上下文管理工程落地.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_上下文管理工程落地.md",
+    "type": "tentacle",
+    "mtime": 1782641140.9001865,
+    "chunk_count": 3,
+    "chunk_start": 855
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_章鱼方向_基于用户原话.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_章鱼方向_基于用户原话.md",
+    "type": "tentacle",
+    "mtime": 1782629642.9927435,
+    "chunk_count": 6,
+    "chunk_start": 858
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_综合18篇论文进化Hermes_openLLM.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_综合18篇论文进化Hermes_openLLM.md",
+    "type": "tentacle",
+    "mtime": 1782636084.4660547,
+    "chunk_count": 14,
+    "chunk_start": 864
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_L13-L15论文精读后行动计划.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-28_pal_L13-L15论文精读后行动计划.md",
+    "type": "tentacle",
+    "mtime": 1782615086.0813448,
+    "chunk_count": 6,
+    "chunk_start": 878
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-27_pal_IDC四系统P0任务分解.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/pal/2026-06-27_pal_IDC四系统P0任务分解.md",
+    "type": "tentacle",
+    "mtime": 1782575984.8509555,
+    "chunk_count": 5,
+    "chunk_start": 884
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_lesson_web_search与bing全线崩溃与搜索管线韧性.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_lesson_web_search与bing全线崩溃与搜索管线韧性.md",
+    "type": "tentacle",
+    "mtime": 1782627128.2312531,
+    "chunk_count": 3,
+    "chunk_start": 889
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_decision_搜索管线Tier重评与通道健康检查.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_decision_搜索管线Tier重评与通道健康检查.md",
+    "type": "tentacle",
+    "mtime": 1782627112.2069287,
+    "chunk_count": 4,
+    "chunk_start": 892
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_decision_上下文管理四要素_读取补全.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_decision_上下文管理四要素_读取补全.md",
+    "type": "tentacle",
+    "mtime": 1782636017.7487414,
+    "chunk_count": 3,
+    "chunk_start": 896
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_lesson_补强最弱层方法论-ddgs替代web_search.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_lesson_补强最弱层方法论-ddgs替代web_search.md",
+    "type": "tentacle",
+    "mtime": 1782628155.685553,
+    "chunk_count": 3,
+    "chunk_start": 899
+  },
+  "tentacle:/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_decision_ddgs替代web_search成为Tier0.5+.md": {
+    "path": "/home/zcs/projects/isa/octopus/tentacles/decision/2026-06-28_decision_ddgs替代web_search成为Tier0.5+.md",
+    "type": "tentacle",
+    "mtime": 1782628699.7065494,
+    "chunk_count": 4,
+    "chunk_start": 902
+  },
+  "recall:0": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T13:30:01+08:00",
+    "chunk_count": 1,
+    "chunk_start": 906
+  },
+  "recall:1": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T13:37:36+08:00",
+    "chunk_count": 1,
+    "chunk_start": 907
+  },
+  "recall:4": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T14:09:38+08:00",
+    "chunk_count": 1,
+    "chunk_start": 908
+  },
+  "recall:5": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T14:15:12+08:00",
+    "chunk_count": 1,
+    "chunk_start": 909
+  },
+  "recall:6": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T14:34:50+08:00",
+    "chunk_count": 1,
+    "chunk_start": 910
+  },
+  "recall:8": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "",
+    "chunk_count": 1,
+    "chunk_start": 911
+  },
+  "recall:9": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T14:47:50+08:00",
+    "chunk_count": 1,
+    "chunk_start": 912
+  },
+  "recall:10": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T14:47:50+08:00",
+    "chunk_count": 1,
+    "chunk_start": 913
+  },
+  "recall:11": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T14:51:17+08:00",
+    "chunk_count": 1,
+    "chunk_start": 914
+  },
+  "recall:12": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T14:53:48+08:00",
+    "chunk_count": 1,
+    "chunk_start": 915
+  },
+  "recall:13": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T14:55:54+08:00",
+    "chunk_count": 1,
+    "chunk_start": 916
+  },
+  "recall:14": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T15:33:58+08:00",
+    "chunk_count": 1,
+    "chunk_start": 917
+  },
+  "recall:15": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T15:36:48+08:00",
+    "chunk_count": 1,
+    "chunk_start": 918
+  },
+  "recall:16": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T15:48:45+08:00",
+    "chunk_count": 1,
+    "chunk_start": 919
+  },
+  "recall:17": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:02:39+08:00",
+    "chunk_count": 1,
+    "chunk_start": 920
+  },
+  "recall:18": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:06:42+08:00",
+    "chunk_count": 1,
+    "chunk_start": 921
+  },
+  "recall:19": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:17:13+08:00",
+    "chunk_count": 1,
+    "chunk_start": 922
+  },
+  "recall:20": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:24:14+08:00",
+    "chunk_count": 1,
+    "chunk_start": 923
+  },
+  "recall:21": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:28:49+08:00",
+    "chunk_count": 1,
+    "chunk_start": 924
+  },
+  "recall:22": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:32:32+08:00",
+    "chunk_count": 1,
+    "chunk_start": 925
+  },
+  "recall:23": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:35:10+08:00",
+    "chunk_count": 1,
+    "chunk_start": 926
+  },
+  "recall:24": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:39:09+08:00",
+    "chunk_count": 1,
+    "chunk_start": 927
+  },
+  "recall:25": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:41:23+08:00",
+    "chunk_count": 1,
+    "chunk_start": 928
+  },
+  "recall:26": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:44:00+08:00",
+    "chunk_count": 1,
+    "chunk_start": 929
+  },
+  "recall:29": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:48:48+08:00",
+    "chunk_count": 1,
+    "chunk_start": 930
+  },
+  "recall:30": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "",
+    "chunk_count": 1,
+    "chunk_start": 931
+  },
+  "recall:31": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "",
+    "chunk_count": 1,
+    "chunk_start": 932
+  },
+  "recall:32": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:49:41.229000+00:00",
+    "chunk_count": 1,
+    "chunk_start": 933
+  },
+  "recall:33": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:50:08.561006+00:00",
+    "chunk_count": 1,
+    "chunk_start": 934
+  },
+  "recall:34": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:52:34.271700+00:00",
+    "chunk_count": 1,
+    "chunk_start": 935
+  },
+  "recall:35": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:52:34.273050+00:00",
+    "chunk_count": 1,
+    "chunk_start": 936
+  },
+  "recall:36": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:52:52.799882+00:00",
+    "chunk_count": 1,
+    "chunk_start": 937
+  },
+  "recall:37": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:52:52.801062+00:00",
+    "chunk_count": 1,
+    "chunk_start": 938
+  },
+  "recall:38": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:53:21.447586+00:00",
+    "chunk_count": 1,
+    "chunk_start": 939
+  },
+  "recall:39": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:53:21.448708+00:00",
+    "chunk_count": 1,
+    "chunk_start": 940
+  },
+  "recall:40": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:54:09+08:00",
+    "chunk_count": 1,
+    "chunk_start": 941
+  },
+  "recall:41": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:54:13.946663+00:00",
+    "chunk_count": 1,
+    "chunk_start": 942
+  },
+  "recall:42": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T08:54:13.948185+00:00",
+    "chunk_count": 1,
+    "chunk_start": 943
+  },
+  "recall:43": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:56:55+08:00",
+    "chunk_count": 1,
+    "chunk_start": 944
+  },
+  "recall:44": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:58:34+08:00",
+    "chunk_count": 1,
+    "chunk_start": 945
+  },
+  "recall:45": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T16:35:00+08:00",
+    "chunk_count": 1,
+    "chunk_start": 946
+  },
+  "recall:46": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:02:04+08:00",
+    "chunk_count": 1,
+    "chunk_start": 947
+  },
+  "recall:47": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T09:06:07.264734+00:00",
+    "chunk_count": 1,
+    "chunk_start": 948
+  },
+  "recall:49": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:11:57+08:00",
+    "chunk_count": 1,
+    "chunk_start": 949
+  },
+  "recall:50": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:19:27+08:00",
+    "chunk_count": 1,
+    "chunk_start": 950
+  },
+  "recall:51": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:20:05+08:00",
+    "chunk_count": 1,
+    "chunk_start": 951
+  },
+  "recall:52": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:27:45+08:00",
+    "chunk_count": 1,
+    "chunk_start": 952
+  },
+  "recall:53": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:00:00+08:00",
+    "chunk_count": 1,
+    "chunk_start": 953
+  },
+  "recall:54": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:30:44+08:00",
+    "chunk_count": 1,
+    "chunk_start": 954
+  },
+  "recall:55": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:31:09+08:00",
+    "chunk_count": 1,
+    "chunk_start": 955
+  },
+  "recall:56": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:32:25+08:00",
+    "chunk_count": 1,
+    "chunk_start": 956
+  },
+  "recall:57": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:33:02+08:00",
+    "chunk_count": 1,
+    "chunk_start": 957
+  },
+  "recall:58": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:33:33+08:00",
+    "chunk_count": 1,
+    "chunk_start": 958
+  },
+  "recall:59": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:36:29+08:00",
+    "chunk_count": 1,
+    "chunk_start": 959
+  },
+  "recall:60": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:39:08+08:00",
+    "chunk_count": 1,
+    "chunk_start": 960
+  },
+  "recall:61": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:43:46+08:00",
+    "chunk_count": 1,
+    "chunk_start": 961
+  },
+  "recall:62": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:00:00+08:00",
+    "chunk_count": 1,
+    "chunk_start": 962
+  },
+  "recall:63": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:56:14+08:00",
+    "chunk_count": 1,
+    "chunk_start": 963
+  },
+  "recall:64": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T17:59:32+08:00",
+    "chunk_count": 1,
+    "chunk_start": 964
+  },
+  "recall:65": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T10:00:17.449760+00:00",
+    "chunk_count": 1,
+    "chunk_start": 965
+  },
+  "recall:66": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:02:02+08:00",
+    "chunk_count": 1,
+    "chunk_start": 966
+  },
+  "recall:67": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:04:00+08:00",
+    "chunk_count": 1,
+    "chunk_start": 967
+  },
+  "recall:68": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:04:28+08:00",
+    "chunk_count": 1,
+    "chunk_start": 968
+  },
+  "recall:69": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:06:19+08:00",
+    "chunk_count": 1,
+    "chunk_start": 969
+  },
+  "recall:70": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:08:02+08:00",
+    "chunk_count": 1,
+    "chunk_start": 970
+  },
+  "recall:71": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:10:23+08:00",
+    "chunk_count": 1,
+    "chunk_start": 971
+  },
+  "recall:72": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:12:10+08:00",
+    "chunk_count": 1,
+    "chunk_start": 972
+  },
+  "recall:73": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:13:59+08:00",
+    "chunk_count": 1,
+    "chunk_start": 973
+  },
+  "recall:74": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T18:15:44+08:00",
+    "chunk_count": 1,
+    "chunk_start": 974
+  },
+  "recall:76": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T20:53:11+08:00",
+    "chunk_count": 1,
+    "chunk_start": 975
+  },
+  "recall:77": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T20:57:01+08:00",
+    "chunk_count": 1,
+    "chunk_start": 976
+  },
+  "recall:78": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "",
+    "chunk_count": 1,
+    "chunk_start": 977
+  },
+  "recall:82": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T22:13:51+08:00",
+    "chunk_count": 1,
+    "chunk_start": 978
+  },
+  "recall:83": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T22:00:00+08:00",
+    "chunk_count": 1,
+    "chunk_start": 979
+  },
+  "recall:84": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T22:31:20+08:00",
+    "chunk_count": 1,
+    "chunk_start": 980
+  },
+  "recall:85": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T22:43:55+08:00",
+    "chunk_count": 1,
+    "chunk_start": 981
+  },
+  "recall:86": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T22:59:47+08:00",
+    "chunk_count": 1,
+    "chunk_start": 982
+  },
+  "recall:87": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-28T23:53:09+08:00",
+    "chunk_count": 1,
+    "chunk_start": 983
+  },
+  "recall:88": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T00:31:26+08:00",
+    "chunk_count": 1,
+    "chunk_start": 984
+  },
+  "recall:89": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T00:36:31+08:00",
+    "chunk_count": 1,
+    "chunk_start": 985
+  },
+  "recall:90": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T00:41:04.934795",
+    "chunk_count": 1,
+    "chunk_start": 986
+  },
+  "recall:91": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T00:42:19+08:00",
+    "chunk_count": 2,
+    "chunk_start": 987
+  },
+  "recall:92": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T00:45:17+08:00",
+    "chunk_count": 1,
+    "chunk_start": 989
+  },
+  "recall:93": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T00:57:55+08:00",
+    "chunk_count": 1,
+    "chunk_start": 990
+  },
+  "recall:94": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T00:59:16+08:00",
+    "chunk_count": 1,
+    "chunk_start": 991
+  },
+  "recall:95": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T01:10:29+08:00",
+    "chunk_count": 1,
+    "chunk_start": 992
+  },
+  "recall:96": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T01:14:22+08:00",
+    "chunk_count": 2,
+    "chunk_start": 993
+  },
+  "recall:97": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T01:18:08+08:00",
+    "chunk_count": 1,
+    "chunk_start": 995
+  },
+  "recall:114": {
+    "path": "/home/zcs/.hermes/jiak/RECALL.jsonl",
+    "type": "recall",
+    "mtime": "2026-06-29T12:00:00+08:00",
+    "chunk_count": 1,
+    "chunk_start": 996
+  },
+  "jiak:ra-collaboration.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/ra-collaboration.json",
+    "type": "jiak",
+    "mtime": 1782673465.2671313,
+    "chunk_count": 5,
+    "chunk_start": 997
+  },
+  "jiak:super-team-system.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/super-team-system.json",
+    "type": "jiak",
+    "mtime": 1782641423.784078,
+    "chunk_count": 2,
+    "chunk_start": 1002
+  },
+  "jiak:agent-governance-patterns.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/agent-governance-patterns.json",
+    "type": "jiak",
+    "mtime": 1782673465.326839,
+    "chunk_count": 1,
+    "chunk_start": 1004
+  },
+  "jiak:anthropic-safety-spectrum.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/anthropic-safety-spectrum.json",
+    "type": "jiak",
+    "mtime": 1782673465.2632463,
+    "chunk_count": 4,
+    "chunk_start": 1005
+  },
+  "jiak:context-as-riverbed.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/context-as-riverbed.json",
+    "type": "jiak",
+    "mtime": 1782667088.0911834,
+    "chunk_count": 2,
+    "chunk_start": 1009
+  },
+  "jiak:context-meta-application.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/context-meta-application.json",
+    "type": "jiak",
+    "mtime": 1782657080.9082062,
+    "chunk_count": 2,
+    "chunk_start": 1011
+  },
+  "jiak:fata-gates.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/fata-gates.json",
+    "type": "jiak",
+    "mtime": 1782673465.2855072,
+    "chunk_count": 2,
+    "chunk_start": 1013
+  },
+  "jiak:sade-translation-project.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/sade-translation-project.json",
+    "type": "jiak",
+    "mtime": 1782625056.7306693,
+    "chunk_count": 1,
+    "chunk_start": 1015
+  },
+  "jiak:openllm.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/openllm.json",
+    "type": "jiak",
+    "mtime": 1782665956.3989546,
+    "chunk_count": 5,
+    "chunk_start": 1016
+  },
+  "jiak:wife-business-ops.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/wife-business-ops.json",
+    "type": "jiak",
+    "mtime": 1782623202.472003,
+    "chunk_count": 1,
+    "chunk_start": 1021
+  },
+  "jiak:hl-resonance.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/hl-resonance.json",
+    "type": "jiak",
+    "mtime": 1782657835.925112,
+    "chunk_count": 1,
+    "chunk_start": 1022
+  },
+  "jiak:iam-harness.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/iam-harness.json",
+    "type": "jiak",
+    "mtime": 1782636528.8322127,
+    "chunk_count": 2,
+    "chunk_start": 1023
+  },
+  "jiak:bilingual-mirror-translations.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/bilingual-mirror-translations.json",
+    "type": "jiak",
+    "mtime": 1782623916.7932723,
+    "chunk_count": 1,
+    "chunk_start": 1025
+  },
+  "jiak:web4-agent-economy.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/web4-agent-economy.json",
+    "type": "jiak",
+    "mtime": 1782673465.3341806,
+    "chunk_count": 1,
+    "chunk_start": 1026
+  },
+  "jiak:hermes-compressor-discovery.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/hermes-compressor-discovery.json",
+    "type": "jiak",
+    "mtime": 1782633759.5569255,
+    "chunk_count": 2,
+    "chunk_start": 1027
+  },
+  "jiak:safety-gradient-evolution.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/safety-gradient-evolution.json",
+    "type": "jiak",
+    "mtime": 1782673465.3283296,
+    "chunk_count": 1,
+    "chunk_start": 1029
+  },
+  "jiak:deepmind-agi-to-asi.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/deepmind-agi-to-asi.json",
+    "type": "jiak",
+    "mtime": 1782673465.304633,
+    "chunk_count": 4,
+    "chunk_start": 1030
+  },
+  "jiak:test-card-crud.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/test-card-crud.json",
+    "type": "jiak",
+    "mtime": 1782606009.3666978,
+    "chunk_count": 1,
+    "chunk_start": 1034
+  },
+  "jiak:sentinel-loop-monitor.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/sentinel-loop-monitor.json",
+    "type": "jiak",
+    "mtime": 1782606009.3645802,
+    "chunk_count": 1,
+    "chunk_start": 1035
+  },
+  "jiak:adult-tech-radar.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/adult-tech-radar.json",
+    "type": "jiak",
+    "mtime": 1782637114.3423123,
+    "chunk_count": 2,
+    "chunk_start": 1036
+  },
+  "jiak:anthropic-claude-fable5.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/anthropic-claude-fable5.json",
+    "type": "jiak",
+    "mtime": 1782665956.4027212,
+    "chunk_count": 2,
+    "chunk_start": 1038
+  },
+  "jiak:intel-20260623-0113.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/intel-20260623-0113.json",
+    "type": "jiak",
+    "mtime": 1782625056.7315252,
+    "chunk_count": 1,
+    "chunk_start": 1040
+  },
+  "jiak:agent-federation.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/agent-federation.json",
+    "type": "jiak",
+    "mtime": 1782673465.255238,
+    "chunk_count": 1,
+    "chunk_start": 1041
+  },
+  "jiak:delta-capsule-memory.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/delta-capsule-memory.json",
+    "type": "jiak",
+    "mtime": 1782656345.138239,
+    "chunk_count": 5,
+    "chunk_start": 1042
+  },
+  "jiak:jika-engine.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/jika-engine.json",
+    "type": "jiak",
+    "mtime": 1782673465.3233392,
+    "chunk_count": 3,
+    "chunk_start": 1047
+  },
+  "jiak:loop-paradigm-industry.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/loop-paradigm-industry.json",
+    "type": "jiak",
+    "mtime": 1782673465.329759,
+    "chunk_count": 1,
+    "chunk_start": 1050
+  },
+  "jiak:context-window-recalculation.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/context-window-recalculation.json",
+    "type": "jiak",
+    "mtime": 1782636240.1274927,
+    "chunk_count": 2,
+    "chunk_start": 1051
+  },
+  "jiak:knowledge-campaign.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/knowledge-campaign.json",
+    "type": "jiak",
+    "mtime": 1782623202.472749,
+    "chunk_count": 1,
+    "chunk_start": 1053
+  },
+  "jiak:multi-model-deliberation.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/multi-model-deliberation.json",
+    "type": "jiak",
+    "mtime": 1782637301.9001791,
+    "chunk_count": 2,
+    "chunk_start": 1054
+  },
+  "jiak:code-review-lesson.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/code-review-lesson.json",
+    "type": "jiak",
+    "mtime": 1782633759.5576181,
+    "chunk_count": 1,
+    "chunk_start": 1056
+  },
+  "jiak:octopus-bio-search-architecture.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/octopus-bio-search-architecture.json",
+    "type": "jiak",
+    "mtime": 1782626108.7362528,
+    "chunk_count": 1,
+    "chunk_start": 1057
+  },
+  "jiak:intel-brief-20260622-2304.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/intel-brief-20260622-2304.json",
+    "type": "jiak",
+    "mtime": 1782636849.0325127,
+    "chunk_count": 1,
+    "chunk_start": 1058
+  },
+  "jiak:o-query-20260624_122220-b6cbe6d3.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/o-query-20260624_122220-b6cbe6d3.json",
+    "type": "jiak",
+    "mtime": 1782609943.5519147,
+    "chunk_count": 1,
+    "chunk_start": 1059
+  },
+  "jiak:chengshi-conservation-law.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/chengshi-conservation-law.json",
+    "type": "jiak",
+    "mtime": 1782673465.3019936,
+    "chunk_count": 2,
+    "chunk_start": 1060
+  },
+  "jiak:ra-vs-skillopt.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/ra-vs-skillopt.json",
+    "type": "jiak",
+    "mtime": 1782673465.3326719,
+    "chunk_count": 1,
+    "chunk_start": 1062
+  },
+  "jiak:isa-chat.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/isa-chat.json",
+    "type": "jiak",
+    "mtime": 1782641522.6760075,
+    "chunk_count": 2,
+    "chunk_start": 1063
+  },
+  "jiak:jika-2.1-birth.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/jika-2.1-birth.json",
+    "type": "jiak",
+    "mtime": 1782667088.091942,
+    "chunk_count": 2,
+    "chunk_start": 1065
+  },
+  "jiak:attention-head-convergence.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/attention-head-convergence.json",
+    "type": "jiak",
+    "mtime": 1782673465.3312142,
+    "chunk_count": 1,
+    "chunk_start": 1067
+  },
+  "jiak:ita-llm-native-language.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/ita-llm-native-language.json",
+    "type": "jiak",
+    "mtime": 1782609943.5536022,
+    "chunk_count": 1,
+    "chunk_start": 1068
+  },
+  "jiak:platonic-love-transformer.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/platonic-love-transformer.json",
+    "type": "jiak",
+    "mtime": 1782606009.3420014,
+    "chunk_count": 1,
+    "chunk_start": 1069
+  },
+  "jiak:fata-gates-split-1782147310.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/fata-gates-split-1782147310.json",
+    "type": "jiak",
+    "mtime": 1782606009.2898583,
+    "chunk_count": 1,
+    "chunk_start": 1070
+  },
+  "jiak:nuclear-team-profile.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/nuclear-team-profile.json",
+    "type": "jiak",
+    "mtime": 1782636240.1285434,
+    "chunk_count": 2,
+    "chunk_start": 1071
+  },
+  "jiak:iah.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/iah.json",
+    "type": "jiak",
+    "mtime": 1782673465.2966406,
+    "chunk_count": 1,
+    "chunk_start": 1073
+  },
+  "jiak:izu-research-pipeline.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/izu-research-pipeline.json",
+    "type": "jiak",
+    "mtime": 1782629628.452276,
+    "chunk_count": 4,
+    "chunk_start": 1074
+  },
+  "jiak:o-query-20260624_120738-b6cbe6d3.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/o-query-20260624_120738-b6cbe6d3.json",
+    "type": "jiak",
+    "mtime": 1782606009.3338845,
+    "chunk_count": 1,
+    "chunk_start": 1078
+  },
+  "jiak:o-query-20260624_122540-b6cbe6d3.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/o-query-20260624_122540-b6cbe6d3.json",
+    "type": "jiak",
+    "mtime": 1782606009.3354099,
+    "chunk_count": 1,
+    "chunk_start": 1079
+  },
+  "jiak:iat-language-compression.json": {
+    "path": "/home/zcs/.hermes/jiak/cards/iat-language-compression.json",
+    "type": "jiak",
+    "mtime": 1782609943.559086,
+    "chunk_count": 1,
+    "chunk_start": 1080
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.1-中文版.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.1-中文版.md",
+    "type": "output",
+    "mtime": 1781881478.5926862,
+    "chunk_count": 13,
+    "chunk_start": 1081
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-20-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-20-1.md",
+    "type": "output",
+    "mtime": 1781928057.3822072,
+    "chunk_count": 4,
+    "chunk_start": 1094
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_Fable5-Skill定义重写_评估入库.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_Fable5-Skill定义重写_评估入库.md",
+    "type": "output",
+    "mtime": 1782069088.9350648,
+    "chunk_count": 4,
+    "chunk_start": 1098
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-24.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-24.md",
+    "type": "output",
+    "mtime": 1782230612.6353126,
+    "chunk_count": 5,
+    "chunk_start": 1102
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-22_IAT回顾与重拾PAL.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-22_IAT回顾与重拾PAL.md",
+    "type": "output",
+    "mtime": 1782026281.3645177,
+    "chunk_count": 8,
+    "chunk_start": 1107
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-18-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-18-1.md",
+    "type": "output",
+    "mtime": 1781770884.9553132,
+    "chunk_count": 4,
+    "chunk_start": 1115
+  },
+  "output:/home/zcs/hermes/output/极大/CPT备忘录_压缩相变与logit注入突破_20260625.md": {
+    "path": "/home/zcs/hermes/output/极大/CPT备忘录_压缩相变与logit注入突破_20260625.md",
+    "type": "output",
+    "mtime": 1782410615.2183194,
+    "chunk_count": 5,
+    "chunk_start": 1119
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-七神天启.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-七神天启.md",
+    "type": "output",
+    "mtime": 1781882002.901682,
+    "chunk_count": 4,
+    "chunk_start": 1124
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-21_IAT-P0-3-v2-D₀数据库扩展.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-21_IAT-P0-3-v2-D₀数据库扩展.md",
+    "type": "output",
+    "mtime": 1782009250.2829375,
+    "chunk_count": 25,
+    "chunk_start": 1128
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-26-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-26-2.md",
+    "type": "output",
+    "mtime": 1782446615.6910937,
+    "chunk_count": 5,
+    "chunk_start": 1153
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-19_IAT-研究简报.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-19_IAT-研究简报.md",
+    "type": "output",
+    "mtime": 1781848885.1680224,
+    "chunk_count": 2,
+    "chunk_start": 1158
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-19-3.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-19-3.md",
+    "type": "output",
+    "mtime": 1781863648.6754405,
+    "chunk_count": 4,
+    "chunk_start": 1160
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-21.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-21.md",
+    "type": "output",
+    "mtime": 1781989356.4222195,
+    "chunk_count": 11,
+    "chunk_start": 1164
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-23.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-23.md",
+    "type": "output",
+    "mtime": 1782144393.7704735,
+    "chunk_count": 5,
+    "chunk_start": 1175
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-24_IAT-P0-1-跨模型D₀.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-24_IAT-P0-1-跨模型D₀.md",
+    "type": "output",
+    "mtime": 1782268501.3660111,
+    "chunk_count": 21,
+    "chunk_start": 1180
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-24-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-24-1.md",
+    "type": "output",
+    "mtime": 1782252018.2060068,
+    "chunk_count": 5,
+    "chunk_start": 1201
+  },
+  "output:/home/zcs/hermes/output/极大/SA论文骨架-舞台理论.md": {
+    "path": "/home/zcs/hermes/output/极大/SA论文骨架-舞台理论.md",
+    "type": "output",
+    "mtime": 1782305587.0784652,
+    "chunk_count": 7,
+    "chunk_start": 1206
+  },
+  "output:/home/zcs/hermes/output/极大/俗改-dialectical-materialism.md": {
+    "path": "/home/zcs/hermes/output/极大/俗改-dialectical-materialism.md",
+    "type": "output",
+    "mtime": 1781820230.3886611,
+    "chunk_count": 7,
+    "chunk_start": 1213
+  },
+  "output:/home/zcs/hermes/output/极大/anthropic-philosopher-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/anthropic-philosopher-eval.md",
+    "type": "output",
+    "mtime": 1780684107.315985,
+    "chunk_count": 10,
+    "chunk_start": 1220
+  },
+  "output:/home/zcs/hermes/output/极大/ita-七刀搜神-综合报告.md": {
+    "path": "/home/zcs/hermes/output/极大/ita-七刀搜神-综合报告.md",
+    "type": "output",
+    "mtime": 1782093460.0051517,
+    "chunk_count": 22,
+    "chunk_start": 1230
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-25_章鱼系统备忘录.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-25_章鱼系统备忘录.md",
+    "type": "output",
+    "mtime": 1782389911.071201,
+    "chunk_count": 4,
+    "chunk_start": 1252
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-26_ITA-决策记录与复盘.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-26_ITA-决策记录与复盘.md",
+    "type": "output",
+    "mtime": 1782409715.7876377,
+    "chunk_count": 11,
+    "chunk_start": 1256
+  },
+  "output:/home/zcs/hermes/output/极大/shannon-kc-ai-dead-end-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/shannon-kc-ai-dead-end-eval.md",
+    "type": "output",
+    "mtime": 1780684030.4956274,
+    "chunk_count": 9,
+    "chunk_start": 1267
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-22_ITA-Δ胶囊注入-合议报告.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-22_ITA-Δ胶囊注入-合议报告.md",
+    "type": "output",
+    "mtime": 1782022483.6041179,
+    "chunk_count": 4,
+    "chunk_start": 1276
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_HarnessX评估分析-与神道系统共振.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_HarnessX评估分析-与神道系统共振.md",
+    "type": "output",
+    "mtime": 1782121202.5245366,
+    "chunk_count": 5,
+    "chunk_start": 1280
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-22_IAT-P0-1-跨模型D₀.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-22_IAT-P0-1-跨模型D₀.md",
+    "type": "output",
+    "mtime": 1782096477.2303066,
+    "chunk_count": 26,
+    "chunk_start": 1285
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-26-3.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-26-3.md",
+    "type": "output",
+    "mtime": 1782468073.0687814,
+    "chunk_count": 5,
+    "chunk_start": 1311
+  },
+  "output:/home/zcs/hermes/output/极大/IAT-数学推导-特征值谱与三区边界.md": {
+    "path": "/home/zcs/hermes/output/极大/IAT-数学推导-特征值谱与三区边界.md",
+    "type": "output",
+    "mtime": 1781962994.4565048,
+    "chunk_count": 8,
+    "chunk_start": 1316
+  },
+  "output:/home/zcs/hermes/output/极大/世界模型三范式_文献索引.md": {
+    "path": "/home/zcs/hermes/output/极大/世界模型三范式_文献索引.md",
+    "type": "output",
+    "mtime": 1782423481.954732,
+    "chunk_count": 8,
+    "chunk_start": 1324
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-22-3.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-22-3.md",
+    "type": "output",
+    "mtime": 1782122456.6569753,
+    "chunk_count": 5,
+    "chunk_start": 1332
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-22_Phase1-桥接验证方案.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-22_Phase1-桥接验证方案.md",
+    "type": "output",
+    "mtime": 1782033773.7083995,
+    "chunk_count": 46,
+    "chunk_start": 1337
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-24_神道skill系统_PAL.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-24_神道skill系统_PAL.md",
+    "type": "output",
+    "mtime": 1782151714.8555686,
+    "chunk_count": 9,
+    "chunk_start": 1383
+  },
+  "output:/home/zcs/hermes/output/极大/归藏审计_研究路线图_2026-06-19_1200.md": {
+    "path": "/home/zcs/hermes/output/极大/归藏审计_研究路线图_2026-06-19_1200.md",
+    "type": "output",
+    "mtime": 1781842379.1257224,
+    "chunk_count": 3,
+    "chunk_start": 1392
+  },
+  "output:/home/zcs/hermes/output/极大/idc-agent-thinking-20260606.md": {
+    "path": "/home/zcs/hermes/output/极大/idc-agent-thinking-20260606.md",
+    "type": "output",
+    "mtime": 1780682677.4322672,
+    "chunk_count": 5,
+    "chunk_start": 1395
+  },
+  "output:/home/zcs/hermes/output/极大/IAT-P0-4-locv-real-embeddings.md": {
+    "path": "/home/zcs/hermes/output/极大/IAT-P0-4-locv-real-embeddings.md",
+    "type": "output",
+    "mtime": 1781932442.5450819,
+    "chunk_count": 3,
+    "chunk_start": 1400
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAH-P0-实验报告.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAH-P0-实验报告.md",
+    "type": "output",
+    "mtime": 1781932332.8682897,
+    "chunk_count": 6,
+    "chunk_start": 1403
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-24_SKill健康体检报告.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-24_SKill健康体检报告.md",
+    "type": "output",
+    "mtime": 1782149843.2668195,
+    "chunk_count": 4,
+    "chunk_start": 1409
+  },
+  "output:/home/zcs/hermes/output/极大/boris-claude-code-dynamic-workflows-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/boris-claude-code-dynamic-workflows-eval.md",
+    "type": "output",
+    "mtime": 1780681598.159767,
+    "chunk_count": 8,
+    "chunk_start": 1413
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-24-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-24-2.md",
+    "type": "output",
+    "mtime": 1782273801.6053622,
+    "chunk_count": 5,
+    "chunk_start": 1421
+  },
+  "output:/home/zcs/hermes/output/极大/决策记录-搜神学术搜索踩坑-2026-06-26.md": {
+    "path": "/home/zcs/hermes/output/极大/决策记录-搜神学术搜索踩坑-2026-06-26.md",
+    "type": "output",
+    "mtime": 1782420940.7302573,
+    "chunk_count": 10,
+    "chunk_start": 1426
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_备忘录_五线P0行动全完成.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_备忘录_五线P0行动全完成.md",
+    "type": "output",
+    "mtime": 1782611801.3444853,
+    "chunk_count": 10,
+    "chunk_start": 1436
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAH-立项书+PAL.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAH-立项书+PAL.md",
+    "type": "output",
+    "mtime": 1781928659.951819,
+    "chunk_count": 9,
+    "chunk_start": 1446
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-28.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-28.md",
+    "type": "output",
+    "mtime": 1782680838.9969614,
+    "chunk_count": 30,
+    "chunk_start": 1455
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-19_IAT-P0-2-LOCV-vs-r.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-19_IAT-P0-2-LOCV-vs-r.md",
+    "type": "output",
+    "mtime": 1782439733.7040823,
+    "chunk_count": 13,
+    "chunk_start": 1485
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-28-3.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-28-3.md",
+    "type": "output",
+    "mtime": 1782641024.964462,
+    "chunk_count": 7,
+    "chunk_start": 1498
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-20-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-20-2.md",
+    "type": "output",
+    "mtime": 1781949627.6902125,
+    "chunk_count": 4,
+    "chunk_start": 1505
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-23.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-23.md",
+    "type": "output",
+    "mtime": 1782162192.1051362,
+    "chunk_count": 20,
+    "chunk_start": 1509
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-24_Skill系统三部曲-全书架构.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-24_Skill系统三部曲-全书架构.md",
+    "type": "output",
+    "mtime": 1782139226.3124816,
+    "chunk_count": 9,
+    "chunk_start": 1529
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_Skill四阶系统-SkillOpt-OpenSkill融合.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_Skill四阶系统-SkillOpt-OpenSkill融合.md",
+    "type": "output",
+    "mtime": 1782113219.2526674,
+    "chunk_count": 5,
+    "chunk_start": 1538
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-27-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-27-1.md",
+    "type": "output",
+    "mtime": 1782511238.995792,
+    "chunk_count": 5,
+    "chunk_start": 1543
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_IAT-P0-3-v4-D₀数据库扩展.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_IAT-P0-3-v4-D₀数据库扩展.md",
+    "type": "output",
+    "mtime": 1782614008.0744867,
+    "chunk_count": 32,
+    "chunk_start": 1548
+  },
+  "output:/home/zcs/hermes/output/极大/INDEX.md": {
+    "path": "/home/zcs/hermes/output/极大/INDEX.md",
+    "type": "output",
+    "mtime": 1782684031.5510216,
+    "chunk_count": 18,
+    "chunk_start": 1580
+  },
+  "output:/home/zcs/hermes/output/极大/ita-七刀搜-子Agent版.md": {
+    "path": "/home/zcs/hermes/output/极大/ita-七刀搜-子Agent版.md",
+    "type": "output",
+    "mtime": 1782110170.3944051,
+    "chunk_count": 21,
+    "chunk_start": 1598
+  },
+  "output:/home/zcs/hermes/output/极大/IAT-PAL-v3.0.md": {
+    "path": "/home/zcs/hermes/output/极大/IAT-PAL-v3.0.md",
+    "type": "output",
+    "mtime": 1781965517.2852426,
+    "chunk_count": 4,
+    "chunk_start": 1619
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-21.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-21.md",
+    "type": "output",
+    "mtime": 1781971601.1466963,
+    "chunk_count": 4,
+    "chunk_start": 1623
+  },
+  "output:/home/zcs/hermes/output/极大/boris-dynamic-workflows-adversarial.md": {
+    "path": "/home/zcs/hermes/output/极大/boris-dynamic-workflows-adversarial.md",
+    "type": "output",
+    "mtime": 1780682676.7842765,
+    "chunk_count": 4,
+    "chunk_start": 1627
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-23-3.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-23-3.md",
+    "type": "output",
+    "mtime": 1782209012.8937895,
+    "chunk_count": 5,
+    "chunk_start": 1631
+  },
+  "output:/home/zcs/hermes/output/极大/kaneai-compression-macro-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/kaneai-compression-macro-eval.md",
+    "type": "output",
+    "mtime": 1780677323.9794652,
+    "chunk_count": 5,
+    "chunk_start": 1636
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-21_IAH-paper-v0.1-zh.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-21_IAH-paper-v0.1-zh.md",
+    "type": "output",
+    "mtime": 1782012475.1768808,
+    "chunk_count": 14,
+    "chunk_start": 1641
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-25.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-25.md",
+    "type": "output",
+    "mtime": 1782316830.5816891,
+    "chunk_count": 5,
+    "chunk_start": 1655
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-26-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-26-1.md",
+    "type": "output",
+    "mtime": 1782425017.0609713,
+    "chunk_count": 5,
+    "chunk_start": 1660
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-26_章鱼五层架构-v1.0-techdoc.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-26_章鱼五层架构-v1.0-techdoc.md",
+    "type": "output",
+    "mtime": 1782409523.4911602,
+    "chunk_count": 17,
+    "chunk_start": 1665
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-29-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-29-1.md",
+    "type": "output",
+    "mtime": 1782684031.5502634,
+    "chunk_count": 7,
+    "chunk_start": 1682
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-22_IAT-P0-3-D₀数据库扩展.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-22_IAT-P0-3-D₀数据库扩展.md",
+    "type": "output",
+    "mtime": 1782095732.256582,
+    "chunk_count": 22,
+    "chunk_start": 1689
+  },
+  "output:/home/zcs/hermes/output/极大/IAT-数学推导-率失真逼近.md": {
+    "path": "/home/zcs/hermes/output/极大/IAT-数学推导-率失真逼近.md",
+    "type": "output",
+    "mtime": 1781962861.78711,
+    "chunk_count": 11,
+    "chunk_start": 1711
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_decision_搜索管线Tier重评与通道健康检查.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_decision_搜索管线Tier重评与通道健康检查.md",
+    "type": "output",
+    "mtime": 1782627128.247396,
+    "chunk_count": 4,
+    "chunk_start": 1722
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-26_章鱼八触须输出标准-v1.0-techdoc.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-26_章鱼八触须输出标准-v1.0-techdoc.md",
+    "type": "output",
+    "mtime": 1782409485.0539606,
+    "chunk_count": 16,
+    "chunk_start": 1726
+  },
+  "output:/home/zcs/hermes/output/极大/kaneai-compression-series-batch-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/kaneai-compression-series-batch-eval.md",
+    "type": "output",
+    "mtime": 1780680815.3496606,
+    "chunk_count": 9,
+    "chunk_start": 1742
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-22_Loop范式深度研究_两条腿SkillLoop架构设计.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-22_Loop范式深度研究_两条腿SkillLoop架构设计.md",
+    "type": "output",
+    "mtime": 1782057102.4859648,
+    "chunk_count": 9,
+    "chunk_start": 1751
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-25-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-25-1.md",
+    "type": "output",
+    "mtime": 1782338473.6996891,
+    "chunk_count": 5,
+    "chunk_start": 1760
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-反方审查.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-反方审查.md",
+    "type": "output",
+    "mtime": 1781881593.7489355,
+    "chunk_count": 6,
+    "chunk_start": 1765
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-26_李飞飞团队联系信息.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-26_李飞飞团队联系信息.md",
+    "type": "output",
+    "mtime": 1782421068.9738517,
+    "chunk_count": 3,
+    "chunk_start": 1771
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_memo_搜神方法论复盘与执行纪律.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_memo_搜神方法论复盘与执行纪律.md",
+    "type": "output",
+    "mtime": 1782625569.2377229,
+    "chunk_count": 5,
+    "chunk_start": 1774
+  },
+  "output:/home/zcs/hermes/output/极大/IAH-报告格式标准-v0.1.md": {
+    "path": "/home/zcs/hermes/output/极大/IAH-报告格式标准-v0.1.md",
+    "type": "output",
+    "mtime": 1782149961.1784384,
+    "chunk_count": 6,
+    "chunk_start": 1779
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.2-英文版.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.2-英文版.md",
+    "type": "output",
+    "mtime": 1781881836.199177,
+    "chunk_count": 31,
+    "chunk_start": 1785
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.2-中文版.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.2-中文版.md",
+    "type": "output",
+    "mtime": 1781881859.5126872,
+    "chunk_count": 13,
+    "chunk_start": 1816
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-26.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-26.md",
+    "type": "output",
+    "mtime": 1782403633.4270515,
+    "chunk_count": 5,
+    "chunk_start": 1829
+  },
+  "output:/home/zcs/hermes/output/极大/IAH-FATA映射协议-v0.1.md": {
+    "path": "/home/zcs/hermes/output/极大/IAH-FATA映射协议-v0.1.md",
+    "type": "output",
+    "mtime": 1782149984.315382,
+    "chunk_count": 7,
+    "chunk_start": 1834
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-27_Causal_Bias_DAgger_Training_Design.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-27_Causal_Bias_DAgger_Training_Design.md",
+    "type": "output",
+    "mtime": 1782488110.1789281,
+    "chunk_count": 23,
+    "chunk_start": 1841
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-26_世界模型备忘录.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-26_世界模型备忘录.md",
+    "type": "output",
+    "mtime": 1782417000.5350666,
+    "chunk_count": 9,
+    "chunk_start": 1864
+  },
+  "output:/home/zcs/hermes/output/极大/联邦共振执行Prompt-MVP.md": {
+    "path": "/home/zcs/hermes/output/极大/联邦共振执行Prompt-MVP.md",
+    "type": "output",
+    "mtime": 1782276012.278446,
+    "chunk_count": 7,
+    "chunk_start": 1873
+  },
+  "output:/home/zcs/hermes/output/极大/搜神prompt-色情产业真实价值.md": {
+    "path": "/home/zcs/hermes/output/极大/搜神prompt-色情产业真实价值.md",
+    "type": "output",
+    "mtime": 1782193696.46312,
+    "chunk_count": 8,
+    "chunk_start": 1880
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-20.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-20.md",
+    "type": "output",
+    "mtime": 1781903048.0195727,
+    "chunk_count": 9,
+    "chunk_start": 1888
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-27_Causal_Bias_Gradient_Analysis.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-27_Causal_Bias_Gradient_Analysis.md",
+    "type": "output",
+    "mtime": 1782488165.614839,
+    "chunk_count": 18,
+    "chunk_start": 1897
+  },
+  "output:/home/zcs/hermes/output/极大/搜神任务_世界模型搜索.md": {
+    "path": "/home/zcs/hermes/output/极大/搜神任务_世界模型搜索.md",
+    "type": "output",
+    "mtime": 1782419761.7424183,
+    "chunk_count": 9,
+    "chunk_start": 1915
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-29.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-29.md",
+    "type": "output",
+    "mtime": 1782662454.627429,
+    "chunk_count": 7,
+    "chunk_start": 1924
+  },
+  "output:/home/zcs/hermes/output/极大/归藏审计_研究路线图_2026-06-19_1800.md": {
+    "path": "/home/zcs/hermes/output/极大/归藏审计_研究路线图_2026-06-19_1800.md",
+    "type": "output",
+    "mtime": 1781863426.8156607,
+    "chunk_count": 3,
+    "chunk_start": 1931
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-26_ITA-备忘录v2.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-26_ITA-备忘录v2.md",
+    "type": "output",
+    "mtime": 1782408559.9606593,
+    "chunk_count": 7,
+    "chunk_start": 1934
+  },
+  "output:/home/zcs/hermes/output/极大/adult-tech-radar-2026-06-21.md": {
+    "path": "/home/zcs/hermes/output/极大/adult-tech-radar-2026-06-21.md",
+    "type": "output",
+    "mtime": 1782015316.5675225,
+    "chunk_count": 16,
+    "chunk_start": 1941
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-24.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-24.md",
+    "type": "output",
+    "mtime": 1782248677.199405,
+    "chunk_count": 15,
+    "chunk_start": 1957
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAH-前期研究素材.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAH-前期研究素材.md",
+    "type": "output",
+    "mtime": 1781930244.098141,
+    "chunk_count": 9,
+    "chunk_start": 1972
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.1.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.1.md",
+    "type": "output",
+    "mtime": 1781881385.7840536,
+    "chunk_count": 28,
+    "chunk_start": 1981
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-19_IAT-P0-1-跨模型D₀.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-19_IAT-P0-1-跨模型D₀.md",
+    "type": "output",
+    "mtime": 1782441943.7556577,
+    "chunk_count": 12,
+    "chunk_start": 2009
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-18.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-18.md",
+    "type": "output",
+    "mtime": 1781770836.3535333,
+    "chunk_count": 6,
+    "chunk_start": 2021
+  },
+  "output:/home/zcs/hermes/output/极大/尖兵团-web-反爬作战方案-2026-06-21.md": {
+    "path": "/home/zcs/hermes/output/极大/尖兵团-web-反爬作战方案-2026-06-21.md",
+    "type": "output",
+    "mtime": 1782017770.592345,
+    "chunk_count": 16,
+    "chunk_start": 2027
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-21_FATA关2-压缩节奏实验设计.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-21_FATA关2-压缩节奏实验设计.md",
+    "type": "output",
+    "mtime": 1782013359.4219759,
+    "chunk_count": 7,
+    "chunk_start": 2043
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-22-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-22-1.md",
+    "type": "output",
+    "mtime": 1782079331.4881327,
+    "chunk_count": 5,
+    "chunk_start": 2050
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAH-PAL-v2.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAH-PAL-v2.md",
+    "type": "output",
+    "mtime": 1781930775.4265096,
+    "chunk_count": 8,
+    "chunk_start": 2055
+  },
+  "output:/home/zcs/hermes/output/极大/hindsight-ai-memory-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/hindsight-ai-memory-eval.md",
+    "type": "output",
+    "mtime": 1780684125.0560627,
+    "chunk_count": 12,
+    "chunk_start": 2063
+  },
+  "output:/home/zcs/hermes/output/极大/搜神任务_世界模型全景搜索.md": {
+    "path": "/home/zcs/hermes/output/极大/搜神任务_世界模型全景搜索.md",
+    "type": "output",
+    "mtime": 1782420977.0395875,
+    "chunk_count": 8,
+    "chunk_start": 2075
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-21_经营周报-暑期研学与同桌消费.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-21_经营周报-暑期研学与同桌消费.md",
+    "type": "output",
+    "mtime": 1782002104.5413053,
+    "chunk_count": 12,
+    "chunk_start": 2083
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-25-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-25-2.md",
+    "type": "output",
+    "mtime": 1782360077.3139517,
+    "chunk_count": 5,
+    "chunk_start": 2095
+  },
+  "output:/home/zcs/hermes/output/极大/lawvere-fixed-point-topos-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/lawvere-fixed-point-topos-eval.md",
+    "type": "output",
+    "mtime": 1780684029.09162,
+    "chunk_count": 9,
+    "chunk_start": 2100
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-25-3.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-25-3.md",
+    "type": "output",
+    "mtime": 1782381670.3653069,
+    "chunk_count": 5,
+    "chunk_start": 2109
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-22.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-22.md",
+    "type": "output",
+    "mtime": 1782076001.3269303,
+    "chunk_count": 14,
+    "chunk_start": 2114
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-22.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-22.md",
+    "type": "output",
+    "mtime": 1782057992.4130943,
+    "chunk_count": 5,
+    "chunk_start": 2128
+  },
+  "output:/home/zcs/hermes/output/极大/zigong-junshi-wow-harness-v3.md": {
+    "path": "/home/zcs/hermes/output/极大/zigong-junshi-wow-harness-v3.md",
+    "type": "output",
+    "mtime": 1780688267.3482053,
+    "chunk_count": 11,
+    "chunk_start": 2133
+  },
+  "output:/home/zcs/hermes/output/极大/压缩相变_CPT形式化定义_v1.md": {
+    "path": "/home/zcs/hermes/output/极大/压缩相变_CPT形式化定义_v1.md",
+    "type": "output",
+    "mtime": 1782322632.3640296,
+    "chunk_count": 6,
+    "chunk_start": 2144
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_PEEU规划层接入IO-S_萧何执行路径报告.md",
+    "type": "output",
+    "mtime": 1782615777.590188,
+    "chunk_count": 27,
+    "chunk_start": 2150
+  },
+  "output:/home/zcs/hermes/output/极大/paper-top-digest_2026-06-21.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-top-digest_2026-06-21.md",
+    "type": "output",
+    "mtime": 1782015239.3816152,
+    "chunk_count": 10,
+    "chunk_start": 2177
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_lesson_补强最弱层方法论-ddgs替代web_search.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_lesson_补强最弱层方法论-ddgs替代web_search.md",
+    "type": "output",
+    "mtime": 1782628723.0403936,
+    "chunk_count": 4,
+    "chunk_start": 2187
+  },
+  "output:/home/zcs/hermes/output/极大/压力测试备忘录_logit注入_20260626.md": {
+    "path": "/home/zcs/hermes/output/极大/压力测试备忘录_logit注入_20260626.md",
+    "type": "output",
+    "mtime": 1782415954.6074336,
+    "chunk_count": 7,
+    "chunk_start": 2191
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-25.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-25.md",
+    "type": "output",
+    "mtime": 1782335146.8889515,
+    "chunk_count": 22,
+    "chunk_start": 2198
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_analysis_物种章鱼研究_重锚版.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_analysis_物种章鱼研究_重锚版.md",
+    "type": "output",
+    "mtime": 1782625822.6931531,
+    "chunk_count": 10,
+    "chunk_start": 2220
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-24_子贡工程执行令_SA四协议栈.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-24_子贡工程执行令_SA四协议栈.md",
+    "type": "output",
+    "mtime": 1782309966.03813,
+    "chunk_count": 22,
+    "chunk_start": 2230
+  },
+  "output:/home/zcs/hermes/output/极大/aksenov2025-compression-mathematics-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/aksenov2025-compression-mathematics-eval.md",
+    "type": "output",
+    "mtime": 1780679064.6254423,
+    "chunk_count": 10,
+    "chunk_start": 2252
+  },
+  "output:/home/zcs/hermes/output/极大/共振-2026-06-18.md": {
+    "path": "/home/zcs/hermes/output/极大/共振-2026-06-18.md",
+    "type": "output",
+    "mtime": 1781798305.0819514,
+    "chunk_count": 45,
+    "chunk_start": 2262
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-23-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-23-1.md",
+    "type": "output",
+    "mtime": 1782165844.177793,
+    "chunk_count": 5,
+    "chunk_start": 2307
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-25_IAT-P0-1-跨模型D₀-cron重跑.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-25_IAT-P0-1-跨模型D₀-cron重跑.md",
+    "type": "output",
+    "mtime": 1782354919.888944,
+    "chunk_count": 15,
+    "chunk_start": 2312
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.4-中文版.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.4-中文版.md",
+    "type": "output",
+    "mtime": 1781940679.9805512,
+    "chunk_count": 27,
+    "chunk_start": 2327
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_IAT-P0-3-v3-D₀数据库扩展.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_IAT-P0-3-v3-D₀数据库扩展.md",
+    "type": "output",
+    "mtime": 1782182185.4630506,
+    "chunk_count": 27,
+    "chunk_start": 2354
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_PEEU规划层接入IO-S设计方案.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_PEEU规划层接入IO-S设计方案.md",
+    "type": "output",
+    "mtime": 1782615205.663048,
+    "chunk_count": 9,
+    "chunk_start": 2381
+  },
+  "output:/home/zcs/hermes/output/极大/memory-population-dynamics-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/memory-population-dynamics-eval.md",
+    "type": "output",
+    "mtime": 1780684030.5636277,
+    "chunk_count": 10,
+    "chunk_start": 2390
+  },
+  "output:/home/zcs/hermes/output/极大/skillos-eval.md": {
+    "path": "/home/zcs/hermes/output/极大/skillos-eval.md",
+    "type": "output",
+    "mtime": 1782379178.3541596,
+    "chunk_count": 3,
+    "chunk_start": 2400
+  },
+  "output:/home/zcs/hermes/output/极大/paper_ita_section_v1.md": {
+    "path": "/home/zcs/hermes/output/极大/paper_ita_section_v1.md",
+    "type": "output",
+    "mtime": 1782230117.1632156,
+    "chunk_count": 33,
+    "chunk_start": 2403
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_ISA-vs-MRAgent-paper.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_ISA-vs-MRAgent-paper.md",
+    "type": "output",
+    "mtime": 1782233173.3959181,
+    "chunk_count": 19,
+    "chunk_start": 2436
+  },
+  "output:/home/zcs/hermes/output/极大/章鱼系统执行Prompt-MVP-v0.1.md": {
+    "path": "/home/zcs/hermes/output/极大/章鱼系统执行Prompt-MVP-v0.1.md",
+    "type": "output",
+    "mtime": 1782273579.8574154,
+    "chunk_count": 7,
+    "chunk_start": 2455
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_IAH-paper-v0.2.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_IAH-paper-v0.2.md",
+    "type": "output",
+    "mtime": 1782149722.523052,
+    "chunk_count": 50,
+    "chunk_start": 2462
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-26.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-26.md",
+    "type": "output",
+    "mtime": 1782421534.992514,
+    "chunk_count": 25,
+    "chunk_start": 2512
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-25_章鱼记忆搜索系统备忘录.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-25_章鱼记忆搜索系统备忘录.md",
+    "type": "output",
+    "mtime": 1782358305.9668016,
+    "chunk_count": 40,
+    "chunk_start": 2537
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.6-中文版.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-论文-v0.6-中文版.md",
+    "type": "output",
+    "mtime": 1781943036.172004,
+    "chunk_count": 17,
+    "chunk_start": 2577
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-23-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-23-2.md",
+    "type": "output",
+    "mtime": 1782187451.863367,
+    "chunk_count": 5,
+    "chunk_start": 2594
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_神道skill系统-架构设计v0.1.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_神道skill系统-架构设计v0.1.md",
+    "type": "output",
+    "mtime": 1782114388.055965,
+    "chunk_count": 8,
+    "chunk_start": 2599
+  },
+  "output:/home/zcs/hermes/output/极大/ITA-Inl-8领域文献资源汇编-20260624.md": {
+    "path": "/home/zcs/hermes/output/极大/ITA-Inl-8领域文献资源汇编-20260624.md",
+    "type": "output",
+    "mtime": 1782306875.552539,
+    "chunk_count": 28,
+    "chunk_start": 2607
+  },
+  "output:/home/zcs/hermes/output/极大/iat-status-report-20260606.md": {
+    "path": "/home/zcs/hermes/output/极大/iat-status-report-20260606.md",
+    "type": "output",
+    "mtime": 1780723772.5639248,
+    "chunk_count": 11,
+    "chunk_start": 2635
+  },
+  "output:/home/zcs/hermes/output/极大/联邦法第1号_共振法.md": {
+    "path": "/home/zcs/hermes/output/极大/联邦法第1号_共振法.md",
+    "type": "output",
+    "mtime": 1782305587.0893512,
+    "chunk_count": 6,
+    "chunk_start": 2646
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-28-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-28-1.md",
+    "type": "output",
+    "mtime": 1782600010.368359,
+    "chunk_count": 5,
+    "chunk_start": 2652
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-P0-2-pq-vs-fsq.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-P0-2-pq-vs-fsq.md",
+    "type": "output",
+    "mtime": 1781931778.2576826,
+    "chunk_count": 4,
+    "chunk_start": 2657
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-P0-3-D₀数据库.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-P0-3-D₀数据库.md",
+    "type": "output",
+    "mtime": 1782441506.8560786,
+    "chunk_count": 50,
+    "chunk_start": 2661
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-24_七神天启_架构审查.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-24_七神天启_架构审查.md",
+    "type": "output",
+    "mtime": 1782139293.4063802,
+    "chunk_count": 12,
+    "chunk_start": 2711
+  },
+  "output:/home/zcs/hermes/output/极大/世界模型文献综述_完整版.md": {
+    "path": "/home/zcs/hermes/output/极大/世界模型文献综述_完整版.md",
+    "type": "output",
+    "mtime": 1782421244.5138235,
+    "chunk_count": 24,
+    "chunk_start": 2723
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_MRAgent-memory-is-reconstructed.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_MRAgent-memory-is-reconstructed.md",
+    "type": "output",
+    "mtime": 1782231554.0938654,
+    "chunk_count": 2,
+    "chunk_start": 2747
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_Skill江山图-全球技能生态全景.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_Skill江山图-全球技能生态全景.md",
+    "type": "output",
+    "mtime": 1782119325.3362908,
+    "chunk_count": 11,
+    "chunk_start": 2749
+  },
+  "output:/home/zcs/hermes/output/极大/ziichan-hanxin-computational-functionalism.md": {
+    "path": "/home/zcs/hermes/output/极大/ziichan-hanxin-computational-functionalism.md",
+    "type": "output",
+    "mtime": 1780688413.7141893,
+    "chunk_count": 18,
+    "chunk_start": 2760
+  },
+  "output:/home/zcs/hermes/output/极大/_索引.md": {
+    "path": "/home/zcs/hermes/output/极大/_索引.md",
+    "type": "output",
+    "mtime": 1781767160.4140851,
+    "chunk_count": 1,
+    "chunk_start": 2778
+  },
+  "output:/home/zcs/hermes/output/极大/luban-xiaohe-agent-memory-comparison.md": {
+    "path": "/home/zcs/hermes/output/极大/luban-xiaohe-agent-memory-comparison.md",
+    "type": "output",
+    "mtime": 1780688373.6497538,
+    "chunk_count": 19,
+    "chunk_start": 2779
+  },
+  "output:/home/zcs/hermes/output/极大/PAL_CPT与logit注入路线图_20260626.md": {
+    "path": "/home/zcs/hermes/output/极大/PAL_CPT与logit注入路线图_20260626.md",
+    "type": "output",
+    "mtime": 1782416311.4034646,
+    "chunk_count": 7,
+    "chunk_start": 2798
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_analysis_物种章鱼研究_搜索引擎架构灵感.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_analysis_物种章鱼研究_搜索引擎架构灵感.md",
+    "type": "output",
+    "mtime": 1782624094.49445,
+    "chunk_count": 31,
+    "chunk_start": 2805
+  },
+  "output:/home/zcs/hermes/output/极大/paper-digest-2026-06-27.md": {
+    "path": "/home/zcs/hermes/output/极大/paper-digest-2026-06-27.md",
+    "type": "output",
+    "mtime": 1782507857.1837065,
+    "chunk_count": 33,
+    "chunk_start": 2836
+  },
+  "output:/home/zcs/hermes/output/极大/共振-2026-06-19.md": {
+    "path": "/home/zcs/hermes/output/极大/共振-2026-06-19.md",
+    "type": "output",
+    "mtime": 1781880976.2338538,
+    "chunk_count": 50,
+    "chunk_start": 2869
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-28-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-28-2.md",
+    "type": "output",
+    "mtime": 1782619616.0447657,
+    "chunk_count": 7,
+    "chunk_start": 2919
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-20.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-20.md",
+    "type": "output",
+    "mtime": 1781906447.6535592,
+    "chunk_count": 4,
+    "chunk_start": 2926
+  },
+  "output:/home/zcs/hermes/output/极大/联邦法第2号_透明度法.md": {
+    "path": "/home/zcs/hermes/output/极大/联邦法第2号_透明度法.md",
+    "type": "output",
+    "mtime": 1782305587.0935807,
+    "chunk_count": 4,
+    "chunk_start": 2930
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-21_IAT-P0-1-跨模型D₀.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-21_IAT-P0-1-跨模型D₀.md",
+    "type": "output",
+    "mtime": 1782009494.854416,
+    "chunk_count": 17,
+    "chunk_start": 2934
+  },
+  "output:/home/zcs/hermes/output/极大/洁琼-管理周报-2026-06-20.md": {
+    "path": "/home/zcs/hermes/output/极大/洁琼-管理周报-2026-06-20.md",
+    "type": "output",
+    "mtime": 1781915641.3518398,
+    "chunk_count": 11,
+    "chunk_start": 2951
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-28_守恒律外部佐证-MemoryContagion.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-28_守恒律外部佐证-MemoryContagion.md",
+    "type": "output",
+    "mtime": 1782607491.5461874,
+    "chunk_count": 11,
+    "chunk_start": 2962
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-19-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-19-2.md",
+    "type": "output",
+    "mtime": 1781863402.2923563,
+    "chunk_count": 4,
+    "chunk_start": 2973
+  },
+  "output:/home/zcs/hermes/output/极大/paper_shared_language_hub_v0.md": {
+    "path": "/home/zcs/hermes/output/极大/paper_shared_language_hub_v0.md",
+    "type": "output",
+    "mtime": 1782226606.9727561,
+    "chunk_count": 39,
+    "chunk_start": 2977
+  },
+  "output:/home/zcs/hermes/output/极大/功课-2026-06-18.md": {
+    "path": "/home/zcs/hermes/output/极大/功课-2026-06-18.md",
+    "type": "output",
+    "mtime": 1781767156.9473562,
+    "chunk_count": 4,
+    "chunk_start": 3016
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-24-3.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-24-3.md",
+    "type": "output",
+    "mtime": 1782295231.9741242,
+    "chunk_count": 5,
+    "chunk_start": 3020
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-22_七神天启-注入方案审视.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-22_七神天启-注入方案审视.md",
+    "type": "output",
+    "mtime": 1782023846.8698626,
+    "chunk_count": 4,
+    "chunk_start": 3025
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-七神天启+PAL.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-七神天启+PAL.md",
+    "type": "output",
+    "mtime": 1781902729.6712174,
+    "chunk_count": 18,
+    "chunk_start": 3029
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_搜大神-skill阅读任务.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_搜大神-skill阅读任务.md",
+    "type": "output",
+    "mtime": 1782115582.4792113,
+    "chunk_count": 4,
+    "chunk_start": 3047
+  },
+  "output:/home/zcs/hermes/output/极大/ita-七刀搜神-prompt.md": {
+    "path": "/home/zcs/hermes/output/极大/ita-七刀搜神-prompt.md",
+    "type": "output",
+    "mtime": 1782091534.5667403,
+    "chunk_count": 13,
+    "chunk_start": 3051
+  },
+  "output:/home/zcs/hermes/output/极大/FATA一句话论文锚定-2026-06-26.md": {
+    "path": "/home/zcs/hermes/output/极大/FATA一句话论文锚定-2026-06-26.md",
+    "type": "output",
+    "mtime": 1782305587.0668104,
+    "chunk_count": 6,
+    "chunk_start": 3064
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-22-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-22-2.md",
+    "type": "output",
+    "mtime": 1782101033.500271,
+    "chunk_count": 5,
+    "chunk_start": 3070
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-21-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-21-1.md",
+    "type": "output",
+    "mtime": 1781992834.0479174,
+    "chunk_count": 4,
+    "chunk_start": 3075
+  },
+  "output:/home/zcs/hermes/output/极大/联邦制共振备忘录.md": {
+    "path": "/home/zcs/hermes/output/极大/联邦制共振备忘录.md",
+    "type": "output",
+    "mtime": 1782279616.878605,
+    "chunk_count": 12,
+    "chunk_start": 3079
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-19_IAT-论文骨架.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-19_IAT-论文骨架.md",
+    "type": "output",
+    "mtime": 1781848885.1814897,
+    "chunk_count": 5,
+    "chunk_start": 3091
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-27.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-27.md",
+    "type": "output",
+    "mtime": 1782489675.2612636,
+    "chunk_count": 5,
+    "chunk_start": 3096
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-23_IDC立项书-三系统研究纲领.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-23_IDC立项书-三系统研究纲领.md",
+    "type": "output",
+    "mtime": 1782136031.5153072,
+    "chunk_count": 9,
+    "chunk_start": 3101
+  },
+  "output:/home/zcs/hermes/output/极大/IAT-继续干-prompt.md": {
+    "path": "/home/zcs/hermes/output/极大/IAT-继续干-prompt.md",
+    "type": "output",
+    "mtime": 1781966107.4911823,
+    "chunk_count": 6,
+    "chunk_start": 3110
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-28.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-28.md",
+    "type": "output",
+    "mtime": 1782576044.1064923,
+    "chunk_count": 5,
+    "chunk_start": 3116
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-21-2.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-21-2.md",
+    "type": "output",
+    "mtime": 1782036199.8714294,
+    "chunk_count": 5,
+    "chunk_start": 3121
+  },
+  "output:/home/zcs/hermes/output/极大/digest-report-20260606.md": {
+    "path": "/home/zcs/hermes/output/极大/digest-report-20260606.md",
+    "type": "output",
+    "mtime": 1780688463.5588932,
+    "chunk_count": 9,
+    "chunk_start": 3126
+  },
+  "output:/home/zcs/hermes/output/极大/IAT-数学推导-非线性退化边界.md": {
+    "path": "/home/zcs/hermes/output/极大/IAT-数学推导-非线性退化边界.md",
+    "type": "output",
+    "mtime": 1781963281.5533965,
+    "chunk_count": 4,
+    "chunk_start": 3135
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAH-paper-v0.1-en.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAH-paper-v0.1-en.md",
+    "type": "output",
+    "mtime": 1781969108.996502,
+    "chunk_count": 27,
+    "chunk_start": 3139
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-19-1.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-19-1.md",
+    "type": "output",
+    "mtime": 1781841994.3253493,
+    "chunk_count": 4,
+    "chunk_start": 3166
+  },
+  "output:/home/zcs/hermes/output/极大/萧何审计-2026-06-19.md": {
+    "path": "/home/zcs/hermes/output/极大/萧何审计-2026-06-19.md",
+    "type": "output",
+    "mtime": 1781820390.9515753,
+    "chunk_count": 4,
+    "chunk_start": 3170
+  },
+  "output:/home/zcs/hermes/output/极大/世界模型文献综述.md": {
+    "path": "/home/zcs/hermes/output/极大/世界模型文献综述.md",
+    "type": "output",
+    "mtime": 1782420212.8574007,
+    "chunk_count": 19,
+    "chunk_start": 3174
+  },
+  "output:/home/zcs/hermes/output/极大/ISN三字段对齐计划.md": {
+    "path": "/home/zcs/hermes/output/极大/ISN三字段对齐计划.md",
+    "type": "output",
+    "mtime": 1782274543.5493815,
+    "chunk_count": 4,
+    "chunk_start": 3193
+  },
+  "output:/home/zcs/hermes/output/极大/2026-06-20_IAT-A2A-intent-extension-draft.md": {
+    "path": "/home/zcs/hermes/output/极大/2026-06-20_IAT-A2A-intent-extension-draft.md",
+    "type": "output",
+    "mtime": 1781933342.5565557,
+    "chunk_count": 23,
+    "chunk_start": 3197
+  },
+  "output:/home/zcs/hermes/output/大/kaneai-compression-1a-revised-eval.md": {
+    "path": "/home/zcs/hermes/output/大/kaneai-compression-1a-revised-eval.md",
+    "type": "output",
+    "mtime": 1780681154.4016368,
+    "chunk_count": 1,
+    "chunk_start": 3220
+  },
+  "output:/home/zcs/hermes/output/大/headroom-feasibility-eval.md": {
+    "path": "/home/zcs/hermes/output/大/headroom-feasibility-eval.md",
+    "type": "output",
+    "mtime": 1780683946.4512563,
+    "chunk_count": 6,
+    "chunk_start": 3221
+  },
+  "output:/home/zcs/hermes/output/大/entropy-four-tools-eval.md": {
+    "path": "/home/zcs/hermes/output/大/entropy-four-tools-eval.md",
+    "type": "output",
+    "mtime": 1780681457.9801893,
+    "chunk_count": 2,
+    "chunk_start": 3227
+  },
+  "output:/home/zcs/hermes/output/大/moxin-entropy-metaphor-eval.md": {
+    "path": "/home/zcs/hermes/output/大/moxin-entropy-metaphor-eval.md",
+    "type": "output",
+    "mtime": 1780677269.24906,
+    "chunk_count": 2,
+    "chunk_start": 3229
+  }
+}

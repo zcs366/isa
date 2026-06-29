@@ -184,6 +184,8 @@ class IsaChat:
                 from dataclasses import asdict
                 from isa import Signal
                 sig = Signal(type="message", source=source, target=self.agent_id, body=body)
+                # 🐙章鱼: ingest前先搜session历史
+                self._agent.brain.recall_sessions(body)
                 matches = self._agent.brain.ingest_signal(asdict(sig))
                 match_hint = f" 🧠+{len(matches)}" if matches else ""
             except Exception:
@@ -223,6 +225,8 @@ class IsaChat:
                 from dataclasses import asdict
                 from isa import Signal
                 sig = Signal(type="message", source=self.agent_id, target="*", body=text)
+                # 🐙章鱼: ingest前先搜session历史
+                self._agent.brain.recall_sessions(text)
                 self._agent.brain.ingest_signal(asdict(sig))
             except Exception:
                 pass

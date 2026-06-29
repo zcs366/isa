@@ -1,0 +1,196 @@
+{
+  "index_settings": {
+    "docstore_compression": "lz4",
+    "docstore_blocksize": 16384
+  },
+  "segments": [
+    {
+      "segment_id": "6b15371f-868e-4550-ae5d-78736337e322",
+      "max_doc": 29480,
+      "deletes": null
+    },
+    {
+      "segment_id": "b5c93adc-5c95-4e13-aef4-57b9c3f79efe",
+      "max_doc": 23750,
+      "deletes": null
+    },
+    {
+      "segment_id": "c9a92db6-ab27-4520-9ba2-cba5422373fb",
+      "max_doc": 20751,
+      "deletes": null
+    },
+    {
+      "segment_id": "c402e825-21c9-4622-bbac-58d1ee9ca659",
+      "max_doc": 19836,
+      "deletes": null
+    },
+    {
+      "segment_id": "af5686e9-f7a3-4983-badf-b4e88002a91f",
+      "max_doc": 19802,
+      "deletes": null
+    },
+    {
+      "segment_id": "2ac3f404-33c6-4825-b8d2-7f5a9f75440e",
+      "max_doc": 17218,
+      "deletes": null
+    },
+    {
+      "segment_id": "ab7eb386-91c0-41a4-90eb-e2547cdf91ca",
+      "max_doc": 14961,
+      "deletes": null
+    },
+    {
+      "segment_id": "5ab85e5a-3b26-4585-87b3-1ddd46ebd246",
+      "max_doc": 14226,
+      "deletes": null
+    },
+    {
+      "segment_id": "a836747b-84b0-45d3-b006-e7f1b6f4e140",
+      "max_doc": 13486,
+      "deletes": null
+    },
+    {
+      "segment_id": "4894410e-aebd-4913-9f24-f889a44bda76",
+      "max_doc": 12249,
+      "deletes": null
+    },
+    {
+      "segment_id": "58a214fe-a0b4-4744-a31e-ad0992b0acc8",
+      "max_doc": 11181,
+      "deletes": null
+    },
+    {
+      "segment_id": "081b16e6-3ab3-4b88-8336-37926779f880",
+      "max_doc": 7000,
+      "deletes": null
+    },
+    {
+      "segment_id": "b0305e62-1354-42de-a422-0196dd1c1b8d",
+      "max_doc": 2002,
+      "deletes": null
+    },
+    {
+      "segment_id": "569bf7a2-66b9-49f7-9da7-998543cb32ff",
+      "max_doc": 1401,
+      "deletes": null
+    },
+    {
+      "segment_id": "4b512355-decb-4305-8133-73be38a327e8",
+      "max_doc": 1223,
+      "deletes": null
+    },
+    {
+      "segment_id": "95933fbe-97ee-4d94-b7a5-72e74074032c",
+      "max_doc": 1004,
+      "deletes": null
+    },
+    {
+      "segment_id": "514bbe21-0f6d-4658-80d7-aeba8cdf2f5a",
+      "max_doc": 865,
+      "deletes": null
+    },
+    {
+      "segment_id": "75b5f32d-7da8-4329-ad59-1785c3ea0418",
+      "max_doc": 749,
+      "deletes": null
+    },
+    {
+      "segment_id": "853f25fc-7679-402c-b4d1-b433f8c7bf07",
+      "max_doc": 748,
+      "deletes": null
+    },
+    {
+      "segment_id": "e0bdc8d0-4da9-4dbe-9c7b-331ecd971aed",
+      "max_doc": 706,
+      "deletes": null
+    }
+  ],
+  "schema": [
+    {
+      "name": "id",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    },
+    {
+      "name": "name",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    },
+    {
+      "name": "ext",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    },
+    {
+      "name": "fmt",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    },
+    {
+      "name": "body",
+      "type": "text",
+      "options": {
+        "indexing": {
+          "record": "position",
+          "fieldnorms": true,
+          "tokenizer": "default"
+        },
+        "stored": true,
+        "fast": false
+      }
+    },
+    {
+      "name": "size",
+      "type": "i64",
+      "options": {
+        "indexed": false,
+        "fieldnorms": false,
+        "fast": false,
+        "stored": true
+      }
+    },
+    {
+      "name": "mtime",
+      "type": "i64",
+      "options": {
+        "indexed": false,
+        "fieldnorms": false,
+        "fast": false,
+        "stored": true
+      }
+    }
+  ],
+  "opstamp": 212778
+}
