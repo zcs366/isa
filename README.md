@@ -1,3 +1,4 @@
+> [!WARNING] 本仓已归档(2026-09-12)：六体真实现回归主仓 github.com/zcs366/openllm，src/openllm/ 下各归其位。本仓不再维护。
 # ISA — 人工认知架构
 
 > **ISA不是通信平台。ISA是人工大脑。**  
